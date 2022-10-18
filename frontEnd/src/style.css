@@ -1,0 +1,316 @@
+/* reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.app-wrapper {
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* header styles */
+header {
+  display: flex;
+  background-color: cadetblue;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.logo-wrapper {
+  flex-grow: 1;
+}
+
+.home-icon-wrapper {
+  font-size: 30px;
+  width: 10%;
+}
+
+/* home page */
+
+.home-page-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f1f1f1;
+}
+
+.home-page-wrapper a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  width: 90%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-top: 20px;
+  text-align: center;
+  background-color: cadetblue;
+}
+
+/* location list styles */
+
+.location-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 50px;
+}
+
+/* location detail component */
+
+.location-detail-wrapper {
+  width: 90%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.location-detail-title-wrapper {
+  display: flex;
+  justify-content: space-between ;
+}
+
+.item-wrapper {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: #fdfdfd;
+  padding: 10px 10px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-wrapper__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.item-wrapper__icon_wrapper {
+  width: 8%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.item-wrapper p {
+  margin-bottom: 5px;
+}
+
+.trash-can:hover  {
+  color: red;
+}
+
+.plus-icon {
+  margin-right: 20px;
+}
+
+.plus-icon:hover {
+  color: green;
+}
+
+.pen-icon {
+  margin-right: 10px;
+}
+
+.item-message{
+  margin-top: 20px;
+  color: green;
+}
+
+.succes-message {
+  margin: 20px 0;
+  color: green;
+}
+
+/* location form styles */
+
+.location-form {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.location-form .succes-message {
+  margin: 20px 0;
+  color: green;
+}
+
+.location-form label {
+  margin-bottom: 10px;
+}
+
+.location-form input {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
+.location-form button {
+  background-color:  cadetblue;
+  border: none;
+  outline: none;
+  padding: 10px 0;
+  color: white;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+/* search location page */
+.serch-location {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 30px;
+}
+
+.serch-location input {
+  padding: 5px 10px;
+}
+
+.serch-location button {
+  background-color: cadetblue;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  color: #fff;
+}
+
+.filterd-locations-wrapper {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*Item form*/
+
+.item-form {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  display: none;
+}
+
+.item-form.active {
+  display: block;
+}
+
+.item-form input{
+  margin-top: 5px;
+  margin-bottom: 5px;
+  max-width: 50%;
+  padding: 5px;
+}
+
+.item-form-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-form button {
+  border: none;
+  padding: 5px 10px;
+  background-color: cadetblue;
+  margin-top: 10px;
+  color: #fff;
+}
+
+/*item edit form*/
+
+.item-edit-form {
+  display: none;
+  margin-top: 30px;
+}
+
+.item-edit-form.active {
+  display: block;
+}
+
+.item-edit-form h3 {
+  margin-bottom: 10px;
+}
+
+.item-edit-form-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-edit-form-input-wrapper input {
+  max-width: 250px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding: 5px 10px;
+
+}
+
+.item-edit-form__item-wrapper label {
+  margin-right: 10px;
+}
+
+.item-edit-form__item-wrapper button {
+  width: 150px;
+  border: none;
+  outline: none;
+  background-color: cadetblue;
+  padding: 5px;
+  color: white;
+  margin-top: 20px;
+}
+
+/*item search page*/
+
+.item-search__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 200px;
+  text-align: center;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.item-search__form label {
+  margin-right: 5px;
+}
+
+.item-search__form input {
+  padding: 5px 10px;
+  border: 1px solid black
+}
+
+.item-search__form button {
+  background-color: cadetblue;
+  padding: 5px 10px;
+  border: none;
+  color: white;
+}
+
+.item-search__total-qty {
+  text-align: center;
+  margin-top: 20px;
+  color: green;
+}
