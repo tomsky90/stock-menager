@@ -314,3 +314,21 @@ header a {
   margin-top: 20px;
   color: green;
 }
+
+/* item list */
+
+.items-list{
+  width: 100%;
+}
+
+.item-list__header {
+  width: 100%;
+  justify-content: space-between;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+
+.items-list__item {
+  padding-left: 40px;
+  padding-right: 40px;
+}

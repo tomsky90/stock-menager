@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LocationsList from '../components/LocationsList';
+import ItemsList from '../components/ItemsList';
 
 const PickItem = () => {
 
@@ -59,7 +59,7 @@ const PickItem = () => {
       </div>}
       </form>
       {itemQty && <div className='item-search__total-qty'>Total on Stock: {itemQty}</div>}
-      <LocationsList locations={data}/>
+      <ItemsList items={data}/>
     </div>
    );
 }
