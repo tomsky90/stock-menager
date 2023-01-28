@@ -13,9 +13,12 @@ const Home = () => {
       <Link to='/location/item/search'>
         <div className='tile tile-3'>Search For Item</div>
       </Link>
+      <Link to='/location/item/pick-item'>
+        <div className='tile tile-4'>Pick Item</div>
+      </Link>
       
       <Link to='/locations'>
-        <div className='tile tile-3'>All Locations</div>
+        <div className='tile tile-5'>All Locations</div>
       </Link>
     </div>
   )

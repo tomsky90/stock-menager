@@ -11,6 +11,7 @@ import LocationsList from './components/LocationsList';
 import LocationForm from './components/LocationForm';
 import LocationSearch from './pages/LocationSearch';
 import SearchForItemPage from './pages/SearchForItemPage';
+import PickItem from './pages/PickItem';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
       <Route path='/location-form' element={<LocationForm/>}/>
       <Route path='/location-search' element={<LocationSearch locations={locations}/>}/>
       <Route path='/location/item/search' element={<SearchForItemPage/>}/>
+      <Route path='/location/item/pick-item' element={<PickItem/>}/>
     </Routes>
     
    </div>
