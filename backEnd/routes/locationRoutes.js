@@ -10,7 +10,7 @@ router.get('/', getAllLocations);
 router.get('/find-items/:title', findItems);
 
 //get single location
-router.get('/:id', getLocation);
+router.get('/:title', getLocation);
 
 //create new location
 router.post('/', createNewLocation);

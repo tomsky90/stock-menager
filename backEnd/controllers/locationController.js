@@ -27,15 +27,18 @@ const findItems = async (req, res) => {
  
 //get single location
 const getLocation = async (req, res) => {
-  const { id } = req.params;
+  const { title } = req.params;
+ 
 
-  const location = await Location.findById(id);
+  const exist = await Location.findOne({title: title})
 
-  if(!location) {
-    return res.status(404).json({error:'Location do not exist'})
-  }
+  // const location = await Location.findById(id);
 
-  res.status(200).json(location)
+  // if(!exist) {
+  //   return res.status(404).json({error:'Location do not exist'})
+  // }
+console.log(exist)
+  // res.status(200).json(exist)
 }
 
 //post new location

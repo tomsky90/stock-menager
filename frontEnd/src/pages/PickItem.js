@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import ItemsList from '../components/ItemsList';
+import { useNavigate } from 'react-router-dom';
 
 const PickItem = () => {
-
+  const navigate = useNavigate()
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(null);
   const [data, setData] = useState([])
@@ -43,7 +43,8 @@ const PickItem = () => {
       setError(null)
       setData(json)
       addQty(json)
-      setInputValue('')
+      navigate(`/location/item/pick-item/select-bin/${inputValue}`, {replace: true})
+      
     }
 
   }
@@ -59,7 +60,7 @@ const PickItem = () => {
       </div>}
       </form>
       {itemQty && <div className='item-search__total-qty'>Total on Stock: {itemQty}</div>}
-      <ItemsList items={data}/>
+    
     </div>
    );
 }

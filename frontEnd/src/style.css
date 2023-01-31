@@ -332,3 +332,36 @@ header a {
   padding-left: 40px;
   padding-right: 40px;
 }
+
+
+/* bins list */
+
+.bins-list__header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #d3d3d3;
+  margin-top: 30px;
+  padding: 10px 10px;
+}
+
+.bins-list__bin:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.bins-list__bin:nth-child(odd) {
+  background-color: #e0e0e0;
+}
+
+.bins-list__bin {
+display: flex;
+justify-content: space-between;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 10px;
+padding-right: 10px;
+cursor: pointer;
+}
+
+.bins-list__bin:hover {
+  background-color: cadetblue;
+}
