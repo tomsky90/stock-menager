@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 const SelectBin = () => {
-  let {item} = useParams()
+  const navigate = useNavigate();
+  let {item} = useParams();
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(null);
-  const [data, setData] = useState([])
-  const [itemQty, setItemQty] = useState('')
+  const [data, setData] = useState([]);
+  const [itemQty, setItemQty] = useState('');
 
 
 const selectInput = (bin) => {
@@ -39,8 +40,6 @@ const selectInput = (bin) => {
       setError(null)
       setData(json)
       addQty(json)
-      // navigate(`/location/item/pick-item/select-bin/${inputValue}`, {replace: true})
-      
     }
     }
 
@@ -66,10 +65,7 @@ const selectInput = (bin) => {
       setError(json.error)
     }
     if(response.ok) {
-      setError(null)
-      setData(json)
-      addQty(json)
-      setInputValue('')
+      navigate(`/location/item/pick-item/select-bin/${item}/${inputValue}`, {replace: true})
     }
 
   }

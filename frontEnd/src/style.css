@@ -365,3 +365,16 @@ cursor: pointer;
 .bins-list__bin:hover {
   background-color: cadetblue;
 }
+
+/* pick bin page */
+
+.pick-bin-page__form {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.pick-bin-page__form-input-group {
+  display: flex;
+  flex-direction: column;
+}

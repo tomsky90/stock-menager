@@ -13,6 +13,7 @@ import LocationSearch from './pages/LocationSearch';
 import SearchForItemPage from './pages/SearchForItemPage';
 import PickItem from './pages/PickItem';
 import SelectBin from './pages/SelectBin';
+import PickBin from './pages/PickBin';
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
       <Route path='/location/item/search' element={<SearchForItemPage/>}/>
       <Route path='/location/item/pick-item' element={<PickItem/>}/>
       <Route path='/location/item/pick-item/select-bin/:item' element={<SelectBin/>}/>
+      <Route path='/location/item/pick-item/select-bin/:item/:bin' element={<PickBin/>}/>
     </Routes>
     
    </div>

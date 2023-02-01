@@ -30,17 +30,14 @@ const getLocation = async (req, res) => {
   const { title } = req.params;
  
 
-  const exist = await Location.findOne({title: title})
+  const location = await Location.findOne({title: title})
 
-  // const location = await Location.findById(id);
-
-  // if(!exist) {
-  //   return res.status(404).json({error:'Location do not exist'})
-  // }
-console.log(exist)
-  // res.status(200).json(exist)
+  if(!location) {
+    return res.status(404).json({error:'Location do not exist'})
+  }
+  res.status(200).json(location)
 }
-
+ 
 //post new location
 const createNewLocation = async (req, res) => {
   const {title, items} = req.body
