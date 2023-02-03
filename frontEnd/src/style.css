@@ -7,6 +7,11 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* general */
+button:hover {
+  cursor: pointer;
+}
+
 .app-wrapper {
   max-width: 800px;
   margin-left: auto;
@@ -334,9 +339,9 @@ header a {
 }
 
 
-/* bins list */
+/* items list */
 
-.bins-list__header {
+.items-list__header {
   display: flex;
   justify-content: space-between;
   background-color: #d3d3d3;
@@ -344,15 +349,15 @@ header a {
   padding: 10px 10px;
 }
 
-.bins-list__bin:nth-child(even) {
+.items-list__item:nth-child(even) {
   background-color: #f6f6f6;
 }
 
-.bins-list__bin:nth-child(odd) {
+.items-list__item:nth-child(odd) {
   background-color: #e0e0e0;
 }
 
-.bins-list__bin {
+.items-list__item {
 display: flex;
 justify-content: space-between;
 padding-top: 10px;
@@ -362,7 +367,7 @@ padding-right: 10px;
 cursor: pointer;
 }
 
-.bins-list__bin:hover {
+.items-list__item.hover:hover {
   background-color: cadetblue;
 }
 
@@ -377,4 +382,21 @@ cursor: pointer;
 .pick-bin-page__form-input-group {
   display: flex;
   flex-direction: column;
+}
+
+.pick-bin-page__form-input-group label {
+  margin-bottom: 10px;
+}
+
+.pick-bin-page__form-input-group input {
+  padding: 5px;
+}
+
+.pick-bin-page__form-input-group button {
+  background-color: cadetblue;
+  outline: none;
+  color: #fff;
+  padding: 5px;
+  margin-top: 20px;
+  border: none;
 }

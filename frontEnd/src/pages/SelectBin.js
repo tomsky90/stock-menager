@@ -81,17 +81,17 @@ const selectInput = (bin) => {
       </div>}
       </form>
       {itemQty && <div className='item-search__total-qty'>Total on Stock: {itemQty}</div>}
-   <div className='bins-list'>
-    <div className='bins-list__header'>
+   <div className='items-list'>
+    <div className='items-list__header'>
       <p>Bin</p>
       <p>part</p>
       <p>qty</p>
     </div>
-    {data.map(loc => (<div onClick={() => {selectInput(loc.title)}} className='bins-list__bin' key={loc._id}>
+    {data.map(loc => (<div onClick={() => {selectInput(loc.title)}} className='items-list__item hover' key={loc._id}>
       <p>{loc.title}</p>
       {loc.items.map(part => {
         if(part.title === item) {
-          return (<React.Fragment key={part._id}> <p key={loc._id}>{part.title}</p> <p key={part._id}>{part.qty}</p></React.Fragment>
+          return (<React.Fragment key={part._id}> <p>{part.title}</p> <p>{part.qty}</p></React.Fragment>
           )
         }
       })}
