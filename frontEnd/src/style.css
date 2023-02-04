@@ -220,22 +220,25 @@ header a {
 }
 
 .item-form.active {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .item-form input{
   margin-top: 5px;
   margin-bottom: 5px;
-  max-width: 50%;
   padding: 5px;
 }
 
 .item-form-input-wrapper {
+  width: 350px;
   display: flex;
   flex-direction: column;
 }
 
 .item-form button {
+  width: 200px;
   border: none;
   padding: 5px 10px;
   background-color: cadetblue;
@@ -399,4 +402,12 @@ cursor: pointer;
   padding: 5px;
   margin-top: 20px;
   border: none;
+}
+
+/* bin-put-away-page */
+
+.bin-put-away-page h1 {
+  color: #000000c5;
+  text-align: center;
+  margin-top: 20px;
 }

@@ -53,7 +53,7 @@ const selectInput = (bin) => {
     setItemQty('')
 
     if(inputValue.length < 1) {
-      setError('Enter Valid Part Number!')
+      setError('Enter valid bin number!')
       return
     }
     

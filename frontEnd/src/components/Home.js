@@ -16,9 +16,11 @@ const Home = () => {
       <Link to='/location/item/pick-item'>
         <div className='tile tile-4'>Pick Item</div>
       </Link>
-      
+      <Link to='/location/item/bin-putaway'>
+        <div className='tile tile-5'>Bin putaway</div>
+      </Link>
       <Link to='/locations'>
-        <div className='tile tile-5'>All Locations</div>
+        <div className='tile tile-6'>All Locations</div>
       </Link>
     </div>
   )
