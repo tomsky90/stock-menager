@@ -31,11 +31,12 @@ const BinPutAway = () => {
   return (
     <div className="bin-put-away-page">
       <h1>Put Stock Away</h1>
+      <p>Step: {steps} of 2</p>
 
       <div className="bin-put-away-page__steps-wrapper">
-        <div className="bin-put-away-page__steps-wrapper__step-1">1</div>
-        <div className="bin-put-away-page__steps-wrapper__step-2__bar"></div>
-        <div className="bin-put-away-page__steps-wrapper__step-2">2</div>
+        <div className="bin-put-away-page__steps-wrapper__step active">1</div>
+        <div className={steps === 2 ? `bin-put-away-page__steps-wrapper__step__bar active` : `bin-put-away-page__steps-wrapper__step__bar` }></div>
+        <div className={steps === 2 ? `bin-put-away-page__steps-wrapper__step active` : `bin-put-away-page__steps-wrapper__step`}>2</div>
       </div>
       {steps === 1 ? (
         <form onSubmit={handelSubmit} className="item-search__form">

@@ -326,7 +326,10 @@ header a {
 /* item list */
 
 .items-list{
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 50px;
 }
 
 .item-list__header {
@@ -410,4 +413,44 @@ cursor: pointer;
   color: #000000c5;
   text-align: center;
   margin-top: 20px;
+}
+
+.bin-put-away-page p {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.bin-put-away-page__steps-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-top: 10px;
+}
+
+.bin-put-away-page__steps-wrapper__step {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px; 
+  background-color: gray;
+  color: #fff;
+  font-size: 20px;
+  border-radius: 50%;
+}
+
+.bin-put-away-page__steps-wrapper__step.active {
+  background-color: cadetblue;
+}
+
+.bin-put-away-page__steps-wrapper__step__bar {
+  height: 5px;
+  width: 60%;
+  background-color: gray;
+  margin-top: 20px;
+}
+
+.bin-put-away-page__steps-wrapper__step__bar.active {
+  background-color: cadetblue;
 }
