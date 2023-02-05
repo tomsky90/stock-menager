@@ -33,10 +33,9 @@ const LocationDetails = ({location}) => {
   return ( 
     <div className='location-detail-wrapper'>
       <div className='location-detail-title-wrapper'>
-        <h3>Location: {location.title}</h3>
+        <h3>Bin: {location.title}</h3>
         <div className='icons-wrapper'>
-          {<FaPlus onClick={toggleForm} className='plus-icon'/>}
-          {<FaTrash onClick={handleClick} className='trash-can'/>}
+          <button className='add-item-btn' onClick={toggleForm}>Add Item</button>
         </div>
       </div>
 

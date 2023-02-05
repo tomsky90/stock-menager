@@ -36,13 +36,13 @@ const LocationForm = () => {
   return ( 
     <form className='location-form' onSubmit={handleSubmit}>
       {message && <div className='succes-message'>{message}</div>}
-      <label>Location Name:</label>
+      <label>Bin Name:</label>
       <input type="text" value={title} onChange={(e)=>{setTitle(e.target.value.toUpperCase() )}}/>
       {error && <div className='error-message'>
         {error}
       </div>}
 
-      <button type='submit' className='submit-location-btn'>Add Location</button>
+      <button type='submit' className='submit-location-btn'>Add Bin</button>
 
     </form>
   );

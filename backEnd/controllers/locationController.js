@@ -72,7 +72,9 @@ const updateLocation = async (req, res) => {
 const pushItem = async (req, res) => {
 
   const { id } = req.params;
-  const {title} = req.body
+  const {title} = req.body;
+  const { qty } = req.body;
+  const { exp } = req.body;
 
   if(!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({error: 'No such Location'})
@@ -88,7 +90,14 @@ const pushItem = async (req, res) => {
   }
 
   if(exist) {
-    return res.status(400).json({error: 'item alrady exists'})
+    const newQty = parseInt(exist.qty) + parseInt(qty)
+    const location = await Location.findOneAndUpdate({'items.title': title}, {'$set': {
+      'items.$.title': title,
+      'items.$.qty': newQty,
+      'items.$.exp' : exp,
+    }})
+
+    return res.status(200).json(location)
   } else {
     const updatedlocation = await Location.findOneAndUpdate({_id: id},{$push: {'items': req.body}})
 

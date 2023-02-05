@@ -5,10 +5,10 @@ const Home = () => {
   return (
     <div className='home-page-wrapper'>
       <Link to='/location-form'>
-        <div className='tile tile-1'>Add Location</div>
+        <div className='tile tile-1'>Create New Bin</div>
       </Link>
       <Link to='/location-search'>
-        <div className='tile tile-2'>Serarch For Location</div>
+        <div className='tile tile-2'>Serarch For Bin</div>
       </Link>
       <Link to='/location/item/search'>
         <div className='tile tile-3'>Search For Item</div>
@@ -20,7 +20,7 @@ const Home = () => {
         <div className='tile tile-5'>Bin putaway</div>
       </Link>
       <Link to='/locations'>
-        <div className='tile tile-6'>All Locations</div>
+        <div className='tile tile-6'>All Bins</div>
       </Link>
     </div>
   )

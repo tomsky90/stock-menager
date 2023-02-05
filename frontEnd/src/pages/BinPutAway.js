@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ItemForm from "../components/ItemForm";
 
 const BinPutAway = () => {
@@ -16,7 +16,6 @@ const BinPutAway = () => {
     }
 
     const response = await fetch("/api/locations/" + inputValue);
-
     const json = await response.json();
 
     if (!response.ok) {

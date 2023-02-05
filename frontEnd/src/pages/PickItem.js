@@ -5,7 +5,6 @@ const PickItem = () => {
   const navigate = useNavigate()
   const [inputValue, setInputValue] = useState('');
   const [error, setError] = useState(null);
-  const [data, setData] = useState([])
   const [itemQty, setItemQty] = useState('')
 
   //total qty for searched item
@@ -23,8 +22,6 @@ const PickItem = () => {
 
   const handelSubmit = async (e) => {
     e.preventDefault()
-
-    setData([])
     setItemQty('')
 
     if(inputValue.length < 1) {
@@ -41,7 +38,6 @@ const PickItem = () => {
     }
     if(response.ok) {
       setError(null)
-      setData(json)
       addQty(json)
       navigate(`/location/item/pick-item/select-bin/${inputValue}`, {replace: true})
       

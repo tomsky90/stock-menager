@@ -8,6 +8,7 @@ const PickBin = () => {
   const [data, setData] = useState()
   const [error, setError] = useState(null)
   const [binTitle, setBinTitle] = useState()
+  const [binId, seetBinId] = useState('')
   const [itemMessage, setItemMessage] = useState('')
 
 
@@ -29,6 +30,7 @@ useEffect(() => {
       if(response.ok) {
         setError(null)
         setBinTitle(json.title)
+        seetBinId(json._id)
         const part = json.items.find(i => i.title === item)
         setData(part)
       }
@@ -40,6 +42,28 @@ useEffect(() => {
   fetchData()
 }, [])
 
+const deletItem = async (item) => {
+  const response = await fetch('/api/locations/items/delete/' + binId, 
+    {
+      method: 'PATCH',
+      body: JSON.stringify(item),
+      headers:{
+      'Content-Type': 'application/json'
+      }
+    }
+  )
+
+  if(response.ok) {
+    setItemMessage('Item Removed')
+    setTimeout(() => {
+      setItemMessage('')
+      window.location.reload(true)
+    },3000)
+    
+  }
+
+}
+
 const handleSubmit = async (e) => {
   e.preventDefault()
   setError(null)
@@ -49,6 +73,10 @@ const handleSubmit = async (e) => {
   }
   if(inputValue > data.qty) {
     setError(`Total avalible: ${data.qty}`)
+  }
+
+  if(data.qty - inputValue === 0) {
+    deletItem(data)
   }
 
   const item = { qty: data.qty - inputValue};

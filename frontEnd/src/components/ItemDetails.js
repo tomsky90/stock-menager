@@ -45,9 +45,8 @@ const ItemDetails = ({item, location, setItemMessage}) => {
               <p>Expiry date: {item.exp}</p>
             </div>
             <div className="item-wrapper__icon_wrapper">
-              <FaPen onClick={toggleItemForm} className='pen-icon'/>
-              <FaTrash onClick={() => {deletItem(item)}} className='trash-can'/>
-            
+              <button className='add-item-btn' onClick={toggleItemForm}>Edit Item</button>
+              <button className='delete-item-btn' onClick={toggleItemForm}>Delete Item</button>
             </div>
 
           </div>

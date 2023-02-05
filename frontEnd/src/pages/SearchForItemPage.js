@@ -59,6 +59,7 @@ const SearchForItemPage = () => {
       </div>}
       </form>
       {itemQty && <div className='item-search__total-qty'>Total on Stock: {itemQty}</div>}
+      {itemQty && <div className='item-search__total-qty'>Total on Stock: {itemQty}</div>}
       <LocationsList locations={data}/>
     </div>
    );
