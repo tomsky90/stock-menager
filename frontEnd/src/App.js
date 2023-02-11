@@ -15,6 +15,7 @@ import PickItem from './pages/PickItem';
 import SelectBin from './pages/SelectBin';
 import PickBin from './pages/PickBin';
 import BinPutAway from './pages/BinPutAway';
+import BinTransfer from './pages/BinTransfer';
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
       <Route path='/location/item/bin-putaway' element={<BinPutAway/>}/>
       <Route path='/location/item/pick-item/select-bin/:item' element={<SelectBin/>}/>
       <Route path='/location/item/pick-item/select-bin/:item/:bin' element={<PickBin/>}/>
+      <Route path='/bin-transfer' element={<BinTransfer />}/>
     </Routes>
     
    </div>

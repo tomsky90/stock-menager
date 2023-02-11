@@ -22,6 +22,9 @@ const Home = () => {
       <Link to='/locations'>
         <div className='tile tile-6'>All Bins</div>
       </Link>
+      <Link to='/bin-transfer'>
+        <div className='tile tile-7'>Bin Transfer</div>
+      </Link>
     </div>
   )
 }
