@@ -30,7 +30,7 @@ const BinPutAway = () => {
   return (
     <div className="bin-put-away-page">
       <h1>Put Stock Away</h1>
-      <p>Step: {steps} of 2</p>
+      <p className="bin-put-away-page__steps-counter">Step: {steps} of 2</p>
 
       <div className="bin-put-away-page__steps-wrapper">
         <div className="bin-put-away-page__steps-wrapper__step active">1</div>

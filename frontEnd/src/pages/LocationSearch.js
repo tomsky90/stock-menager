@@ -36,7 +36,7 @@ const LocationSearch = () => {
   return ( 
     <div className='location-search-page'>
       <div className='serch-location'>
-        <label htmlFor="input">Search For Location</label>
+        <label htmlFor="input">Search For Bin</label>
         <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value.toUpperCase())}/>
 
         <button onClick={filterLocations}>Search</button>

@@ -423,7 +423,7 @@ cursor: pointer;
   margin-top: 20px;
 }
 
-.bin-put-away-page p {
+.bin-put-away-page__steps-counter {
   text-align: center;
   margin-top: 20px;
 }

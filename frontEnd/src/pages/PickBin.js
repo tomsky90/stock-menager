@@ -73,6 +73,7 @@ const handleSubmit = async (e) => {
   }
   if(inputValue > data.qty) {
     setError(`Total avalible: ${data.qty}`)
+    return
   }
 
   if(data.qty - inputValue === 0) {
