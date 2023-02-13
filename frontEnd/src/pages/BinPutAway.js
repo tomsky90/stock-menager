@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import ItemForm from "../components/ItemForm";
+import StepCounter from "../components/stepCounter/StepCounter";
 
 const BinPutAway = () => {
   const [data, setData] = useState();
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  const [steps, setSteps] = useState(1);
+  const [activeStep, setActiveStep] = useState(1);
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -23,21 +24,15 @@ const BinPutAway = () => {
     }
     if (response.ok) {
       setData(json);
-      setSteps(2)
+      setActiveStep(2)
     }
   };
 
   return (
     <div className="bin-put-away-page">
       <h1>Put Stock Away</h1>
-      <p className="bin-put-away-page__steps-counter">Step: {steps} of 2</p>
-
-      <div className="bin-put-away-page__steps-wrapper">
-        <div className="bin-put-away-page__steps-wrapper__step active">1</div>
-        <div className={steps === 2 ? `bin-put-away-page__steps-wrapper__step__bar active` : `bin-put-away-page__steps-wrapper__step__bar` }></div>
-        <div className={steps === 2 ? `bin-put-away-page__steps-wrapper__step active` : `bin-put-away-page__steps-wrapper__step`}>2</div>
-      </div>
-      {steps === 1 ? (
+      <StepCounter steps={2} activeStep={activeStep}/>
+      {activeStep === 1 ? (
         <form onSubmit={handelSubmit} className="item-search__form">
           <label htmlFor="item-input">Select Bin:</label>
           <input
@@ -52,7 +47,7 @@ const BinPutAway = () => {
           {error && <div className="error-message">{error}</div>}
         </form>
       ) :  null }
-       {steps === 2 ? ( <ItemForm location={data} formActive={true}/> ) : null}
+       {activeStep === 2 ? ( <ItemForm location={data} formActive={true}/> ) : null}
       {data && (
         <div className="items-list" key={data._id}>
           <div className="items-list__header">

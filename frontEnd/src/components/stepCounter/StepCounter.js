@@ -1,30 +1,28 @@
-import React, { useState} from 'react';
+import React from 'react';
 
-const StepCounter = (steps) => {
-
-  const [step, setStep] = useState (1)
+const StepCounter = ({steps, activeStep}) => {
 
 
   const renderSteps = () => {
     const arr = [];
-    for(let i = 1; i <= steps.steps; i++) {
+    for(let i = 1; i <= steps; i++) {
       
-      if(i < steps.steps) {
+      if(i < steps) {
         arr.push(
           <React.Fragment
              key={i} >
-            <div className={step === i ? 'step active' : 'step'}>{i}</div>
-            <div className={step === i ? 'step__bar active' : 'step__bar'}></div>
+            <div className={activeStep >= i ? 'step active' : 'step'}>{i}</div>
+            <div className={activeStep > i ? 'step__bar active' : 'step__bar'}></div>
           </React.Fragment>
           
         )
       }
      
 
-      if(i === steps.steps) {
+      if(i === steps) {
         arr.push(
           <React.Fragment key={i}>
-            <div className={step === i ? 'step active' : 'step'}>{i}</div>
+            <div className={activeStep >= i ? 'step active' : 'step'}>{i}</div>
           </React.Fragment>
         )
       
@@ -34,7 +32,7 @@ const StepCounter = (steps) => {
   }
   return ( 
     <div className='step-counter'>
-      <p className="step-counter__counter-heading">Step: {steps.steps} of 2</p>
+      <p className="step-counter__counter-heading">Step: {activeStep} of {steps}</p>
       <div className='steps-wrapper'>
         {renderSteps()}
       </div>
