@@ -17,6 +17,14 @@ button:hover {
   margin-left: auto;
   margin-right: auto;
 }
+
+/* typography */
+h1 {
+  color: #000000c5;
+  text-align: center;
+  margin-top: 20px;
+}
+
 /* header styles */
 header {
   display: flex;
@@ -33,6 +41,10 @@ header a {
 
 .logo-wrapper {
   flex-grow: 1;
+}
+
+.logo-wrapper__heading {
+  color: #fff;
 }
 
 .home-icon-wrapper {
@@ -415,53 +427,6 @@ cursor: pointer;
   border: none;
 }
 
-/* bin-put-away-page */
-
-.bin-put-away-page h1 {
-  color: #000000c5;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.bin-put-away-page__steps-counter {
-  text-align: center;
-  margin-top: 20px;
-}
-
-.bin-put-away-page__steps-wrapper {
-  display: flex;
-  justify-content: space-between;
-  padding-left: 20px;
-  padding-right: 20px;
-  margin-top: 10px;
-}
-
-.bin-put-away-page__steps-wrapper__step {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 50px;
-  height: 50px; 
-  background-color: gray;
-  color: #fff;
-  font-size: 20px;
-  border-radius: 50%;
-}
-
-.bin-put-away-page__steps-wrapper__step.active {
-  background-color: cadetblue;
-}
-
-.bin-put-away-page__steps-wrapper__step__bar {
-  height: 5px;
-  width: 60%;
-  background-color: gray;
-  margin-top: 20px;
-}
-
-.bin-put-away-page__steps-wrapper__step__bar.active {
-  background-color: cadetblue;
-}
  /* step counter */
 
  .steps-wrapper {
@@ -474,7 +439,7 @@ cursor: pointer;
 
  .step-counter__counter-heading {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 20px;
   margin-bottom: 20px;
  }
 
