@@ -472,3 +472,33 @@ cursor: pointer;
  .steps-wrapper .step__bar.active {
   background-color: cadetblue;
  }
+
+ /* bin transfer page */
+
+ .bin-transfare-page__item-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+ }
+
+ .bin-transfer-page__item-form__input-wrapper {
+  display: flex;
+  flex-direction: column;
+ }
+ 
+ .bin-transfer-page__item-form__input-wrapper label {
+  margin-bottom: 10px;
+ }
+
+ .bin-transfer-page__item-form__input-wrapper input {
+  padding: 5px 10px;
+ }
+
+ .bin-transfare-page__item-form button {
+  background-color: cadetblue;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  margin-top: 20px;
+ }
