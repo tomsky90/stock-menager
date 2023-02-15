@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FaTrash, FaPlus } from 'react-icons/fa';
+
 
 //components import
 import ItemForm from './ItemForm';
@@ -7,7 +7,7 @@ import ItemDetails from './ItemDetails';
 
 const LocationDetails = ({location}) => {
 
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   const [itemMessage, setItemMessage] = useState('');
   const [formActive, setFormActive] = useState(false)
   
@@ -16,16 +16,16 @@ const LocationDetails = ({location}) => {
     setFormActive(!formActive)
   }
 
-  const handleClick = async () => {
-    const response = await fetch('/api/locations/' + location._id, {method: 'DELETE'})
+  // const handleClick = async () => {
+  //   const response = await fetch('/api/locations/' + location._id, {method: 'DELETE'})
 
-    const json = await response.json()
-    setMessage('location: ' + json.title +' deleted')
-    setTimeout(() => {
-      setMessage('')
-      window.location.reload(true)
-    },2000)
-  }
+  //   const json = await response.json()
+  //   setMessage('location: ' + json.title +' deleted')
+  //   setTimeout(() => {
+  //     setMessage('')
+  //     window.location.reload(true)
+  //   },2000)
+  // }
 
   
 
@@ -39,7 +39,7 @@ const LocationDetails = ({location}) => {
         </div>
       </div>
 
-      {message && <div className='succes-message'>{message}</div>}
+      {/* {message && <div className='succes-message'>{message}</div>} */}
       {itemMessage && <div className='item-message'>{itemMessage}</div>}
 
       <ItemForm location={location} formActive={formActive}/>

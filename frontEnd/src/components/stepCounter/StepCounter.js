@@ -36,7 +36,6 @@ const StepCounter = ({steps, activeStep}) => {
       <div className='steps-wrapper'>
         {renderSteps()}
       </div>
-      {console.log(steps)}
     </div>
    );
 }

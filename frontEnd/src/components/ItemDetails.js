@@ -1,33 +1,32 @@
 import React, { useState } from 'react';
 import ItemEditForm from './ItemEditForm';
-import { FaTrash, FaPen } from 'react-icons/fa';
 
 const ItemDetails = ({item, location, setItemMessage}) => {
 
   const [itemFormActive, setItemFormActive] = useState(false)
 
 
-  const deletItem = async (item) => {
-    const response = await fetch('/api/locations/items/delete/' + location._id, 
-      {
-        method: 'PATCH',
-        body: JSON.stringify(item),
-        headers:{
-        'Content-Type': 'application/json'
-        }
-      }
-    )
+  // const deletItem = async (item) => {
+  //   const response = await fetch('/api/locations/items/delete/' + location._id, 
+  //     {
+  //       method: 'PATCH',
+  //       body: JSON.stringify(item),
+  //       headers:{
+  //       'Content-Type': 'application/json'
+  //       }
+  //     }
+  //   )
 
-    if(response.ok) {
-      setItemMessage('Item Removed')
-      setTimeout(() => {
-        setItemMessage('')
-        window.location.reload(true)
-      },3000)
+  //   if(response.ok) {
+  //     setItemMessage('Item Removed')
+  //     setTimeout(() => {
+  //       setItemMessage('')
+  //       window.location.reload(true)
+  //     },3000)
       
-    }
+  //   }
 
-  }
+  // }
 
   const toggleItemForm = () => {
     setItemFormActive(!itemFormActive)

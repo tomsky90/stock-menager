@@ -9,6 +9,7 @@ const BinTransfer = () => {
   const [itemTransfered, setItemTransfered] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [itemCodeInput, setItemCodeInput] = useState("");
+  const [itemQtyInput, setItemQtyInput] = useState('');
   const [error, setError] = useState("");
 
   const handelSubmit = async (e) => {
@@ -49,14 +50,43 @@ const BinTransfer = () => {
     }
     if (response.ok) {
       setError(null);
-      setItemTransfered(json);
+      const bin = json.find((i) => i.title === binTransferFrom.title);
+      const part = bin.items.find((i) => i.title === itemCodeInput);
+      setItemTransfered(part);
+      setActiveStep(3);
+    }
+  };
+
+  const selectQtyToBePicked = (e) =>  {
+    e.preventDefault()
+
+  }
+
+  const getTransferToBin = async (e) => {
+    e.preventDefault();
+
+    if (inputValue.length < 1) {
+      setError("Enter valid bin number!");
+      return;
+    }
+
+    const response = await fetch("/api/locations/" + inputValue);
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+    }
+    if (response.ok) {
+      setData(json);
+      setBinTransferTo(json);
+      setActiveStep(4);
     }
   };
 
   return (
     <div className="bin-transfer-page">
       <h1>Bin transfer</h1>
-      <StepCounter steps={3} activeStep={activeStep} />
+      <StepCounter steps={4} activeStep={activeStep} />
       {activeStep === 1 ? (
         <form onSubmit={handelSubmit} className="item-search__form">
           <label htmlFor="item-input">Select Bin:</label>
@@ -91,6 +121,38 @@ const BinTransfer = () => {
         </form>
       ) : null}
 
+      {activeStep === 3 && (
+        <form onSubmit={selectQtyToBePicked} className="pick-bin-page__form">
+          <div className="pick-bin-page__form-input-group">
+            <label htmlFor="input">Quantity To Be Picked:</label>
+            <input
+              type="number"
+              id="input"
+              value={itemQtyInput}
+              onChange={setItemQtyInput}
+            />
+            {error && <div className="error-message">{error}</div>}
+            <button type="submit">Submit</button>
+          </div>
+        </form>
+      )}
+
+      {activeStep === 4 ? (
+        <form onSubmit={getTransferToBin} className="item-search__form">
+          <label htmlFor="item-input">Select Bin:</label>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value.toUpperCase());
+            }}
+            id="item-input"
+          />
+          <button type="submit">Search</button>
+          {error && <div className="error-message">{error}</div>}
+        </form>
+      ) : null}
+
       {data && (
         <div className="items-list" key={data._id}>
           <div className="items-list__header">
@@ -99,7 +161,8 @@ const BinTransfer = () => {
             <p>qty</p>
           </div>
 
-          {activeStep === 2 && data &&
+          {activeStep === 2 &&
+            data &&
             data.items.map((part) => {
               return (
                 <div key={part._id} className="items-list__item ">
@@ -110,7 +173,7 @@ const BinTransfer = () => {
 
           {itemTransfered ? (
             <div key={itemTransfered._id} className="items-list__item ">
-              <p>{itemTransfered.title}</p> <p>{itemTransfered.title}</p>{" "}
+              <p>{binTransferFrom.title}</p> <p>{itemTransfered.title}</p>{" "}
               <p>{itemTransfered.qty}</p>
             </div>
           ) : null}
