@@ -416,6 +416,7 @@ cursor: pointer;
 
 .pick-bin-page__form-input-group input {
   padding: 5px;
+  max-width: 200px;
 }
 
 .pick-bin-page__form-input-group button {
