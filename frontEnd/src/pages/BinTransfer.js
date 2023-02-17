@@ -13,6 +13,8 @@ const BinTransfer = () => {
   const [qtyToBeTransferred, setQtyToBeTransferred] = useState("");
   const [error, setError] = useState("");
 
+
+  //get bin to transfer from
   const handelSubmit = async (e) => {
     e.preventDefault();
 
@@ -31,13 +33,15 @@ const BinTransfer = () => {
       setData(json);
       setBinTransferFrom(json);
       setActiveStep(2);
+      setInputValue('')
     }
   };
 
+  // find item you want to transfer
   const handleItemSubmit = async (e) => {
     e.preventDefault();
 
-    if (inputValue.length < 1) {
+    if (itemCodeInput.length < 1 || itemCodeInput === '') {
       setError("Enter Valid Part Number!");
       return;
     }
@@ -58,6 +62,7 @@ const BinTransfer = () => {
     }
   };
 
+  // choose how many items you want to transfer
   const selectQtyToBePicked = (e) => {
     e.preventDefault();
 
@@ -76,12 +81,18 @@ const BinTransfer = () => {
     setActiveStep(4);
   };
 
+  // choose bin you want to transfer to
   const getTransferToBin = async (e) => {
     e.preventDefault();
 
     if (inputValue.length < 1) {
       setError("Enter valid bin number!");
       return;
+    }
+
+    if(inputValue === binTransferFrom.title) {
+      setError('Can not complete operation, you need to choose different bin!')
+      return
     }
 
     const response = await fetch("/api/locations/" + inputValue);
@@ -97,9 +108,10 @@ const BinTransfer = () => {
     }
   };
 
+
   return (
     <div className="bin-transfer-page">
-      <h1>Bin transfer</h1>
+      <h1>Bin transfer</h1> {console.log(binTransferTo)}
       <StepCounter steps={5} activeStep={activeStep} />
       {activeStep === 1 ? (
         <form onSubmit={handelSubmit} className="item-search__form">
@@ -183,17 +195,19 @@ const BinTransfer = () => {
             <p>qty</p>
           </div>
 
-          {activeStep === 2 &&
-            data &&
-            data.items.map((part) => {
+          {activeStep === 2 || activeStep === 5 &&
+            data ? 
+            (data.items.map((part) => {
               return (
                 <div key={part._id} className="items-list__item ">
                   <p>{data.title}</p> <p>{part.title}</p> <p>{part.qty}</p>
                 </div>
               );
-            })}
+            })) : null
+          
+          }
 
-          {itemTransferred ? (
+          {activeStep === 3 || activeStep === 4 && itemTransferred ? (
             <div key={itemTransferred._id} className="items-list__item ">
               <p>{binTransferFrom.title}</p> <p>{itemTransferred.title}</p>{" "}
               <p>{itemTransferred.qty}</p>
