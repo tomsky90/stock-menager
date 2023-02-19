@@ -282,7 +282,7 @@ const BinTransfer = () => {
             <p>Bin transfer to: {binTransferTo.title}</p>
             <p>Quantity to be transferred: {qtyToBeTransferred}</p>
           </div>
-          {message && message}
+          {message && <div className='succes-message'>{message}</div>}
           <button className="transfer-summary button" onClick={handleTransfer}>Transfer</button>
         </div>
       )}
