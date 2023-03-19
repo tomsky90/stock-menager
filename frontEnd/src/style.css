@@ -176,48 +176,6 @@ header a {
   color: green;
 }
 
-/* location form styles */
-
-.location-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 30px;
-}
-
-.location-form .succes-message {
-  margin: 20px 0;
-  color: green;
-}
-
-.location-form label {
-  margin-bottom: 10px;
-}
-
-.location-form input {
-  margin-bottom: 10px;
-  padding: 5px 10px;
-}
-
-.location-form button {
-  background-color:  cadetblue;
-  width: 100px;
-  border: none;
-  outline: none;
-  padding: 10px 0;
-  color: white;
-}
-
-.error-message {
-  color: red;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-
 /* search location page */
 .serch-location {
   display: flex;

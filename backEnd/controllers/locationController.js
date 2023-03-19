@@ -40,15 +40,14 @@ const getLocation = async (req, res) => {
  
 //post new location
 const createNewLocation = async (req, res) => {
-  const {title, items} = req.body
-
+  const {title} = req.body
   try{
-    const location = await Location.create({title, items})
+    const location = await Location.create({title})
     res.status(200).json(location)
   }catch(error) {
-   res.status(400).json({error: error.message})
+   res.status(400).json({error: 'Bin name in use'})
   }
-}
+} 
 
 //update location
 const updateLocation = async (req, res) => {

@@ -22,7 +22,6 @@ const BinPutAway = () => {
     }
 
     const data = await getData(inputValue);
-    console.log(data);
     if (data.error) {
       setData(null);
       setError("Upps! something is wrong.");

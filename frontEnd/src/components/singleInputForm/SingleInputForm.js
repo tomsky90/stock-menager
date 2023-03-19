@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-const SingleInputForm = ({handelSubmit, setInputValue, inputValue, error, type, title}) => {
+const SingleInputForm = ({handelSubmit, setInputValue, inputValue, type, title}) => {
   return ( 
     <form onSubmit={handelSubmit} className="single-search__form">
           <label htmlFor="item-input">{title}</label>
@@ -14,7 +13,6 @@ const SingleInputForm = ({handelSubmit, setInputValue, inputValue, error, type, 
             id="item-input"
           />
           <button type="submit">Search</button>
-          {error && <div className="error-message">{error}</div>}
         </form>
    );
 }

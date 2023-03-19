@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+//update Item
+import { editItem } from "../fetchData/FetchData";
 
 const ItemForm = ({ formActive, location }) => {
   const [itemCodeInput, setItemCodeInput] = useState("");
@@ -23,21 +25,17 @@ const ItemForm = ({ formActive, location }) => {
       return;
     }
 
-    const item = { title: itemCodeInput, qty: itemQtyInput, exp: itemExpiry };
+    const updatedItem = {
+      title: itemCodeInput,
+      qty: itemQtyInput,
+      exp: itemExpiry,
+    };
 
-    const response = await fetch("/api/locations/items/" + location._id, {
-      method: "PATCH",
-      body: JSON.stringify(item),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const json = await response.json();
-
-    if (!response.ok) {
-      setError(json.error);
+    const data = await editItem(location._id, updatedItem);
+    if (!data.ok) {
+      setError(data.error);
     }
-    if (response.ok) {
+    if (data.ok) {
       setItemCodeInput("");
       setItemQtyInput("");
       setError(null);

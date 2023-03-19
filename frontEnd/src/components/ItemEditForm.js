@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 
+
+
+
 const ItemEditForm = ({itemFormActive, item}) => {
 
   const [itemCodeInput, setItemCodeInput] =  useState(item.title);
@@ -17,31 +20,33 @@ const ItemEditForm = ({itemFormActive, item}) => {
     }
 
     const updatedItem = {title: itemCodeInput, qty: itemQtyInput, exp: itemExpDateInput};
+    const uri = `edit/${item._id}`
 
-    const response = await fetch('/api/locations/items/edit/' + item._id, {
-      method: 'PATCH',
-      body: JSON.stringify(updatedItem),
-      headers:{
-        'Content-Type': 'application/json'
-      }
-    })
-    const json = await response.json()
-    console.log(item)
+    updatedItem(uri, updatedItem)
 
-    if(!response.ok) {
-      setError(json.error)
-    }
-    if(response.ok) {
-      setItemCodeInput('')
-      setItemQtyInput('')
-      setError(null)
-      setItemExpDateInput('')
-      setItemMessage('Item Succesfully Added')
-      setTimeout(() => {
-        setItemMessage('');
-        window.location.reload(true)
-      }, 2000)
-    }
+    // const response = await fetch('/api/locations/items/edit/' + item._id, {
+    //   method: 'PATCH',
+    //   body: JSON.stringify(updatedItem),
+    //   headers:{
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    // const json = await response.json()
+
+    // if(!response.ok) {
+    //   setError(json.error)
+    // }
+    // if(response.ok) {
+    //   setItemCodeInput('')
+    //   setItemQtyInput('')
+    //   setError(null)
+    //   setItemExpDateInput('')
+    //   setItemMessage('Item Succesfully Added')
+    //   setTimeout(() => {
+    //     setItemMessage('');
+    //     window.location.reload(true)
+    //   }, 2000)
+    // }
   }
 
 

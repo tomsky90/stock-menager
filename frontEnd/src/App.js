@@ -5,10 +5,10 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import './style.css'
 
 //components
-import Header from './components/Header';
+import Header from './components/header/Header';
 import Home from './components/Home';
 import LocationsList from './components/LocationsList';
-import LocationForm from './components/LocationForm';
+import LocationForm from './pages/LocationForm';
 import LocationSearch from './pages/LocationSearch';
 import SearchForItemPage from './pages/SearchForItemPage';
 import PickItem from './pages/PickItem';
@@ -30,7 +30,7 @@ function App() {
     }
 
     fetchLocations()
-  },[])
+  },[]) 
   return (
     <BrowserRouter>
    <div className='app-wrapper'>
