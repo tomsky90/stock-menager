@@ -82,7 +82,7 @@ header a {
     column-gap: 20px;
   }
   .home-page-wrapper a {
-    width: 40%;
+    width: 30%;
   }
 }
 
@@ -327,7 +327,7 @@ header a {
 
 /*item search page*/
 
-.item-search__form {
+.single-search__form {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -338,23 +338,23 @@ header a {
   margin-right: auto;
 }
 
-.item-search__form label {
+.single-search__form label {
   margin-right: 5px;
 }
 
-.item-search__form input {
+.single-search__form input {
   padding: 5px 10px;
   border: 1px solid black
 }
 
-.item-search__form button {
+.single-search__form button {
   background-color: cadetblue;
   padding: 5px 10px;
   border: none;
   color: white;
 }
 
-.item-search__total-qty {
+.single-search__total-qty {
   text-align: center;
   margin-top: 20px;
   color: green;

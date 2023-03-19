@@ -4,13 +4,13 @@
 
 ## It is a MERN stack App wich allows:
 
-  ### -create Locatio 
-  ### -add items and items qty to each location
-  ### -edit items qty, part code, and exp date
-  ### -search for items by part code
-  ### -search for location
+  ### -Create new Bin 
+  ### -Add items and items qty to each Bin
+  ### -Edit items qty, part code, and exp date
+  ### -Search for items by Item code
+  ### -Search for Bin by Bin code
   
-#All changes are beaing saved to mongoDb atlas
+#All changes are beaing saved to mongoDb 
 
 ![screencapture-192-168-0-15-3000-2022-10-19-00_33_24](https://user-images.githubusercontent.com/79411793/196565002-922d1d6a-6397-4262-9d3f-b62b39703f7c.png)
 
