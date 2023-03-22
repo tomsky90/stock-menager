@@ -8,7 +8,7 @@ import './style.css'
 import Header from './components/header/Header';
 import Home from './components/Home';
 import LocationsList from './components/LocationsList';
-import LocationForm from './pages/LocationForm';
+import CreateBin from './pages/CreateBin';
 import LocationSearch from './pages/LocationSearch';
 import SearchForItemPage from './pages/SearchForItemPage';
 import PickItem from './pages/PickItem';
@@ -38,7 +38,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/locations' element={<LocationsList locations={locations}/>}/>
-      <Route path='/location-form' element={<LocationForm/>}/>
+      <Route path='/location-form' element={<CreateBin/>}/>
       <Route path='/location-search' element={<LocationSearch locations={locations}/>}/>
       <Route path='/location/item/search' element={<SearchForItemPage/>}/>
       <Route path='/location/item/pick-item' element={<PickItem/>}/>
