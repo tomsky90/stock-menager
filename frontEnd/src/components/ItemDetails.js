@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ItemEditForm from './ItemEditForm';
+import ItemForm from './ItemForm';
 
 const ItemDetails = ({ item }) => {
 
@@ -26,7 +26,7 @@ const ItemDetails = ({ item }) => {
 
           </div>
           
-          <ItemEditForm item={item} itemFormActive={itemFormActive}/>
+          <ItemForm item={item} formActive={itemFormActive}/>
         </div>
     
    );

@@ -33,7 +33,7 @@ const getLocation = async (req, res) => {
   const location = await Location.findOne({title: title})
 
   if(!location) {
-    return res.status(404).json({error:'Location do not exist'})
+    return res.status(404).json({error:'Bin do not exist'})
   }
   res.status(200).json(location)
 }

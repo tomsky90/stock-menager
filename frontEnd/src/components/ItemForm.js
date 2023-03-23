@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 //update Item
 import { editItem } from "../fetchData/FetchData";
+//components
 
-const ItemForm = ({ formActive, location }) => {
+const ItemForm = ({ formActive, location, setActiveStep, setMessage }) => {
   const [itemCodeInput, setItemCodeInput] = useState("");
   const [itemQtyInput, setItemQtyInput] = useState("");
   const [error, setError] = useState("");
-  const [itemMessage, setItemMessage] = useState("");
   const [itemExpiry, setItemExpiry] = useState("");
 
   const itemQtyOnChange = (e) => {
@@ -40,11 +40,8 @@ const ItemForm = ({ formActive, location }) => {
       setItemQtyInput("");
       setError(null);
       setItemExpiry("");
-      setItemMessage("Item Succesfully Added");
-      setTimeout(() => {
-        setItemMessage("");
-        window.location.reload(true);
-      }, 2000);
+      setActiveStep(3)
+      setMessage("Item Succesfully Added");
     }
   };
 
@@ -53,7 +50,6 @@ const ItemForm = ({ formActive, location }) => {
       onSubmit={handleSubmit}
       className={formActive ? "item-form active" : "item-form"}
     >
-      {itemMessage && <div className="item-message">{itemMessage}</div>}
       <div className="item-form-input-wrapper">
         <label htmlFor="item-code">Item Code:</label>
         <input

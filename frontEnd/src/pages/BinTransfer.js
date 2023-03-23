@@ -12,7 +12,7 @@ const BinTransfer = () => {
   const [itemQtyInput, setItemQtyInput] = useState("");
   const [qtyToBeTransferred, setQtyToBeTransferred] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
 
   //get bin to transfer from
   const handelSubmit = async (e) => {
@@ -108,89 +108,102 @@ const BinTransfer = () => {
     }
   };
 
-
   const deletItem = async (item) => {
-    const response = await fetch('/api/locations/items/delete/' + binTransferFrom._id, 
+    const response = await fetch(
+      "/api/locations/items/delete/" + binTransferFrom._id,
       {
-        method: 'PATCH',
+        method: "PATCH",
         body: JSON.stringify(item),
-        headers:{
-        'Content-Type': 'application/json'
-        }
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    )
-  
-    if(response.ok) {
+    );
 
-      const item = {title: itemTransferred.title, qty: qtyToBeTransferred , exp: itemTransferred.exp};
-      
-          const response = await fetch('/api/locations/items/' + binTransferTo._id, {
-            method: 'PATCH',
-            body: JSON.stringify(item),
-            headers:{
-              'Content-Type': 'application/json'
-            }
-          })
-          const json = await response.json()
-      
-          if(!response.ok) {
-            setError(json.error)
-          }
-          if(response.ok) {
-            setError(null)
-            setMessage('Item Succesfully Transfered!')
-          }
-      
+    if (response.ok) {
+      const item = {
+        title: itemTransferred.title,
+        qty: qtyToBeTransferred,
+        exp: itemTransferred.exp,
+      };
+
+      const response = await fetch(
+        "/api/locations/items/" + binTransferTo._id,
+        {
+          method: "PATCH",
+          body: JSON.stringify(item),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error);
+      }
+      if (response.ok) {
+        setError(null);
+        setMessage("Item Succesfully Transfered!");
+      }
     }
-  
-  }
+  };
 
-  // handle transfer 
+  // handle transfer
   const handleTransfer = async () => {
-    setError(null)
+    setError(null);
 
     // calculate what's left in bin and update
-    const qty = { qty: itemTransferred.qty - qtyToBeTransferred};
-  
+    const qty = { qty: itemTransferred.qty - qtyToBeTransferred };
+
     // if qty to transfer = to total avalible qty delete item
-    if(qty.qty === 0) {
-      deletItem(itemTransferred)
+    if (qty.qty === 0) {
+      deletItem(itemTransferred);
     }
-    
-        const response = await fetch('/api/locations/items/edit/' + itemTransferred._id, {
-          method: 'PATCH',
-          body: JSON.stringify(qty),
-          headers:{
-            'Content-Type': 'application/json'
-          }
-        })
-        const json = await response.json()
-    
-        if(!response.ok) {
-          setError(json.error)
+
+    const response = await fetch(
+      "/api/locations/items/edit/" + itemTransferred._id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(qty),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    const json = await response.json();
+
+    if (!response.ok) {
+      setError(json.error);
+    }
+    if (response.ok) {
+      const item = {
+        title: itemTransferred.title,
+        qty: qtyToBeTransferred,
+        exp: itemTransferred.exp,
+      };
+
+      const response = await fetch(
+        "/api/locations/items/" + binTransferTo._id,
+        {
+          method: "PATCH",
+          body: JSON.stringify(item),
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
-        if(response.ok) {
-      
-          const item = {title: itemTransferred.title, qty: qtyToBeTransferred , exp: itemTransferred.exp};
-      
-          const response = await fetch('/api/locations/items/' + binTransferTo._id, {
-            method: 'PATCH',
-            body: JSON.stringify(item),
-            headers:{
-              'Content-Type': 'application/json'
-            }
-          })
-          const json = await response.json()
-      
-          if(!response.ok) {
-            setError(json.error)
-          }
-          if(response.ok) {
-            setError(null)
-            setMessage('Item Succesfully Transfered!')
-          }
-        }
-  }
+      );
+      const json = await response.json();
+
+      if (!response.ok) {
+        setError(json.error);
+      }
+      if (response.ok) {
+        setError(null);
+        setMessage("Item Succesfully Transfered!");
+      }
+    }
+  };
 
   return (
     <div className="bin-transfer-page">
@@ -233,7 +246,6 @@ const BinTransfer = () => {
             <div>
               <button type="submit">Submit</button>
             </div>
-            
           </div>
         </form>
       ) : null}
@@ -282,8 +294,10 @@ const BinTransfer = () => {
             <p>Bin transfer to: {binTransferTo.title}</p>
             <p>Quantity to be transferred: {qtyToBeTransferred}</p>
           </div>
-          {message && <div className='succes-message'>{message}</div>}
-          <button className="transfer-summary button" onClick={handleTransfer}>Transfer</button>
+          {message && <div className="succes-message">{message}</div>}
+          <button className="transfer-summary button" onClick={handleTransfer}>
+            Transfer
+          </button>
         </div>
       )}
 
@@ -295,7 +309,7 @@ const BinTransfer = () => {
             <p>part</p>
             <p>qty</p>
           </div>
-        {/* display items list */}
+          {/* display items list */}
           {activeStep === 2 || (activeStep === 5 && data)
             ? data.items.map((part) => {
                 return (

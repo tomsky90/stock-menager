@@ -4,6 +4,7 @@ import ItemForm from "../components/ItemForm";
 import SingleInputForm from "../components/singleInputForm/SingleInputForm";
 import StepCounter from "../components/stepCounter/StepCounter";
 import ItemsList from "../components/itemsList/ItemsList";
+import Message from "../components/message/Message";
 //get data
 import { getData } from "../fetchData/FetchData";
 
@@ -11,7 +12,9 @@ const BinPutAway = () => {
   const [data, setData] = useState();
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const [activeStep, setActiveStep] = useState(1);
+  
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -24,9 +27,10 @@ const BinPutAway = () => {
     const data = await getData(inputValue);
     if (data.error) {
       setData(null);
-      setError("Upps! something is wrong.");
+      setError(data.error);
     } else {
       setData(data);
+      setError(null)
       setActiveStep(2);
     }
   };
@@ -34,7 +38,7 @@ const BinPutAway = () => {
   return (
     <div className="bin-put-away-page">
       <h1>Put Stock Away</h1>
-      <StepCounter steps={2} activeStep={activeStep} />
+      <StepCounter steps={3} activeStep={activeStep} />
       {activeStep === 1 ? (
         <SingleInputForm
           handelSubmit={handelSubmit}
@@ -45,7 +49,9 @@ const BinPutAway = () => {
           title="Select Bin"
         />
       ) : null}
-      {activeStep === 2 ? <ItemForm location={data} formActive={true} /> : null}
+      {error && <Message status='error' message={error}/>}
+      {message && <Message status='succes' message={message}/>}
+      {activeStep === 2 ? <ItemForm setMessage={setMessage} setActiveStep={setActiveStep} location={data} formActive={true} /> : null}
       {data && ( <ItemsList data={data}/>
         
       )}
