@@ -2,6 +2,7 @@ import React, { useState } from "react";
 //update Item
 import { editItem } from "../fetchData/FetchData";
 //components
+import Message from "./message/Message";
 
 const ItemForm = ({ formActive, location, setActiveStep, setMessage }) => {
   const [itemCodeInput, setItemCodeInput] = useState("");
@@ -76,7 +77,7 @@ const ItemForm = ({ formActive, location, setActiveStep, setMessage }) => {
         <label htmlFor="item-qty">Item Qty:</label>
         <input type="number" value={itemQtyInput} onChange={itemQtyOnChange} />
       </div>
-      {error && <div className="error-message">{error}</div>}
+      {error && <Message status='error' message={error}/>}
 
       <button type="submit">Add Item</button>
     </form>

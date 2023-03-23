@@ -1,20 +1,18 @@
-import React, {useState} from 'react';
-
+import React, { useState } from "react";
 
 //components import
-import ItemForm from './ItemForm';
-import ItemDetails from './ItemDetails';
+import ItemForm from "./ItemForm";
+import ItemDetails from "./ItemDetails";
+import Message from "./message/Message";
 
-const LocationDetails = ({location}) => {
-
+const LocationDetails = ({ location }) => {
   // const [message, setMessage] = useState('');
-  const [itemMessage, setItemMessage] = useState('');
-  const [formActive, setFormActive] = useState(false)
-  
+  const [itemMessage, setItemMessage] = useState("");
+  const [formActive, setFormActive] = useState(false);
 
   const toggleForm = () => {
-    setFormActive(!formActive)
-  }
+    setFormActive(!formActive);
+  };
 
   // const handleClick = async () => {
   //   const response = await fetch('/api/locations/' + location._id, {method: 'DELETE'})
@@ -27,30 +25,33 @@ const LocationDetails = ({location}) => {
   //   },2000)
   // }
 
-  
-
- 
-  return ( 
-    <div className='location-detail-wrapper'>
-      <div className='location-detail-title-wrapper'>
+  return (
+    <div className="location-detail-wrapper">
+      <div className="location-detail-title-wrapper">
         <h3>Bin: {location.title}</h3>
-        <div className='icons-wrapper'>
-          <button className='add-item-btn' onClick={toggleForm}>Add Item</button>
+        <div className="icons-wrapper">
+          <button className="add-item-btn" onClick={toggleForm}>
+            Add Item
+          </button>
         </div>
       </div>
 
       {/* {message && <div className='succes-message'>{message}</div>} */}
-      {itemMessage && <div className='item-message'>{itemMessage}</div>}
+      {itemMessage && <Message status="succes" message={itemMessage} />}
 
-      <ItemForm location={location} formActive={formActive}/>
-      
-      {location.items && location.items.map(item => (
-        <ItemDetails key={item._id} item={item} location={location} setItemMessage={setItemMessage}/>
-        
-      ))}
-      
+      <ItemForm location={location} formActive={formActive} />
+
+      {location.items &&
+        location.items.map((item) => (
+          <ItemDetails
+            key={item._id}
+            item={item}
+            location={location}
+            setItemMessage={setItemMessage}
+          />
+        ))}
     </div>
-   );
-}
- 
+  );
+};
+
 export default LocationDetails;
