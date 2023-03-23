@@ -1,5 +1,13 @@
 import React, { useState } from "react";
 import StepCounter from "../components/stepCounter/StepCounter";
+//helpers
+import {
+  getSingleBin,
+  getSingleItem,
+  deleteItem,
+  editItem,
+  updateItem,
+} from "../fetchData/FetchData";
 
 const BinTransfer = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -23,9 +31,8 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await fetch("/api/locations/" + inputValue);
+    const response = await getSingleBin(inputValue);
     const json = await response.json();
-
     if (!response.ok) {
       setError(json.error);
     }
@@ -46,10 +53,8 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await fetch("/api/locations/find-items/" + itemCodeInput);
-
+    const response = await getSingleItem(itemCodeInput);
     const json = await response.json();
-
     if (!response.ok) {
       setError(json.error);
     }
@@ -72,7 +77,6 @@ const BinTransfer = () => {
       );
       return;
     }
-
     if (itemQtyInput === "") {
       setError(`Please enter amount you want to transfer.`);
       return;
@@ -95,7 +99,7 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await fetch("/api/locations/" + inputValue);
+    const response = await getSingleBin(inputValue);
     const json = await response.json();
 
     if (!response.ok) {
@@ -107,18 +111,9 @@ const BinTransfer = () => {
       setActiveStep(5);
     }
   };
-
-  const deletItem = async (item) => {
-    const response = await fetch(
-      "/api/locations/items/delete/" + binTransferFrom._id,
-      {
-        method: "PATCH",
-        body: JSON.stringify(item),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+  //delete Item
+  const deletItemAndTransfer = async (item) => {
+    const response = await deleteItem(item, binTransferFrom._id);
 
     if (response.ok) {
       const item = {
@@ -127,16 +122,7 @@ const BinTransfer = () => {
         exp: itemTransferred.exp,
       };
 
-      const response = await fetch(
-        "/api/locations/items/" + binTransferTo._id,
-        {
-          method: "PATCH",
-          body: JSON.stringify(item),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await editItem(item, binTransferTo._id);
       const json = await response.json();
 
       if (!response.ok) {
@@ -153,54 +139,36 @@ const BinTransfer = () => {
   const handleTransfer = async () => {
     setError(null);
 
-    // calculate what's left in bin and update
+    // calculate what's left in bin
     const qty = { qty: itemTransferred.qty - qtyToBeTransferred };
 
     // if qty to transfer = to total avalible qty delete item
     if (qty.qty === 0) {
-      deletItem(itemTransferred);
-    }
-
-    const response = await fetch(
-      "/api/locations/items/edit/" + itemTransferred._id,
-      {
-        method: "PATCH",
-        body: JSON.stringify(qty),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    const json = await response.json();
-
-    if (!response.ok) {
-      setError(json.error);
-    }
-    if (response.ok) {
-      const item = {
-        title: itemTransferred.title,
-        qty: qtyToBeTransferred,
-        exp: itemTransferred.exp,
-      };
-
-      const response = await fetch(
-        "/api/locations/items/" + binTransferTo._id,
-        {
-          method: "PATCH",
-          body: JSON.stringify(item),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      deletItemAndTransfer(itemTransferred);
+    } else {
+      const response = await updateItem(itemTransferred._id, qty);
       const json = await response.json();
 
       if (!response.ok) {
         setError(json.error);
       }
       if (response.ok) {
-        setError(null);
-        setMessage("Item Succesfully Transfered!");
+        const item = {
+          title: itemTransferred.title,
+          qty: qtyToBeTransferred,
+          exp: itemTransferred.exp,
+        };
+
+        const response = await editItem(binTransferTo._id, item);
+        const json = await response.json();
+
+        if (!response.ok) {
+          setError(json.error);
+        }
+        if (response.ok) {
+          setError(null);
+          setMessage("Item Succesfully Transfered!");
+        }
       }
     }
   };

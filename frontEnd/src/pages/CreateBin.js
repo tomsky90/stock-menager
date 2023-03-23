@@ -16,7 +16,6 @@ const CreateBin = () => {
     const location = { title: title };
 
     const data = await addNewBin(location);
-    console.log(data);
     if (data.error) {
       setError(data.error);
     } else {
