@@ -1,56 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import LocationDetails from '../components/locationDetails/LocationDetails';
+import React, { useState } from "react";
+//components
+import LocationDetails from "../components/locationDetails/LocationDetails";
+import SingleInputForm from "../components/singleInputForm/SingleInputForm";
+import Message from "../components/message/Message";
+//fetchers
+import { getSingleBin } from "../fetchData/FetchData";
 
 const LocationSearch = () => {
+  const [location, setLocation] = useState();
+  const [inputValue, setInputValue] = useState("");
+  const [error, setError] = useState("");
 
-  const [locations, setLocations] = useState();
-  const [filterdLocations, setFilterdLocations] = useState([]);
-  const [inputValue, setInputValue] = useState('');
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-
-   const fetchLocations = async () => {
-    const response = await fetch('/api/locations/')
-    const data = await response.json()
-    setLocations(data)
-   }
-
-   fetchLocations()
-  },[])
-
-  const filterLocations = () => {
-
-    if(inputValue.length < 1) {
-      setError('Enter Valid Location!')
-      return
+  const getBin = async (e) => {
+    e.preventDefault();
+    setError("");
+    if (inputValue.length < 4) {
+      setError("Please enter correct Bin Title.");
+      return;
     }
-    
-    setError('')
+    const response = await getSingleBin(inputValue);
+    const json = await response.json();
+    if (!response.ok) {
+      setError(json.error);
+    }
+    if (response.ok) {
+      setLocation(json);
+    }
+  };
 
-    const searchText = inputValue.toLowerCase()
-    setFilterdLocations(locations.filter(location => location.title.toLowerCase().includes(searchText)))
-    setInputValue('')
-  }
-
-  return ( 
-    <div className='location-search-page'>
-      <div className='serch-location'>
-        <label htmlFor="input">Search For Bin</label>
-        <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value.toUpperCase())}/>
-
-        <button onClick={filterLocations}>Search</button>
-        {error && <div className='error-message'>
-        {error}
-      </div>}
-      </div>
-      <div className='filterd-locations-wrapper'>
-      {filterLocations && filterdLocations.map(location => (
-        <LocationDetails location={location} key={location._id}/>
-      ))}
+  return (
+    <div className="location-search-page">
+      {error && <Message status="error" message={error} />}
+      <SingleInputForm
+        handelSubmit={getBin}
+        setInputValue={setInputValue}
+        inputValue={inputValue}
+        type="text"
+        title="Enter Bin Name:"
+      />
+      <div className="filterd-locations-wrapper">
+        {location && <LocationDetails location={location} key={location._id} />}
       </div>
     </div>
-   );
-}
- 
+  );
+};
+
 export default LocationSearch;
