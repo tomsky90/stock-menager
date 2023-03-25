@@ -1,8 +1,7 @@
 import React from 'react';
 
-
-
 const Message = ({status, message}) => {
+  
   return ( 
     <div className={`${status} message`}>
       {message}
@@ -11,3 +10,4 @@ const Message = ({status, message}) => {
 }
  
 export default Message;
+

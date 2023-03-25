@@ -13,15 +13,22 @@ const CreateBin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const location = { title: title };
-
-    const data = await addNewBin(location);
-    if (data.error) {
-      setError(data.error);
+    if (title.length < 4) {
+      setError("Please enter correct bin title.");
     } else {
-      setTitle("");
-      setError(null);
-      setMessage("Location " + location.title + " added");
+      setMessage("");
+      setError("");
+
+      const location = { title: title };
+
+      const data = await addNewBin(location);
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setTitle("");
+        setError(null);
+        setMessage("Location " + location.title + " added");
+      }
     }
   };
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 //components
-import ItemForm from "../components/ItemForm";
+import ItemForm from "../components/itemForm/ItemForm";
 import SingleInputForm from "../components/singleInputForm/SingleInputForm";
 import StepCounter from "../components/stepCounter/StepCounter";
 import ItemsList from "../components/itemsList/ItemsList";

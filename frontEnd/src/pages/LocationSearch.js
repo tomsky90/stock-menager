@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import LocationDetails from '../components/LocationDetails';
+import LocationDetails from '../components/locationDetails/LocationDetails';
 
 const LocationSearch = () => {
 

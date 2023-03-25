@@ -1,5 +1,6 @@
 import React from "react";
-import LocationDetails from "./LocationDetails";
+//components
+import LocationDetails from "../locationDetails/LocationDetails";
 
 const LocationsList = ({ locations }) => {
   const renderLocations = locations.map((location) => (

@@ -6,8 +6,8 @@ import './style.css'
 
 //components
 import Header from './components/header/Header';
-import Home from './components/Home';
-import LocationsList from './components/LocationsList';
+import Home from './components/home/Home';
+import LocationsList from './components/locationsList/LocationsList';
 import CreateBin from './pages/CreateBin';
 import LocationSearch from './pages/LocationSearch';
 import SearchForItemPage from './pages/SearchForItemPage';

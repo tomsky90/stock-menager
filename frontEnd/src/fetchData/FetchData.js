@@ -20,10 +20,10 @@ export const getSingleItem = async (uri) => {
 };
 
 //update Item
-export const editItem = async (uri, updatedItem) => {
+export const editItem = async (uri, item) => {
   const response = await fetch("/api/locations/items/" + uri, {
     method: "PATCH",
-    body: JSON.stringify(updatedItem),
+    body: JSON.stringify(item),
     headers: {
       "Content-Type": "application/json",
     },
@@ -31,18 +31,19 @@ export const editItem = async (uri, updatedItem) => {
   return response;
 };
 
-//edit Item 
-export const updateItem = async (uri, qty) => {
-  fetch(
+//edit location item 
+export const editLocation = async (uri, item) => {
+  const response = await fetch(
     "/api/locations/items/edit/" + uri,
     {
       method: "PATCH",
-      body: JSON.stringify(qty),
+      body: JSON.stringify(item),
       headers: {
         "Content-Type": "application/json",
       },
     }
   );
+  return response
 } 
 
 //add new bin

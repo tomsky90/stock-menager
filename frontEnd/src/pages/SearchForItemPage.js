@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import LocationsList from '../components/LocationsList';
+import LocationsList from '../components/locationsList/LocationsList';
 
 const SearchForItemPage = () => {
 
