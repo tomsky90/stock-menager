@@ -40,7 +40,6 @@ const PickItem = () => {
       setError(null)
       addQty(json)
       navigate(`/location/item/pick-item/select-bin/${inputValue}`, {replace: true})
-      
     }
 
   }

@@ -237,9 +237,6 @@ header a {
   .item-form-input-wrapper {
     width: 300px;
   }
-  .item-form.active {
-    align-items: start;
-  }
 }
 
 .item-form button {

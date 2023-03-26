@@ -7,16 +7,14 @@ import './style.css'
 //components
 import Header from './components/header/Header';
 import Home from './components/home/Home';
-import LocationsList from './components/locationsList/LocationsList';
-import CreateBin from './pages/CreateBin';
+import LocationsList from './components//locationsList/LocationsList';
+import BinPutAway from './pages/BinPutAway';
 import LocationSearch from './pages/LocationSearch';
 import SearchForItemPage from './pages/SearchForItemPage';
 import PickItem from './pages/PickItem';
 import SelectBin from './pages/SelectBin';
 import PickBin from './pages/PickBin';
-import BinPutAway from './pages/BinPutAway';
 import BinTransfer from './pages/BinTransfer';
-
 function App() {
 
   const [locations, setLocations] = useState([]);
@@ -30,7 +28,7 @@ function App() {
     }
 
     fetchLocations()
-  },[]) 
+  },[])
   return (
     <BrowserRouter>
    <div className='app-wrapper'>
@@ -38,7 +36,6 @@ function App() {
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/locations' element={<LocationsList locations={locations}/>}/>
-      <Route path='/location-form' element={<CreateBin/>}/>
       <Route path='/location-search' element={<LocationSearch locations={locations}/>}/>
       <Route path='/location/item/search' element={<SearchForItemPage/>}/>
       <Route path='/location/item/pick-item' element={<PickItem/>}/>

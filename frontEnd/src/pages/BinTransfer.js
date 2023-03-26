@@ -1,16 +1,5 @@
 import React, { useState } from "react";
-//components
 import StepCounter from "../components/stepCounter/StepCounter";
-import Message from "../components/message/Message";
-import SingleInputForm from "../components/singleInputForm/SingleInputForm";
-//helpers
-import {
-  getSingleBin,
-  getSingleItem,
-  deleteItem,
-  editItem,
-  editLocation,
-} from "../fetchData/FetchData";
 
 const BinTransfer = () => {
   const [activeStep, setActiveStep] = useState(1);
@@ -23,10 +12,10 @@ const BinTransfer = () => {
   const [itemQtyInput, setItemQtyInput] = useState("");
   const [qtyToBeTransferred, setQtyToBeTransferred] = useState("");
   const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
 
   //get bin to transfer from
-  const handleSubmit = async (e) => {
+  const handelSubmit = async (e) => {
     e.preventDefault();
 
     if (inputValue.length < 1) {
@@ -34,14 +23,13 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleBin(inputValue);
+    const response = await fetch("/api/locations/" + inputValue);
     const json = await response.json();
-    
+
     if (!response.ok) {
       setError(json.error);
     }
     if (response.ok) {
-      setError('')
       setData(json);
       setBinTransferFrom(json);
       setActiveStep(2);
@@ -58,13 +46,15 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleItem(itemCodeInput);
+    const response = await fetch("/api/locations/find-items/" + itemCodeInput);
+
     const json = await response.json();
+
     if (!response.ok) {
       setError(json.error);
     }
     if (response.ok) {
-      setError('');
+      setError(null);
       const bin = json.find((i) => i.title === binTransferFrom.title);
       const part = bin.items.find((i) => i.title === itemCodeInput);
       setItemTransferred(part);
@@ -75,13 +65,14 @@ const BinTransfer = () => {
   // choose how many items you want to transfer
   const selectQtyToBePicked = (e) => {
     e.preventDefault();
-    setError('')
+
     if (itemQtyInput > itemTransferred.qty) {
       setError(
         `Max avalible ${itemTransferred.qty}. Please enter correct amount.`
       );
       return;
     }
+
     if (itemQtyInput === "") {
       setError(`Please enter amount you want to transfer.`);
       return;
@@ -104,145 +95,195 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleBin(inputValue);
+    const response = await fetch("/api/locations/" + inputValue);
     const json = await response.json();
 
     if (!response.ok) {
       setError(json.error);
     }
     if (response.ok) {
-      setError('')
       setData(json);
       setBinTransferTo(json);
       setActiveStep(5);
     }
   };
-  //delete Item
-  const deletItemAndTransfer = async (item) => {
-    const response = await deleteItem(item, binTransferFrom._id);
 
-    if (response.ok) {
-      const item = {
-        title: itemTransferred.title,
-        qty: qtyToBeTransferred,
-        exp: itemTransferred.exp,
-      };
 
-      const response = await editItem( binTransferTo._id, item);
-      const json = await response.json();
-
-      if (!response.ok) {
-        setError(json.error);
+  const deletItem = async (item) => {
+    const response = await fetch('/api/locations/items/delete/' + binTransferFrom._id, 
+      {
+        method: 'PATCH',
+        body: JSON.stringify(item),
+        headers:{
+        'Content-Type': 'application/json'
+        }
       }
-      if (response.ok) {
-        setError(null);
-        setMessage("Item Succesfully Transfered!");
-      }
+    )
+  
+    if(response.ok) {
+
+      const item = {title: itemTransferred.title, qty: qtyToBeTransferred , exp: itemTransferred.exp};
+      
+          const response = await fetch('/api/locations/items/' + binTransferTo._id, {
+            method: 'PATCH',
+            body: JSON.stringify(item),
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          })
+          const json = await response.json()
+      
+          if(!response.ok) {
+            setError(json.error)
+          }
+          if(response.ok) {
+            setError(null)
+            setMessage('Item Succesfully Transfered!')
+          }
+      
     }
-  };
+  
+  }
 
-  // handle transfer
+  // handle transfer 
   const handleTransfer = async () => {
-    setError(null);
+    setError(null)
 
-    // calculate what's left in bin
-    const qty = { qty: itemTransferred.qty - qtyToBeTransferred };
-
+    // calculate what's left in bin and update
+    const qty = { qty: itemTransferred.qty - qtyToBeTransferred};
+  
     // if qty to transfer = to total avalible qty delete item
-    if (qty.qty === 0) {
-      deletItemAndTransfer(itemTransferred);
-    } else {
-      //pick Item from pick bin
-      const response = await editLocation(itemTransferred._id, qty);
-      const json = await response.json();
-
-      if (!response.ok) {
-        setError(json.error);
-      }
-      if (response.ok) {
-        const item = {
-          title: itemTransferred.title,
-          qty: qtyToBeTransferred,
-          exp: itemTransferred.exp,
-        };
-        console.log(binTransferTo._id)
-        const response = await editItem( binTransferTo._id, item);
-        const json = await response.json();
-
-        if (!response.ok) {
-          setError(json.error);
-        }
-        if (response.ok) {
-          setError(null);
-          setMessage("Item Succesfully Transfered!");
-        }
-      }
+    if(qty.qty === 0) {
+      deletItem(itemTransferred)
     }
-  };
+    
+        const response = await fetch('/api/locations/items/edit/' + itemTransferred._id, {
+          method: 'PATCH',
+          body: JSON.stringify(qty),
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        })
+        const json = await response.json()
+    
+        if(!response.ok) {
+          setError(json.error)
+        }
+        if(response.ok) {
+      
+          const item = {title: itemTransferred.title, qty: qtyToBeTransferred , exp: itemTransferred.exp};
+            console.log(binTransferTo._id)
+          const response = await fetch('/api/locations/items/' + binTransferTo._id, {
+            method: 'PATCH',
+            body: JSON.stringify(item),
+            headers:{
+              'Content-Type': 'application/json'
+            }
+          })
+          const json = await response.json()
+      
+          if(!response.ok) {
+            setError(json.error)
+          }
+          if(response.ok) {
+            setError(null)
+            setMessage('Item Succesfully Transfered!')
+          }
+        }
+  }
 
   return (
     <div className="bin-transfer-page">
       <h1>Bin transfer</h1>
-      {error && <Message status='error' message={error}/>}
-      {message && <Message status='succes' message={message}/>}
       {/* display progress bar */}
       <StepCounter steps={5} activeStep={activeStep} />
+
       {/* display bin form */}
       {activeStep === 1 ? (
-        <SingleInputForm
-          handelSubmit={handleSubmit}
-          setInputValue={setInputValue}
-          inputValue={inputValue}
-          type="text"
-          title="Enter Bin Name:"
-        />
+        <form onSubmit={handelSubmit} className="item-search__form">
+          <label htmlFor="item-input">Select Bin:</label>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value.toUpperCase());
+            }}
+            id="item-input"
+          />
+          <button type="submit">Search</button>
+          {error && <div className="error-message">{error}</div>}
+        </form>
       ) : null}
+
       {/* display item form */}
       {activeStep === 2 ? (
-        <SingleInputForm
-          handelSubmit={handleItemSubmit}
-          setInputValue={setItemCodeInput}
-          inputValue={itemCodeInput}
-          type="text"
-          title="Enter Item Code:"
-        />
+        <form
+          onSubmit={handleItemSubmit}
+          className="bin-transfare-page__item-form"
+        >
+          <div className="bin-transfer-page__item-form__input-wrapper">
+            <label htmlFor="partInput">Item Code:</label>
+            <input
+              type="text"
+              value={itemCodeInput}
+              onChange={(e) => {
+                setItemCodeInput(e.target.value.toUpperCase());
+              }}
+            />
+            <div>
+              <button type="submit">Submit</button>
+            </div>
+            
+          </div>
+        </form>
       ) : null}
 
       {/* display qty form */}
       {activeStep === 3 && (
-         <SingleInputForm
-          handelSubmit={selectQtyToBePicked}
-          setInputValue={setItemQtyInput}
-          inputValue={itemQtyInput}
-          type="number"
-          title="Enter qty you want to move:"
-        />
+        <form onSubmit={selectQtyToBePicked} className="pick-bin-page__form">
+          <div className="pick-bin-page__form-input-group">
+            <label htmlFor="input">Quantity To Be Picked:</label>
+            <input
+              type="number"
+              id="input"
+              value={itemQtyInput}
+              onChange={(e) => {
+                setItemQtyInput(e.target.value);
+              }}
+            />
+            {error && <div className="error-message">{error}</div>}
+            <button type="submit">Submit</button>
+          </div>
+        </form>
       )}
 
       {/* display bin form */}
       {activeStep === 4 ? (
-         <SingleInputForm
-          handelSubmit={getTransferToBin}
-          setInputValue={setInputValue}
-          inputValue={inputValue}
-          type="text"
-          title="Enter bin name you trasfer to:"
-        />
+        <form onSubmit={getTransferToBin} className="item-search__form">
+          <label htmlFor="item-input">Select Bin to transfer to:</label>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={(e) => {
+              setInputValue(e.target.value.toUpperCase());
+            }}
+            id="item-input"
+          />
+          <button type="submit">Search</button>
+          {error && <div className="error-message">{error}</div>}
+        </form>
       ) : null}
 
       {/* display summary */}
       {activeStep === 5 && (
         <div className="transfer-summary">
           <div>
-            <h3>You move: </h3>
-            <p>Item qty: {qtyToBeTransferred}</p>
-            <p>Item code:{itemTransferred.title}</p>
             <p>Bin transfer from: {binTransferFrom.title}</p>
             <p>Bin transfer to: {binTransferTo.title}</p>
+            <p>Quantity to be transferred: {qtyToBeTransferred}</p>
           </div>
-          <button className="transfer-summary button" onClick={handleTransfer}>
-            Transfer
-          </button>
+          {message && message}
+          <button className="transfer-summary button" onClick={handleTransfer}>Transfer</button>
         </div>
       )}
 
@@ -254,7 +295,7 @@ const BinTransfer = () => {
             <p>part</p>
             <p>qty</p>
           </div>
-          {/* display items list */}
+        {/* display items list */}
           {activeStep === 2 || (activeStep === 5 && data)
             ? data.items.map((part) => {
                 return (

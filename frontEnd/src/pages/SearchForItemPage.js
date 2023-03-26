@@ -23,7 +23,6 @@ const SearchForItemPage = () => {
 
   const handelSubmit = async (e) => {
     e.preventDefault()
-
     setData([])
     setItemQty('')
 

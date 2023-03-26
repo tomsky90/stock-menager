@@ -6,15 +6,30 @@ import StepCounter from "../components/stepCounter/StepCounter";
 import ItemsList from "../components/itemsList/ItemsList";
 import Message from "../components/message/Message";
 //get data
-import { getData } from "../fetchData/FetchData";
+import { getData, editItem } from "../fetchData/FetchData";
 
 const BinPutAway = () => {
   const [data, setData] = useState();
   const [inputValue, setInputValue] = useState("");
+  const [itemCodeInput, setItemCodeInput] = useState("");
+  const [itemExpiryInput, setItemExpiryInput] = useState("");
+  const [itemQtyInput, setItemQtyInput] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [activeStep, setActiveStep] = useState(1);
-  
+  const [location, setLocation] = useState(null);
+
+  const itemCodeInputOnChange = (e) => {
+    setItemCodeInput(e.target.value);
+  };
+
+  const itemExpiryOnChange = (e) => {
+    setItemExpiryInput(e.target.value);
+  };
+
+  const itemQtyOnChange = (e) => {
+    setItemQtyInput(e.target.value);
+  };
 
   const handelSubmit = async (e) => {
     e.preventDefault();
@@ -30,8 +45,32 @@ const BinPutAway = () => {
       setError(data.error);
     } else {
       setData(data);
-      setError(null)
+      setError(null);
       setActiveStep(2);
+    }
+  };
+
+  const pushItem = async (e) => {
+    e.preventDefault();
+    if (
+      itemCodeInput.length <= 0 ||
+      itemExpiryInput.length <= 0 ||
+      itemQtyInput <= 0
+    ) {
+      return setError("Please fill in all fields.");
+    }
+    const item = {
+      title: itemCodeInput,
+      qty: itemQtyInput,
+      exp: itemExpiryInput,
+    };
+    const response = await editItem(data._id, item);
+    const json = await response.json()
+
+    if(response.ok) {
+      setActiveStep(3)
+      setMessage('Bin updated succesfully')
+      setLocation(json)
     }
   };
 
@@ -49,12 +88,21 @@ const BinPutAway = () => {
           title="Select Bin"
         />
       ) : null}
-      {error && <Message status='error' message={error}/>}
-      {message && <Message status='succes' message={message}/>}
-      {activeStep === 2 ? <ItemForm setMessage={setMessage} setActiveStep={setActiveStep} location={data} formActive={true} /> : null}
-      {data && ( <ItemsList data={data}/>
-        
-      )}
+      {error && <Message status="error" message={error} />}
+      {message && <Message status="succes" message={message} />}
+      {activeStep === 2 ? (
+        <ItemForm
+          handleSubmit={pushItem}
+          formActive={true}
+          itemCodeInput={itemCodeInput}
+          itemCodeInputOnChange={itemCodeInputOnChange}
+          itemExpiryInput={itemExpiryInput}
+          itemExpiryOnChange={itemExpiryOnChange}
+          itemQtyInput={itemQtyInput}
+          itemQtyOnChange={itemQtyOnChange}
+        />
+      ) : null}
+      {data && <ItemsList data={data} />}
     </div>
   );
 };

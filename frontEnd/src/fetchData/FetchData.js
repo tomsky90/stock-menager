@@ -28,7 +28,8 @@ export const editItem = async (uri, item) => {
       "Content-Type": "application/json",
     },
   });
-  return response;
+  const json = await response
+  return json
 };
 
 //edit location item 
@@ -43,7 +44,8 @@ export const editLocation = async (uri, item) => {
       },
     }
   );
-  return response
+  const json = await response
+  return json
 } 
 
 //add new bin
