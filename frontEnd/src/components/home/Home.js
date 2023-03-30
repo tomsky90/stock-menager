@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Home = () => {
   return (
     <div className='home-page-wrapper'>
-      <Link to='/location-form'>
+      <Link to='/create-bin'>
         <div className='tile tile-1'>Create New Bin</div>
       </Link>
       <Link to='/location-search'>

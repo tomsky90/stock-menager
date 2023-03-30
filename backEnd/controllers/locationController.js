@@ -31,19 +31,20 @@ const getLocation = async (req, res) => {
   const location = await Location.findOne({ title: title });
 
   if (!location) {
-    return res.status(404).json({ error: "Bin do not exist" });
+    return res.status(404).json({ error: "Location do not exist" });
   }
   res.status(200).json(location);
 };
 
 //post new location
 const createNewLocation = async (req, res) => {
-  const { title } = req.body;
+  const { title, items } = req.body;
+
   try {
-    const location = await Location.create({ title });
+    const location = await Location.create({ title, items });
     res.status(200).json(location);
   } catch (error) {
-    res.status(400).json({ error: "Bin name in use" });
+    res.status(400).json({ error: error.message });
   }
 };
 
@@ -67,29 +68,31 @@ const updateLocation = async (req, res) => {
   return res.status(200).json(location);
 };
 
-//push item
-const pushItem = async (req, res) => {
+//take off item
+const takeOffItem = async (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
   const { qty } = req.body;
   const { exp } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).json({ error: "No such Location" });
+    return res.status(404).json({ error: "No such location" });
   }
 
-  const location = await Location.findOne({ _id: id });
-
-  const exist = location.items.find((item) => item.title === title);
-
+  const location = await Location.findOne({ "items._id": id });
   if (!location) {
-    return res.status(400).json({ error: "No such location" });
+    return res.status(400).json({ error: "Item dont exist" });
   }
-
+  const exist = location.items.find((item) => item.title === title);
   if (exist) {
-    const newQty = parseInt(exist.qty) + parseInt(qty);
+    const newQty = parseInt(exist.qty) - parseInt(qty)
+    if(newQty === 0) {
+      deleteItem()
+    } else if ( newQty < 0) {
+      return res.status(400).json({ error: `Not enough items max avalible: ${exist.qty}` });
+    }
     const location = await Location.findOneAndUpdate(
-      { "items.title": title },
+      { "items._id": id },
       {
         $set: {
           "items.$.title": title,
@@ -98,15 +101,41 @@ const pushItem = async (req, res) => {
         },
       }
     );
+     return res.status(200).json(location);
+  }
 
-    return res.status(200).json(location);
-  } else {
-    const updatedlocation = await Location.findOneAndUpdate(
-      { _id: id },
-      { $push: { items: req.body } }
+ 
+};
+
+//add to item
+const addToItem = async (req, res) => {
+  const { id } = req.params;
+  const { title } = req.body;
+  const { qty } = req.body;
+  const { exp } = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such location" });
+  }
+
+  const location = await Location.findOne({ "items._id": id });
+  if(!location) {
+    return res.status(400).json({error: 'No such location'})
+  }
+  const exist = location.items.find((item) => item.title === title);
+  if (exist) {
+    const newQty = parseInt(exist.qty) + parseInt(qty)
+    const location = await Location.findOneAndUpdate(
+      { "items._id": id },
+      {
+        $set: {
+          "items.$.title": title,
+          "items.$.qty": newQty,
+          "items.$.exp": exp,
+        },
+      }
     );
-
-    return res.status(200).json(updatedlocation);
+     return res.status(200).json(location);
   }
 };
 
@@ -185,7 +214,8 @@ module.exports = {
   createNewLocation,
   deleteLocation,
   updateLocation,
-  pushItem,
+  addToItem,
+  takeOffItem,
   deleteItem,
   editItem,
   findItems,

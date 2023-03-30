@@ -15,6 +15,7 @@ import PickItem from './pages/PickItem';
 import SelectBin from './pages/SelectBin';
 import PickBin from './pages/PickBin';
 import BinTransfer from './pages/BinTransfer';
+import CreateBin from './pages/CreateBin';
 function App() {
 
   const [locations, setLocations] = useState([]);
@@ -22,7 +23,7 @@ function App() {
 
   useEffect(() => {
     const fetchLocations = async () => {
-      const response = await fetch('/api/locations//')
+      const response = await fetch('/api/locations')
       const data = await response.json()
       setLocations(data)
     }
@@ -43,6 +44,7 @@ function App() {
       <Route path='/location/item/pick-item/select-bin/:item' element={<SelectBin/>}/>
       <Route path='/location/item/pick-item/select-bin/:item/:bin' element={<PickBin/>}/>
       <Route path='/bin-transfer' element={<BinTransfer />}/>
+      <Route path='create-bin' element={<CreateBin/>}/>
     </Routes>
     
    </div>

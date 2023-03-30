@@ -5,7 +5,8 @@ const {
   getLocation,
   deleteLocation,
   updateLocation,
-  pushItem,
+  addToItem,
+  takeOffItem,
   deleteItem,
   editItem,
   findItems,
@@ -31,8 +32,11 @@ router.delete("/:id", deleteLocation);
 //edit location
 router.patch("/:id", updateLocation);
 
-//push item
-router.patch("/items/:id", pushItem);
+//add to item
+router.patch("/items/add-to-item/:id", addToItem);
+
+//take off item
+router.patch("/items/take-off-item/:id", takeOffItem);
 
 //delete item
 router.patch("/items/delete/:id", deleteItem);

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Message from "../message/Message";
 import ItemForm from "../itemForm/ItemForm";
 //fetchers
-import { editLocation, deleteItem } from "../../fetchData/FetchData";
+import { editItem, deleteItem } from "../../fetchData/FetchData";
 
 const ItemDetails = ({ item, setMessage, location }) => {
   const [itemFormActive, setItemFormActive] = useState(false);
@@ -42,7 +42,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
       exp: itemExpiry,
     };
 
-    const data = await editLocation(item._id, updatedItem);
+    const data = await editItem(item._id, updatedItem);
     if (!data.ok) {
       setError(data.error);
     }
