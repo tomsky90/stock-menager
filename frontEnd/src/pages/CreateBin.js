@@ -34,6 +34,7 @@ const CreateBin = () => {
 
   return (
     <div className="add-bin-page">
+      <h1>Create New Bin</h1>
       {message && <Message status="succes" message={message} />}
       {error && <Message status="error" message={error} />}
       <SingleInputForm

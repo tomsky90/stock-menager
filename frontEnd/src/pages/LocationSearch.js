@@ -30,6 +30,7 @@ const LocationSearch = () => {
 
   return (
     <div className="location-search-page">
+      <h1>Search For Bin</h1>
       {error && <Message status="error" message={error} />}
       <SingleInputForm
         handelSubmit={getBin}

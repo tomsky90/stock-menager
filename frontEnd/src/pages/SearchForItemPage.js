@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+//components
+import Message from '../components/message/Message';
+import SingleInputForm from '../components/singleInputForm/SingleInputForm';
 import LocationsList from '../components/locationsList/LocationsList';
 
 const SearchForItemPage = () => {
@@ -7,6 +10,7 @@ const SearchForItemPage = () => {
   const [error, setError] = useState(null);
   const [data, setData] = useState([])
   const [itemQty, setItemQty] = useState('')
+  const [itemName, setItemName] = useState('')
 
   //total qty for searched item
   const addQty = (locations) => {
@@ -41,6 +45,7 @@ const SearchForItemPage = () => {
     if(response.ok) {
       setError(null)
       setData(json)
+      setItemName(inputValue)
       addQty(json)
       setInputValue('')
     }
@@ -49,15 +54,16 @@ const SearchForItemPage = () => {
 
   return ( 
     <div className='item-search-wrapper'>
-      <form onSubmit={handelSubmit} className='item-search__form'>
-        <label htmlFor="item-input">Part Number:</label>
-        <input type="text" value={inputValue} onChange={(e) => {setInputValue(e.target.value.toUpperCase())}}  id='item-input'/>
-        <button type="submit">Search</button>
-        {error && <div className='error-message'>
-        {error}
-      </div>}
-      </form>
-      {itemQty && <div className='item-search__total-qty'>Total on Stock: {itemQty}</div>}
+      <h1>Search For Item</h1>
+      <h3> {itemQty && <div className='item-search__total-qty'>Found: {itemName} <br/> Total on Stock: {itemQty}</div>}</h3>
+      {error && <Message status='error' message={error}/>}
+      {<SingleInputForm
+        handelSubmit={handelSubmit}
+        setInputValue={setInputValue}
+        inputValue={inputValue}
+        type='text'
+        title='Enter Item Code:'
+      />}
       <LocationsList locations={data}/>
     </div>
    );
