@@ -19,7 +19,7 @@ export const getSingleItem = async (uri) => {
   return json;
 };
 
-//add to item
+//add to item qty
 export const addToItem = async (uri, item) => {
   const response = await fetch("/api/locations/items/add-to-item/" + uri, {
     method: "PATCH",
@@ -31,8 +31,32 @@ export const addToItem = async (uri, item) => {
   return response
 };
 
+//put item away
+export const putItemAway = async (uri, item) => {
+  const response = await fetch("/api/locations/items/put-item-away/"+ uri, {
+    method: "PATCH",
+    body: JSON.stringify(item),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response
+}
 
-//edit location item 
+//push Item
+export const pushItem = async (uri, item) => {
+  const response = await fetch('/api/locations/items/push-item/'+ uri, {
+    method: "PATCH",
+    body: JSON.stringify(item),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response
+}
+
+
+//take off items qty 
 export const takeOffItem = async (uri, item) => {
   const response = await fetch(
     "/api/locations/items/take-off-item/" + uri,

@@ -9,6 +9,7 @@ import {
   getSingleItem,
   addToItem,
   takeOffItem,
+  pushItem,
 } from "../fetchData/FetchData";
 
 const BinTransfer = () => {
@@ -24,7 +25,7 @@ const BinTransfer = () => {
   const [itemToBeAddedTo, setItemToBeAddedTo] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   //get bin to transfer from
   const handleSubmit = async (e) => {
@@ -131,26 +132,48 @@ const BinTransfer = () => {
       title: itemTransferred.title,
       qty: qtyToBeTransferred,
       exp: itemTransferred.exp,
+      itemId: itemTransferred._id,
     };
-    const response = await takeOffItem(itemTransferred._id, item);
-    const json = await response.json()
+    const response = await takeOffItem(binTransferFrom._id, item);
+    const json = await response.json();
     if (!response.ok) {
       setError(json.error);
       setLoading(false);
     }
-    //if response.ok update qty in bin transferTo 
+    //if response.ok update qty in bin transferTo
     if (response.ok) {
-      const response = await addToItem(itemToBeAddedTo._id, item);
-      const json = await response.json();
+      //if item exist add to it
+      if (itemToBeAddedTo) {
+        const response = await addToItem(itemToBeAddedTo._id, item);
+        const json = await response.json();
 
-      if (!response.ok) {
-        setError(json.error);
-        setLoading(false);
-      }
-      if (response.ok) {
-        setError(null);
-        setMessage("Item Succesfully Transfered!");
-        setLoading(false);
+        if (!response.ok) {
+          setError(json.error);
+          setLoading(false);
+        }
+        if (response.ok) {
+          setError(null);
+          setMessage("Item Succesfully Transfered!");
+          setLoading(false);
+        }
+      } else {
+        const newItem = {
+          title: itemTransferred.title,
+          qty: qtyToBeTransferred,
+          exp: itemTransferred.exp,
+        };
+        const response = await pushItem(binTransferTo._id, newItem);
+        const json = await response.json();
+
+        if (!response.ok) {
+          setError(json.error);
+          setLoading(false);
+        }
+        if (response.ok) {
+          setError(null);
+          setMessage("Item Succesfully Transfered!");
+          setLoading(false);
+        }
       }
     }
   };
@@ -215,9 +238,23 @@ const BinTransfer = () => {
             <p>Bin transfer from: {binTransferFrom.title}</p>
             <p>Bin transfer to: {binTransferTo.title}</p>
           </div>
-         { <button  className="transfer-summary button" onClick={handleTransfer}>
-            Transfer
-          </button>}
+          {!loading && (
+            <button
+              className="transfer-summary button"
+              onClick={handleTransfer}
+            >
+              Transfer
+            </button>
+          )}
+          {loading && (
+            <button
+              disabled
+              className="transfer-summary button"
+              onClick={handleTransfer}
+            >
+              Transfer
+            </button>
+          )}
         </div>
       )}
 

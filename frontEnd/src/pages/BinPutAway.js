@@ -6,7 +6,7 @@ import StepCounter from "../components/stepCounter/StepCounter";
 import ItemsList from "../components/itemsList/ItemsList";
 import Message from "../components/message/Message";
 //get data
-import { getData, editItem } from "../fetchData/FetchData";
+import { getData, putItemAway } from "../fetchData/FetchData";
 
 const BinPutAway = () => {
   const [data, setData] = useState();
@@ -20,11 +20,11 @@ const BinPutAway = () => {
   const [location, setLocation] = useState(null);
 
   const itemCodeInputOnChange = (e) => {
-    setItemCodeInput(e.target.value);
+    setItemCodeInput(e.target.value.toUpperCase());
   };
 
   const itemExpiryOnChange = (e) => {
-    setItemExpiryInput(e.target.value);
+    setItemExpiryInput(e.target.value.toUpperCase());
   };
 
   const itemQtyOnChange = (e) => {
@@ -64,7 +64,7 @@ const BinPutAway = () => {
       qty: itemQtyInput,
       exp: itemExpiryInput,
     };
-    const response = await editItem(data._id, item);
+    const response = await putItemAway(data._id, item);
     const json = await response.json()
 
     if(response.ok) {
@@ -78,6 +78,8 @@ const BinPutAway = () => {
     <div className="bin-put-away-page">
       <h1>Put Stock Away</h1>
       <StepCounter steps={3} activeStep={activeStep} />
+      {error && <Message status="error" message={error} />}
+      {message && <Message status="succes" message={message} />}
       {activeStep === 1 ? (
         <SingleInputForm
           handelSubmit={handelSubmit}
@@ -88,8 +90,6 @@ const BinPutAway = () => {
           title="Select Bin"
         />
       ) : null}
-      {error && <Message status="error" message={error} />}
-      {message && <Message status="succes" message={message} />}
       {activeStep === 2 ? (
         <ItemForm
           handleSubmit={pushItem}

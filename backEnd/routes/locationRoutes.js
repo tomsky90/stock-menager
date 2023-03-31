@@ -10,6 +10,8 @@ const {
   deleteItem,
   editItem,
   findItems,
+  putItemAway,
+  pushItem,
 } = require("../controllers/locationController");
 
 const router = express.Router();
@@ -43,5 +45,11 @@ router.patch("/items/delete/:id", deleteItem);
 
 //edit item
 router.patch("/items/edit/:id", editItem);
+
+//put item away
+router.patch("/items/put-item-away/:id", putItemAway);
+
+//push Item
+router.patch("/items/push-item/:id", pushItem)
 
 module.exports = router;
