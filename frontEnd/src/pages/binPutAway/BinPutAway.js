@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 //components
-import ItemForm from "../components/itemForm/ItemForm";
-import SingleInputForm from "../components/singleInputForm/SingleInputForm";
-import StepCounter from "../components/stepCounter/StepCounter";
-import ItemsList from "../components/itemsList/ItemsList";
-import Message from "../components/message/Message";
+import ItemForm from "../../components/itemForm/ItemForm";
+import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
+import StepCounter from "../../components/stepCounter/StepCounter";
+import ItemsList from "../../components/itemsList/ItemsList";
+import Message from "../../components/message/Message";
 //get data
-import { getData, putItemAway } from "../fetchData/FetchData";
+import { getData, putItemAway } from "../../fetchData/FetchData";
 
 const BinPutAway = () => {
   const [data, setData] = useState();

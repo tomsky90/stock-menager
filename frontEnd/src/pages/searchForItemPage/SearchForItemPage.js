@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 //components
-import Message from '../components/message/Message';
-import SingleInputForm from '../components/singleInputForm/SingleInputForm';
-import LocationsList from '../components/locationsList/LocationsList';
+import Message from '../../components/message/Message';
+import SingleInputForm from '../../components/singleInputForm/SingleInputForm';
+import LocationsList from '../../components/locationsList/LocationsList';
 
 const SearchForItemPage = () => {
 

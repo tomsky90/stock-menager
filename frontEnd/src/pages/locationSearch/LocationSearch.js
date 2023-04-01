@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 //components
-import LocationDetails from "../components/locationDetails/LocationDetails";
-import SingleInputForm from "../components/singleInputForm/SingleInputForm";
-import Message from "../components/message/Message";
+import LocationDetails from "../../components/locationDetails/LocationDetails";
+import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
+import Message from "../../components/message/Message";
 //fetchers
-import { getSingleBin } from "../fetchData/FetchData";
+import { getSingleBin } from "../../fetchData/FetchData";
 
 const LocationSearch = () => {
   const [location, setLocation] = useState();

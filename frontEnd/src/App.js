@@ -8,14 +8,14 @@ import './style.css'
 import Header from './components/header/Header';
 import Home from './components/home/Home';
 import LocationsList from './components//locationsList/LocationsList';
-import BinPutAway from './pages/BinPutAway';
-import LocationSearch from './pages/LocationSearch';
-import SearchForItemPage from './pages/SearchForItemPage';
-import PickItem from './pages/PickItem';
-import SelectBin from './pages/SelectBin';
-import PickBin from './pages/PickBin';
+import BinPutAway from './pages/binPutAway/BinPutAway';
+import LocationSearch from './pages/locationSearch/LocationSearch';
+import SearchForItemPage from './pages/searchForItemPage/SearchForItemPage';
+import PickItem from './pages/pickItem/PickItem';
+import SelectBin from './pages/selectBin/SelectBin';
+import PickBin from './pages/pickBin/PickBin';
 import BinTransfer from './pages/binTransferPage/BinTransfer';
-import CreateBin from './pages/CreateBin';
+import CreateBin from './pages/createBin/CreateBin';
 function App() {
 
   const [locations, setLocations] = useState([]);

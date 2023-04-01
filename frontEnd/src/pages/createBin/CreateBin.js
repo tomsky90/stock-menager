@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 //components
-import SingleInputForm from "../components/singleInputForm/SingleInputForm";
-import Message from "../components/message/Message";
+import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
+import Message from "../../components/message/Message";
 //helpers
-import { addNewBin } from "../fetchData/FetchData";
+import { addNewBin } from "../../fetchData/FetchData";
 
 const CreateBin = () => {
   const [title, setTitle] = useState("");
