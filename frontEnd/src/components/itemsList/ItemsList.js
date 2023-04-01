@@ -1,4 +1,6 @@
 import React from 'react';
+//styles
+import './itemsList.css'
 
 const ItemsList = ({ data }) => {
   return ( 

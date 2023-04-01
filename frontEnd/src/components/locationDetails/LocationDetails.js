@@ -6,6 +6,8 @@ import ItemDetails from "../itemDetails/ItemDetails";
 import Message from "../message/Message";
 //fetchers
 import { editItem } from "../../fetchData/FetchData";
+//styles
+import './locationDetails.css'
 
 const LocationDetails = ({ location }) => {
   // const [message, setMessage] = useState('');

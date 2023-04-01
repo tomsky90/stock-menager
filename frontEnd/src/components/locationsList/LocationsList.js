@@ -1,6 +1,8 @@
 import React from "react";
 //components
 import LocationDetails from "../locationDetails/LocationDetails";
+//styles
+import './locationList.css'
 
 const LocationsList = ({ locations }) => {
   const renderLocations = locations.map((location) => (
