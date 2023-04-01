@@ -1,0 +1,38 @@
+.single-search__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 200px;
+  text-align: center;
+  padding-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.item-search__total-qty {
+  text-align: center;
+  color: green;
+  margin-top: 10px;
+}
+
+.single-search__form label {
+  margin-right: 5px;
+}
+
+.single-search__form input {
+  padding: 5px 10px;
+  border: 1px solid black
+}
+
+.single-search__form button {
+  background-color: cadetblue;
+  padding: 5px 10px;
+  border: none;
+  color: white;
+}
+
+.single-search__total-qty {
+  text-align: center;
+  margin-top: 20px;
+  color: green;
+}

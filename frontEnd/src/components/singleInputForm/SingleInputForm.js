@@ -1,4 +1,6 @@
 import React from 'react';
+//styles
+import './singleInputForm.css'
 
 const SingleInputForm = ({handelSubmit, setInputValue, inputValue, type, title}) => {
   return ( 
