@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 //components
-import StepCounter from "../components/stepCounter/StepCounter";
-import Message from "../components/message/Message";
-import SingleInputForm from "../components/singleInputForm/SingleInputForm";
+import StepCounter from "../../components/stepCounter/StepCounter";
+import Message from "../../components/message/Message";
+import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
 //helpers
 import {
   getSingleBin,
@@ -10,7 +10,9 @@ import {
   addToItem,
   takeOffItem,
   pushItem,
-} from "../fetchData/FetchData";
+} from "../../fetchData/FetchData";
+//styles
+import './binTransfer.css'
 
 const BinTransfer = () => {
   const [activeStep, setActiveStep] = useState(1);

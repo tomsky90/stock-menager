@@ -14,7 +14,7 @@ import SearchForItemPage from './pages/SearchForItemPage';
 import PickItem from './pages/PickItem';
 import SelectBin from './pages/SelectBin';
 import PickBin from './pages/PickBin';
-import BinTransfer from './pages/BinTransfer';
+import BinTransfer from './pages/binTransferPage/BinTransfer';
 import CreateBin from './pages/CreateBin';
 function App() {
 

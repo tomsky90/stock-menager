@@ -1,0 +1,19 @@
+.transfer-summary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+ }
+
+ .transfer-summary p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+ }
+
+ .transfer-summary button {
+  background-color: cadetblue;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+ }
