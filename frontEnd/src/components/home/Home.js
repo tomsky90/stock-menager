@@ -1,29 +1,31 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+//styles
+import './home.css'
 
 const Home = () => {
   return (
-    <div className='home-page-wrapper'>
+    <div className='home__page-wrapper'>
       <Link to='/create-bin'>
-        <div className='tile tile-1'>Create New Bin</div>
+        <div>Create New Bin</div>
       </Link>
       <Link to='/location-search'>
-        <div className='tile tile-2'>Serarch For Bin</div>
+        <div>Serarch For Bin</div>
       </Link>
       <Link to='/location/item/search'>
-        <div className='tile tile-3'>Search For Item</div>
+        <div>Search For Item</div>
       </Link>
       <Link to='/location/item/pick-item'>
-        <div className='tile tile-4'>Pick Item</div>
+        <div>Pick Item</div>
       </Link>
       <Link to='/location/item/bin-putaway'>
-        <div className='tile tile-5'>Bin putaway</div>
+        <div>Bin putaway</div>
       </Link>
       <Link to='/locations'>
-        <div className='tile tile-6'>All Bins</div>
+        <div>All Bins</div>
       </Link>
       <Link to='/bin-transfer'>
-        <div className='tile tile-7'>Bin Transfer</div>
+        <div>Bin Transfer</div>
       </Link>
     </div>
   )

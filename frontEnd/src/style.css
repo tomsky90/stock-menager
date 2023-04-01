@@ -46,66 +46,6 @@ h1 {
   border: 1px solid green;
 }
 
-/* header styles */
-header {
-  display: flex;
-  background-color: cadetblue;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-}
-
-header a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.logo-wrapper {
-  flex-grow: 1;
-}
-
-.logo-wrapper__heading {
-  color: #fff;
-}
-
-.home-icon-wrapper {
-  font-size: 30px;
-  width: 10%;
-}
-
-/* home page */
-
-.home-page-wrapper {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-  min-height: 100vh;
-  background-color: #f1f1f1;
-}
-
-.home-page-wrapper a {
-  display: block;
-  text-decoration: none;
-  color: #fff;
-  width: 90%;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-top: 20px;
-  text-align: center;
-  background-color: cadetblue;
-}
-
-@media only screen and (min-width: 600px) {
-  .home-page-wrapper {
-    padding-top: 30px;
-    column-gap: 20px;
-  }
-  .home-page-wrapper a {
-    width: 30%;
-  }
-}
 
 /* location list styles */
 

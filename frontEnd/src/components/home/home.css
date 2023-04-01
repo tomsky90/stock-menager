@@ -1,0 +1,31 @@
+.home__page-wrapper {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
+  min-height: 100vh;
+  background-color: #f1f1f1;
+}
+
+.home__page-wrapper a {
+  display: block;
+  text-decoration: none;
+  color: #fff;
+  width: 90%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-top: 20px;
+  text-align: center;
+  background-color: cadetblue;
+}
+
+@media only screen and (min-width: 600px) {
+  .home__page-wrapper {
+    padding-top: 30px;
+    column-gap: 20px;
+  }
+  .home__page-wrapper a {
+    width: 30%;
+  }
+}

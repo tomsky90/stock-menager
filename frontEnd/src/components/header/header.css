@@ -1,0 +1,35 @@
+header {
+  display: flex;
+  background-color: cadetblue;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+}
+
+header a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header__logo-wrapper {
+  flex-grow: 1;
+}
+
+.header__logo-wrapper__heading {
+  color: #fff;
+}
+
+.header__icon-wrapper {
+  font-size: 30px;
+  width: 10%;
+}
+
+@media only screen and (min-width: 800px) {
+   header {
+    padding-left: 100px;
+    padding-right: 100px;
+   }
+   .header__icon-wrapper {
+    font-size: 40px;
+  }
+}
