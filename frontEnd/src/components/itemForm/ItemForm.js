@@ -1,6 +1,8 @@
 import React from "react";
 //components
 import Message from "../message/Message";
+//styles
+import './itemForm.css'
 
 const ItemForm = ({
   formActive,
@@ -18,7 +20,7 @@ const ItemForm = ({
       onSubmit={handleSubmit}
       className={formActive ? "item-form active" : "item-form"}
     >
-      <div className="item-form-input-wrapper">
+      <div className="item-form__input-wrapper">
         <label htmlFor="item-code">Item Code:</label>
         <input
           type="text"
@@ -29,7 +31,7 @@ const ItemForm = ({
           }}
         />
       </div>
-      <div className="item-form-input-wrapper">
+      <div className="item-form__input-wrapper">
         <label htmlFor="item-exp">Expiry Date:</label>
         <input
           type="text"
@@ -40,7 +42,7 @@ const ItemForm = ({
           }}
         />
       </div>
-      <div className="item-form-input-wrapper">
+      <div className="item-form__input-wrapper">
         <label htmlFor="item-qty">Item Qty:</label>
         <input type="number" value={itemQtyInput} onChange={itemQtyOnChange} />
       </div>

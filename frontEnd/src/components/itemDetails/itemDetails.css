@@ -1,0 +1,68 @@
+.location-detail-wrapper {
+  width: 90%;
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 8px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.location-detail-title-wrapper {
+  display: flex;
+  justify-content: space-between ;
+}
+
+.item-wrapper {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  background-color: #fdfdfd;
+  padding: 10px 10px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-wrapper__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.item-wrapper p {
+  margin-bottom: 5px;
+}
+
+.item-wrapper__icon_wrapper {
+  margin-top: 20px;
+}
+
+.add-item-btn {
+  background-color: cadetblue;
+  color: #fff;
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.add-item-btn:hover {
+  background-color: rgba(95, 158, 160, 0.534);
+}
+
+.delete-item-btn {
+  background-color: rgb(192, 43, 43);
+  color: #fff;
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.delete-item-btn:hover {
+  background-color: rgba(192, 43, 43, 0.493);
+}
+
+.pen-icon {
+  margin-right: 10px;
+}

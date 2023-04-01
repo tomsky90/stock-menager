@@ -4,6 +4,8 @@ import Message from "../message/Message";
 import ItemForm from "../itemForm/ItemForm";
 //fetchers
 import { editItem, deleteItem } from "../../fetchData/FetchData";
+//styles
+import './itemDetails.css'
 
 const ItemDetails = ({ item, setMessage, location }) => {
   const [itemFormActive, setItemFormActive] = useState(false);
