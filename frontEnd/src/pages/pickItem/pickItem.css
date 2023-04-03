@@ -1,0 +1,14 @@
+.pick-item__summary {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin-top: 20px;
+}
+
+.pick-item__summary button {
+  background-color: cadetblue;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+}

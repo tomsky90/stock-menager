@@ -272,7 +272,7 @@ const BinTransfer = () => {
           {activeStep === 2 || (activeStep === 5 && data)
             ? data.items.map((part) => {
                 return (
-                  <div key={part._id} className="items-list__item ">
+                  <div key={part._id} className="items-list__item  items-list__bin-item">
                     <p>{data.title}</p> <p>{part.title}</p> <p>{part.qty}</p>
                   </div>
                 );

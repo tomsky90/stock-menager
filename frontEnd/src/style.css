@@ -12,12 +12,6 @@ button:hover {
   cursor: pointer;
 }
 
-.app-wrapper {
-  max-width: 2000px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* typography */
 h1 {
   color: #000000c5;
