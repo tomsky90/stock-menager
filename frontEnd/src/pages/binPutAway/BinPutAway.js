@@ -17,7 +17,6 @@ const BinPutAway = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [activeStep, setActiveStep] = useState(1);
-  const [location, setLocation] = useState(null);
 
   const itemCodeInputOnChange = (e) => {
     setItemCodeInput(e.target.value.toUpperCase());
@@ -69,8 +68,7 @@ const BinPutAway = () => {
 
     if(response.ok) {
       setActiveStep(3)
-      setMessage('Bin updated succesfully')
-      setLocation(json)
+      setMessage(`Bin: ${json.title} updated succesfully`)
     }
   };
 
