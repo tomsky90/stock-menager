@@ -32,7 +32,6 @@ userSchema.statics.createUser = async function(email, password) {
   }
 
   const exists = await this.findOne({email})
- console.log()
   if(exists) {
     throw Error('Email already in use')
   }
@@ -42,6 +41,25 @@ userSchema.statics.createUser = async function(email, password) {
 
   const user = await this.create(({email, password: hash}));
 
+  return user
+}
+
+//static login method
+userSchema.statics.login = async function(email, password) {
+  
+  //validation
+  if(!email || !password) {
+    throw Error('All fields must be field')
+  }
+
+  const user = await this.findOne({email})
+  if(!user) {
+    throw Error('Incorect user name')
+  }
+  const match = await bcrypt.compare(password, user.password)
+  if(!match) {
+    throw Error('Incorect password')
+  }
   return user
 }
 
