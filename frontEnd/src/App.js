@@ -14,6 +14,8 @@ import SearchForItemPage from './pages/searchForItemPage/SearchForItemPage';
 import PickItem from './pages/pickItem/PickItem';
 import BinTransfer from './pages/binTransferPage/BinTransfer';
 import CreateBin from './pages/createBin/CreateBin';
+import Login from './pages/login/Login';
+import CreateUser from './pages/createUser/CreateUser';
 function App() {
 
   const [locations, setLocations] = useState([]);
@@ -40,7 +42,9 @@ function App() {
       <Route path='/location/item/pick-item' element={<PickItem/>}/>
       <Route path='/location/item/bin-putaway' element={<BinPutAway/>}/>
       <Route path='/bin-transfer' element={<BinTransfer />}/>
-      <Route path='create-bin' element={<CreateBin/>}/>
+      <Route path='/create-bin' element={<CreateBin/>}/>
+      <Route path='/create-user' element={<CreateUser/>}/>
+      <Route path='/login' element={<Login/>}/>
     </Routes>
     
    </div>
