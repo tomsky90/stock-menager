@@ -1,6 +1,4 @@
 import { useState } from "react";
-//img's
-import presentation from '../../assets/presentation-640.png'
 //css
 import './login.css'
 //hooks
