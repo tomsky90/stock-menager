@@ -16,6 +16,7 @@ import BinTransfer from './pages/binTransferPage/BinTransfer';
 import CreateBin from './pages/createBin/CreateBin';
 import Login from './pages/login/Login';
 import CreateUser from './pages/createUser/CreateUser';
+import WelcomePage from './pages/welcomePage/WelcomePage';
 function App() {
 
   const [locations, setLocations] = useState([]);
@@ -35,7 +36,8 @@ function App() {
    <div className='app-wrapper'>
     <Header/>
     <Routes>
-      <Route path='/' element={<Home/>}/>
+      <Route path='/' element={<WelcomePage/>}/>
+      <Route path='/home' element={<Home/>}/>
       <Route path='/locations' element={<LocationsList locations={locations}/>}/>
       <Route path='/location-search' element={<LocationSearch locations={locations}/>}/>
       <Route path='/location/item/search' element={<SearchForItemPage/>}/>

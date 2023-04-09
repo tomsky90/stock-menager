@@ -15,6 +15,10 @@ header a {
   flex-grow: 1;
 }
 
+.header__logo-wrapper h1 {
+  margin-bottom: 5px;
+}
+
 .header__logo-wrapper__heading {
   color: #fff;
 }
@@ -34,9 +38,35 @@ header a {
   }
 }
 
+
+
 .header__logout-btn {
   background-color: cadetblue;
   border: #fff 1px solid;
   padding: 2px 5px;
   color: #fff;
+  margin-left: 5px;
+}
+
+.header__login__link {
+  background-color: cadetblue;
+  border: #fff 1px solid;
+  border-radius: 3px;
+  padding: 2px 5px;
+  color: #fff;
+  margin-left: 5px;
+  font-size: 12px;
+}
+
+@media only screen and (min-width: 1200px) {
+  header {
+   padding-left: 100px;
+   padding-right: 100px;
+  }
+  .header__icon-wrapper {
+   font-size: 40px;
+ }
+ .header__login__link {
+  font-size: 16px;
+ }
 }
