@@ -33,3 +33,10 @@ header a {
     font-size: 40px;
   }
 }
+
+.header__logout-btn {
+  background-color: cadetblue;
+  border: #fff 1px solid;
+  padding: 2px 5px;
+  color: #fff;
+}

@@ -1,22 +1,33 @@
-import React from 'react';
+import React from "react";
 //import icons
-import { Link } from 'react-router-dom';
-import { FaHome } from 'react-icons/fa';
+import { Link } from "react-router-dom";
+import { FaHome } from "react-icons/fa";
 //styles
-import './header.css'
+import "./header.css";
+//hooks
+import { useLogout } from "../../hooks/useLogout";
 
 const Header = () => {
-  return ( 
+  const { logout } = useLogout()
+
+  const handleClick = () => {
+    logout()
+  }
+  return (
     <header>
-      <Link to='/'>
-        <div className='header__icon-wrapper'>
+      <Link to="/">
+        <div className="header__icon-wrapper">
           <FaHome />
         </div>
       </Link>
-        <div className='header__logo-wrapper'><h1 className='header__logo-wrapper__heading'>Stock Manager</h1></div>
-      
+      <div className="header__logo-wrapper">
+        <h1 className="header__logo-wrapper__heading">Stock Manager</h1>
+      </div>
+      <div>
+        <button className="header__logout-btn" onClick={handleClick}>Log out</button>
+      </div>
     </header>
-   );
-}
- 
-export default Header
+  );
+};
+
+export default Header;
