@@ -1,12 +1,14 @@
 import { useState } from "react";
+import { useCreateuser } from "../../hooks/useCreateuser";
 
 const CreateUser = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {signup, error, isLoading} = useCreateuser()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log(email, password)
+    await signup(email, password)
   }
   return ( 
     <form className="signup__form" onSubmit={handleSubmit}>
@@ -27,6 +29,8 @@ const CreateUser = () => {
           value={password}
         />
       </label>
+      <button disabled={isLoading} type="submit">Submit</button>
+      {error && <div className="error"> {error}</div>}
     </form>
    );
 }
