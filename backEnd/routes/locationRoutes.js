@@ -14,7 +14,12 @@ const {
   pushItem,
 } = require("../controllers/locationController");
 
+const requireAuth = require('../middleware/requireAuth');
+
 const router = express.Router();
+
+//require auth for all locations routes
+router.use(requireAuth);
 
 //get all locations
 router.get("/", getAllLocations);

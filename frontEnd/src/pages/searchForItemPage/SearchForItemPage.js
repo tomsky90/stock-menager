@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Message from '../../components/message/Message';
 import SingleInputForm from '../../components/singleInputForm/SingleInputForm';
 import LocationsList from '../../components/locationsList/LocationsList';
+//hooks
+import { useAuthContext } from '../../hooks/useAuthContext';
 
 const SearchForItemPage = () => {
 
@@ -11,6 +13,7 @@ const SearchForItemPage = () => {
   const [data, setData] = useState([])
   const [itemQty, setItemQty] = useState('')
   const [itemName, setItemName] = useState('')
+  const { user } = useAuthContext()
 
   //total qty for searched item
   const addQty = (locations) => {
@@ -35,7 +38,9 @@ const SearchForItemPage = () => {
       return
     }
     
-    const response = await fetch('/api/locations/find-items/' + inputValue)
+    const response = await fetch('/api/locations/find-items/' + inputValue, { headers:{
+      'Authorization': `Bearer ${user.token}`
+    }})
 
     const json = await response.json()
 

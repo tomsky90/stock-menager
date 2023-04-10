@@ -42,7 +42,7 @@
   .welcome-page__wrapper {
     padding-top: 150px;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     display: flex;
     column-gap: 100px;
   }

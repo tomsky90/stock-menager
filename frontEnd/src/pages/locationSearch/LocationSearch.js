@@ -5,11 +5,14 @@ import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
 import Message from "../../components/message/Message";
 //fetchers
 import { getSingleBin } from "../../fetchData/FetchData";
+//hooks
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const LocationSearch = () => {
   const [location, setLocation] = useState();
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
+  const { user } = useAuthContext()
 
   const getBin = async (e) => {
     e.preventDefault();
@@ -18,7 +21,7 @@ const LocationSearch = () => {
       setError("Please enter correct Bin Title.");
       return;
     }
-    const response = await getSingleBin(inputValue);
+    const response = await getSingleBin(inputValue, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);

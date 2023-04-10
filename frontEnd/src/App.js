@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { useAuthContext } from "./hooks/useAuthContext";
 
 //import styles
 import './style.css'
@@ -20,17 +21,23 @@ import WelcomePage from './pages/welcomePage/WelcomePage';
 function App() {
 
   const [locations, setLocations] = useState([]);
+  const { user } = useAuthContext()
   
 
   useEffect(() => {
     const fetchLocations = async () => {
-      const response = await fetch('/api/locations')
+      const response = await fetch('/api/locations', {headers: {
+        'Authorization': `Bearer ${user.token}`
+      }})
       const data = await response.json()
       setLocations(data)
     }
 
-    fetchLocations()
-  },[])
+    if(user) {
+       fetchLocations()
+    }
+
+  },[user])
   return (
     <BrowserRouter>
    <div className='app-wrapper'>

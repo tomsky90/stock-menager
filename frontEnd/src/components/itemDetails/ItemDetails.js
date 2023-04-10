@@ -6,6 +6,8 @@ import ItemForm from "../itemForm/ItemForm";
 import { editItem, deleteItem } from "../../fetchData/FetchData";
 //styles
 import './itemDetails.css'
+//auth context
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const ItemDetails = ({ item, setMessage, location }) => {
   const [itemFormActive, setItemFormActive] = useState(false);
@@ -13,6 +15,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
   const [itemQtyInput, setItemQtyInput] = useState("");
   const [error, setError] = useState("");
   const [itemExpiry, setItemExpiry] = useState("");
+  const { user } = useAuthContext()
 
   const itemQtyOnChange = (e) => {
     if (e.target.value < 0) {
@@ -44,7 +47,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
       exp: itemExpiry,
     };
 
-    const data = await editItem(item._id, updatedItem);
+    const data = await editItem(item._id, updatedItem, user);
     if (!data.ok) {
       setError(data.error);
     }
@@ -58,7 +61,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
   };
 
   const removeItem = async () => {
-    const response = await deleteItem(item, location._id);
+    const response = await deleteItem(item, location._id, user);
     if(response.ok) {
       setMessage(`Item: ${item.title} succesfuly deleted!`)
     }

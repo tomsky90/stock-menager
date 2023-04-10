@@ -7,6 +7,8 @@ import ItemsList from "../../components/itemsList/ItemsList";
 import Message from "../../components/message/Message";
 //get data
 import { getData, putItemAway } from "../../fetchData/FetchData";
+//useAuthContext hook
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const BinPutAway = () => {
   const [data, setData] = useState();
@@ -17,6 +19,7 @@ const BinPutAway = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [activeStep, setActiveStep] = useState(1);
+  const { user } = useAuthContext();
 
   const itemCodeInputOnChange = (e) => {
     setItemCodeInput(e.target.value.toUpperCase());
@@ -38,7 +41,7 @@ const BinPutAway = () => {
       return;
     }
 
-    const data = await getData(inputValue);
+    const data = await getData(inputValue, user);
     if (data.error) {
       setData(null);
       setError(data.error);
@@ -63,7 +66,7 @@ const BinPutAway = () => {
       qty: itemQtyInput,
       exp: itemExpiryInput,
     };
-    const response = await putItemAway(data._id, item);
+    const response = await putItemAway(data._id, item, user);
     const json = await response.json()
 
     if(response.ok) {

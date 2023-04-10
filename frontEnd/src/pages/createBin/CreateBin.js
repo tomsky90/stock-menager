@@ -4,11 +4,14 @@ import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
 import Message from "../../components/message/Message";
 //helpers
 import { addNewBin } from "../../fetchData/FetchData";
+//hooks
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const CreateBin = () => {
   const [title, setTitle] = useState("");
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
+  const { user } = useAuthContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +24,7 @@ const CreateBin = () => {
 
       const location = { title: title };
 
-      const data = await addNewBin(location);
+      const data = await addNewBin(location, user);
       if (data.error) {
         setError(data.error);
       } else {

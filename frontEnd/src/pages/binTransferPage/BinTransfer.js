@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+//useAuthContext hook
+import { useAuthContext } from "../../hooks/useAuthContext";
 //components
 import StepCounter from "../../components/stepCounter/StepCounter";
 import Message from "../../components/message/Message";
@@ -28,6 +30,7 @@ const BinTransfer = () => {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+  const { user } = useAuthContext()
 
   //get bin to transfer from
   const handleSubmit = async (e) => {
@@ -38,7 +41,7 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleBin(inputValue);
+    const response = await getSingleBin(inputValue, user);
     const json = await response.json();
 
     if (!response.ok) {
@@ -62,7 +65,7 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleItem(itemCodeInput);
+    const response = await getSingleItem(itemCodeInput, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
@@ -108,7 +111,7 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleBin(inputValue);
+    const response = await getSingleBin(inputValue, user);
     const json = await response.json();
     const part = json.items.find((i) => i.title === itemCodeInput);
 
@@ -136,7 +139,7 @@ const BinTransfer = () => {
       exp: itemTransferred.exp,
       itemId: itemTransferred._id,
     };
-    const response = await takeOffItem(binTransferFrom._id, item);
+    const response = await takeOffItem(binTransferFrom._id, item, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
@@ -146,7 +149,7 @@ const BinTransfer = () => {
     if (response.ok) {
       //if item exist add to it
       if (itemToBeAddedTo) {
-        const response = await addToItem(itemToBeAddedTo._id, item);
+        const response = await addToItem(itemToBeAddedTo._id, item, user);
         const json = await response.json();
 
         if (!response.ok) {
@@ -164,7 +167,7 @@ const BinTransfer = () => {
           qty: qtyToBeTransferred,
           exp: itemTransferred.exp,
         };
-        const response = await pushItem(binTransferTo._id, newItem);
+        const response = await pushItem(binTransferTo._id, newItem, user);
         const json = await response.json();
 
         if (!response.ok) {

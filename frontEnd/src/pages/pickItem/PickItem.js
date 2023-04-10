@@ -8,6 +8,8 @@ import ItemTableList from "../../components/itemsTableList/itemsTableList";
 import { getSingleItem, getSingleBin, takeOffItem } from "../../fetchData/FetchData";
 //styles
 import './pickItem.css'
+//hooks
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 const PickItem = () => {
   const [itemInputValue, setItemInputValue] = useState("");
@@ -22,6 +24,7 @@ const PickItem = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [itemTransferred, setItemTransferred] = useState(null);
   const [message, setMessage] = useState('')
+  const { user } = useAuthContext()
 
   //total qty for searched item
   const addQty = (locations) => {
@@ -46,7 +49,7 @@ const PickItem = () => {
       return;
     }
 
-    const response = await getSingleItem(itemInputValue);
+    const response = await getSingleItem(itemInputValue, user);
     const json = await response.json();
 
     if (!response.ok) {
@@ -69,7 +72,7 @@ const PickItem = () => {
       setError("Please Enter Correct Bin Code.");
     }
 
-    const response = await getSingleBin(binTitleInput);
+    const response = await getSingleBin(binTitleInput, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
@@ -98,7 +101,7 @@ const PickItem = () => {
       exp: itemTransferred.exp,
       itemId: itemTransferred._id,
     };
-    const response = await takeOffItem(binPickFrom[0]._id, item);
+    const response = await takeOffItem(binPickFrom[0]._id, item, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);

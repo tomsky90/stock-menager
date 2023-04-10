@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+//authContext hook
+import { useAuthContext } from "../../hooks/useAuthContext";
 //components import
 import ItemForm from "../itemForm/ItemForm";
 import ItemDetails from "../itemDetails/ItemDetails";
@@ -17,6 +18,7 @@ const LocationDetails = ({ location }) => {
   const [itemQtyInput, setItemQtyInput] = useState("");
   const [error, setError] = useState("");
   const [itemExpiry, setItemExpiry] = useState("");
+  const { user } = useAuthContext()
 
   const toggleForm = () => {
     setFormActive(!formActive);
@@ -52,7 +54,7 @@ const LocationDetails = ({ location }) => {
       exp: itemExpiry,
     };
 
-    const data = await editItem(location._id, updatedItem);
+    const data = await editItem(location._id, updatedItem, user);
     if (!data.ok) {
       setError(data.error);
     }
@@ -65,17 +67,6 @@ const LocationDetails = ({ location }) => {
     }
   };
 
-  // const handleClick = async () => {
-  //   const response = await fetch('/api/locations/' + location._id, {method: 'DELETE'})
-
-  //   const json = await response.json()
-  //   setMessage('location: ' + json.title +' deleted')
-  //   setTimeout(() => {
-  //     setMessage('')
-  //     window.location.reload(true)
-  //   },2000)
-  // }
-
   return (
     <div className="location-detail-wrapper">
       <div className="location-detail-title-wrapper">
@@ -87,7 +78,6 @@ const LocationDetails = ({ location }) => {
         </div>
       </div>
 
-      {/* {message && <div className='succes-message'>{message}</div>} */}
       {message && <Message status="succes" message={message} />}
       <ItemForm
         formActive={formActive}

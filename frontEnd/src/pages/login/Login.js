@@ -40,9 +40,6 @@ const Login = () => {
         <button disabled={isLoading} type="submit">Submit</button>
         {error && <div className="error"> {error}</div>}
       </form>
-      {/* <div className="login__img-wrapper">
-          <img src={presentation}/>
-      </div> */}
     </div>
   );
 };
