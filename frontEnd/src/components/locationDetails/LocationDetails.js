@@ -6,7 +6,7 @@ import ItemForm from "../itemForm/ItemForm";
 import ItemDetails from "../itemDetails/ItemDetails";
 import Message from "../message/Message";
 //fetchers
-import { editItem } from "../../fetchData/FetchData";
+import { putItemAway } from "../../fetchData/FetchData";
 //styles
 import './locationDetails.css'
 
@@ -54,7 +54,7 @@ const LocationDetails = ({ location }) => {
       exp: itemExpiry,
     };
 
-    const data = await editItem(location._id, updatedItem, user);
+    const data = await putItemAway(location._id, updatedItem, user);
     if (!data.ok) {
       setError(data.error);
     }

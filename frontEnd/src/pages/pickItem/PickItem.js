@@ -109,6 +109,7 @@ const PickItem = () => {
     }
     if(response.ok) {
       setMessage('Item Picked Succesfully')
+      setStep(5)
     }
 
   }

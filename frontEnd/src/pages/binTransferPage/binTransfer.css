@@ -1,3 +1,7 @@
+.bin-transfer-page {
+  padding-top: 30px;
+}
+
 .transfer-summary {
   display: flex;
   flex-direction: column;

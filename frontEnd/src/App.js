@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
 import { useAuthContext } from "./hooks/useAuthContext";
 
 //import styles
@@ -16,7 +16,7 @@ import PickItem from './pages/pickItem/PickItem';
 import BinTransfer from './pages/binTransferPage/BinTransfer';
 import CreateBin from './pages/createBin/CreateBin';
 import Login from './pages/login/Login';
-import CreateUser from './pages/createUser/CreateUser';
+// import CreateUser from './pages/createUser/CreateUser';
 import WelcomePage from './pages/welcomePage/WelcomePage';
 function App() {
 
@@ -43,17 +43,18 @@ function App() {
    <div className='app-wrapper'>
     <Header/>
     <Routes>
-      <Route path='/' element={<WelcomePage/>}/>
-      <Route path='/home' element={<Home/>}/>
-      <Route path='/locations' element={<LocationsList locations={locations}/>}/>
-      <Route path='/location-search' element={<LocationSearch locations={locations}/>}/>
-      <Route path='/location/item/search' element={<SearchForItemPage/>}/>
-      <Route path='/location/item/pick-item' element={<PickItem/>}/>
-      <Route path='/location/item/bin-putaway' element={<BinPutAway/>}/>
-      <Route path='/bin-transfer' element={<BinTransfer />}/>
-      <Route path='/create-bin' element={<CreateBin/>}/>
-      <Route path='/create-user' element={<CreateUser/>}/>
-      <Route path='/login' element={<Login/>}/>
+      <Route path='/' element={!user ? <WelcomePage/> : <Navigate to='/home'/>}/>
+      <Route path='/home' element={user ? <Home/> : <Navigate to='/'/>}/>
+      <Route path='/locations' element={user ? <LocationsList locations={locations}/> : <Navigate to='/'/>}/>
+      <Route path='/location-search' element={user ? <LocationSearch locations={locations}/> : <Navigate to='/'/>}/>
+      <Route path='/location/item/search' element={user ? <SearchForItemPage/> : <Navigate to='/'/>}/>
+      <Route path='/location/item/pick-item' element={user ? <PickItem/> : <Navigate to='/'/>}/>
+      <Route path='/location/item/bin-putaway' element={user ? <BinPutAway/> : <Navigate to='/'/>}/>
+      <Route path='/bin-transfer' element={user ? <BinTransfer/> : <Navigate to='/'/>}/>
+      <Route path='/create-bin' element={user ? <CreateBin/> : <Navigate to='/'/>}/>
+      {/* <Route path='/create-user' element={<CreateUser/>}/> */}
+      <Route path='/login' element={ <Login/> }/>
+
     </Routes>
     
    </div>

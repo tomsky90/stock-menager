@@ -5,6 +5,8 @@ import SingleInputForm from '../../components/singleInputForm/SingleInputForm';
 import LocationsList from '../../components/locationsList/LocationsList';
 //hooks
 import { useAuthContext } from '../../hooks/useAuthContext';
+//styles
+import './searchForItemPage.css';
 
 const SearchForItemPage = () => {
 

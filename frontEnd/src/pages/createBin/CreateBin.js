@@ -6,6 +6,8 @@ import Message from "../../components/message/Message";
 import { addNewBin } from "../../fetchData/FetchData";
 //hooks
 import { useAuthContext } from "../../hooks/useAuthContext";
+//styles
+import './createBin.css'
 
 const CreateBin = () => {
   const [title, setTitle] = useState("");

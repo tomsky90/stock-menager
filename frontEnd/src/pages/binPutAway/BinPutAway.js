@@ -9,6 +9,8 @@ import Message from "../../components/message/Message";
 import { getData, putItemAway } from "../../fetchData/FetchData";
 //useAuthContext hook
 import { useAuthContext } from "../../hooks/useAuthContext";
+//styles
+import './binPutAway.css'
 
 const BinPutAway = () => {
   const [data, setData] = useState();

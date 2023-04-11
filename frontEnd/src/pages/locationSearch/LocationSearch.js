@@ -7,6 +7,8 @@ import Message from "../../components/message/Message";
 import { getSingleBin } from "../../fetchData/FetchData";
 //hooks
 import { useAuthContext } from "../../hooks/useAuthContext";
+//styles
+import './locationSearch.css'
 
 const LocationSearch = () => {
   const [location, setLocation] = useState();

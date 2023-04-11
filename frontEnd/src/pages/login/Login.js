@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 //css
 import './login.css'
 //hooks
@@ -8,10 +9,20 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, error, isLoading } = useLogin();
+  const navigate = useNavigate()
+
+  const emailOnChange = (e) => {
+    setEmail(e.target.value);
+  }
+
+  const passwordOnChange = (e) => {
+    setPassword(e.target.value)
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     await login(email, password);
+    navigate('/home')
   };
   return (
     <div className="login__page-wrapper">
@@ -22,7 +33,7 @@ const Login = () => {
           <input
             type="email"
             onChange={(e) => {
-              setEmail(e.target.value);
+              emailOnChange(e)
             }}
             value={email}
           />
@@ -32,7 +43,7 @@ const Login = () => {
           <input
             type="password"
             onChange={(e) => {
-              setPassword(e.target.value);
+              passwordOnChange(e)
             }}
             value={password}
           />
