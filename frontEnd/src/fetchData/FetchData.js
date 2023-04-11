@@ -43,7 +43,7 @@ export const addToItem = async (uri, item, user) => {
 
 //put item away
 export const putItemAway = async (uri, item, user) => {
-  const response = await fetch("/api/locations/items/put-item-away/"+ uri, {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/items/put-item-away/"+ uri, {
     method: "PATCH",
     body: JSON.stringify(item),
     headers: {
@@ -56,7 +56,7 @@ export const putItemAway = async (uri, item, user) => {
 
 //push Item
 export const pushItem = async (uri, item, user) => {
-  const response = await fetch('/api/locations/items/push-item/'+ uri, {
+  const response = await fetch('https://stock-menager-back-end.onrender.com/api/locations/items/push-item/'+ uri, {
     method: "PATCH",
     body: JSON.stringify(item),
     headers: {
@@ -71,7 +71,7 @@ export const pushItem = async (uri, item, user) => {
 //take off items qty 
 export const takeOffItem = async (uri, item, user) => {
   const response = await fetch(
-    "/api/locations/items/take-off-item/" + uri,
+    "https://stock-menager-back-end.onrender.com/api/locations/items/take-off-item/" + uri,
     {
       method: "PATCH",
       body: JSON.stringify(item),
@@ -86,7 +86,7 @@ export const takeOffItem = async (uri, item, user) => {
 //edit location item 
 export const editItem = async (uri, item, user) => {
   const response = await fetch(
-    "/api/locations/items/edit/" + uri,
+    "https://stock-menager-back-end.onrender.com/api/locations/items/edit/" + uri,
     {
       method: "PATCH",
       body: JSON.stringify(item),
@@ -101,7 +101,7 @@ export const editItem = async (uri, item, user) => {
 
 //add new bin
 export const addNewBin = async (location, user) => {
-  const response = await fetch("/api/locations", {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations", {
     method: "POST",
     body: JSON.stringify(location),
     headers: {
@@ -115,7 +115,7 @@ export const addNewBin = async (location, user) => {
 
 //delete Item
 export const deleteItem = async (item, uri, user) => {
-  const response = await fetch("/api/locations/items/delete/" + uri, {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/items/delete/" + uri, {
     method: "PATCH",
     body: JSON.stringify(item),
     headers: {

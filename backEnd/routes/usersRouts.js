@@ -5,7 +5,7 @@ const router = express.Router();
 const {loginUser, signupUser } = require('../controllers/userController')
 
 //login route
-router.post('https://stock-menager-back-end.onrender.com/login', loginUser);
+router.post('/login', loginUser);
 
 // sign up route
 router.post('/create-user', signupUser);

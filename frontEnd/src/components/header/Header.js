@@ -34,13 +34,6 @@ const Header = () => {
           </div>
         )}
       </div>
-      {!user && (
-        <div>
-          <Link to='/login' className="header__login__link">
-            Log in
-          </Link>
-        </div>
-      )}
     </header>
   );
 };

@@ -40,7 +40,7 @@ const SearchForItemPage = () => {
       return
     }
     
-    const response = await fetch('/api/locations/find-items/' + inputValue, { headers:{
+    const response = await fetch('https://stock-menager-back-end.onrender.com/api/locations/find-items/' + inputValue, { headers:{
       'Authorization': `Bearer ${user.token}`
     }})
 

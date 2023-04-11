@@ -48,15 +48,6 @@ header a {
   margin-left: 5px;
 }
 
-.header__login__link {
-  background-color: cadetblue;
-  border: #fff 1px solid;
-  border-radius: 3px;
-  padding: 2px 5px;
-  color: #fff;
-  margin-left: 5px;
-  font-size: 12px;
-}
 
 @media only screen and (min-width: 1200px) {
   header {
@@ -65,8 +56,5 @@ header a {
   }
   .header__icon-wrapper {
    font-size: 40px;
- }
- .header__login__link {
-  font-size: 16px;
  }
 }
