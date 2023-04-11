@@ -1,4 +1,5 @@
 {
+  "proxy": "https://stock-menager-back-end.onrender.com/",
   "name": "stock-manager",
   "version": "0.1.0",
   "private": true,
