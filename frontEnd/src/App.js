@@ -26,7 +26,7 @@ function App() {
 
   useEffect(() => {
     const fetchLocations = async () => {
-      const response = await fetch('/api/locations', {headers: {
+      const response = await fetch('https://stock-menager-back-end.onrender.com/api/locations', {headers: {
         'Authorization': `Bearer ${user.token}`
       }})
       const data = await response.json()
