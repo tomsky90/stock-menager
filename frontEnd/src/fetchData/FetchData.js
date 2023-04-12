@@ -1,7 +1,7 @@
 
 //get all data
 export const getData = async (uri, user) => {
-  const response = await fetch("/api/locations/" + uri, {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/" + uri, {
     headers: {
       'Authorization': `Bearer ${user.token}`
     }
@@ -12,7 +12,7 @@ export const getData = async (uri, user) => {
 
 //get single bin
 export const getSingleBin = async (uri, user) => {
-  const response = await fetch("/api/locations/" + uri, {headers: {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/" + uri, {headers: {
     'Authorization': `Bearer ${user.token}`
   }});
   const json = response;
@@ -21,7 +21,7 @@ export const getSingleBin = async (uri, user) => {
 
 //get Item
 export const getSingleItem = async (uri, user) => {
-  const response = await fetch("/api/locations/find-items/" + uri, {headers: {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/find-items/" + uri, {headers: {
     'Authorization': `Bearer ${user.token}`
   }});
   const json = response;
@@ -30,7 +30,7 @@ export const getSingleItem = async (uri, user) => {
 
 //add to item qty
 export const addToItem = async (uri, item, user) => {
-  const response = await fetch("/api/locations/items/add-to-item/" + uri, {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/items/add-to-item/" + uri, {
     method: "PATCH",
     body: JSON.stringify(item),
     headers: {
