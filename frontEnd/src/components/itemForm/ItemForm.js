@@ -34,7 +34,7 @@ const ItemForm = ({
       <div className="item-form__input-wrapper">
         <label htmlFor="item-exp">Expiry Date:</label>
         <input
-          type="text"
+          type="date"
           value={itemExpiry}
           id="item-exp"
           onChange={(e) => {

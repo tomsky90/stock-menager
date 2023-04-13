@@ -45,7 +45,7 @@ function App() {
     <Routes>
       <Route path='/' element={!user ? <WelcomePage/> : <Navigate to='/home'/>}/>
       <Route path='/home' element={user ? <Home/> : <Navigate to='/'/>}/>
-      <Route path='/locations' element={user ? <LocationsList/> : <Navigate to='/'/>}/>
+      <Route path='/locations' element={user ? <LocationsList locations={locations}/> : <Navigate to='/'/>}/>
       <Route path='/location-search' element={user ? <LocationSearch locations={locations}/> : <Navigate to='/'/>}/>
       <Route path='/location/item/search' element={user ? <SearchForItemPage/> : <Navigate to='/'/>}/>
       <Route path='/location/item/pick-item' element={user ? <PickItem/> : <Navigate to='/'/>}/>
