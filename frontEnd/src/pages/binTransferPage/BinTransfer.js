@@ -208,6 +208,7 @@ const BinTransfer = () => {
           inputValue={itemCodeInput}
           type="text"
           title="Enter Item Code:"
+          btnText='Search'
         />
       ) : null}
 
@@ -219,6 +220,7 @@ const BinTransfer = () => {
           inputValue={itemQtyInput}
           type="number"
           title="Enter qty you want to move:"
+          btnText='Select'
         />
       )}
 
@@ -230,6 +232,7 @@ const BinTransfer = () => {
           inputValue={inputValue}
           type="text"
           title="Enter bin name you trasfer to:"
+          btnText='Search'
         />
       ) : null}
 

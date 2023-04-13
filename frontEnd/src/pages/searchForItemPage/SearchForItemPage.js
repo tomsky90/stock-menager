@@ -70,6 +70,7 @@ const SearchForItemPage = () => {
         inputValue={inputValue}
         type='text'
         title='Enter Item Code:'
+        btnText='Search'
       />}
       <LocationsList locations={data}/>
     </div>

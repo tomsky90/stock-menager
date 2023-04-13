@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate} from 'react-router-dom';
 import { useAuthContext } from "./hooks/useAuthContext";
 
 //import styles
@@ -39,7 +39,7 @@ function App() {
 
   },[user])
   return (
-    <BrowserRouter>
+    <HashRouter>
    <div className='app-wrapper'>
     <Header/>
     <Routes>
@@ -58,7 +58,7 @@ function App() {
     </Routes>
     
    </div>
-   </BrowserRouter>
+   </HashRouter>
   );
 }
 

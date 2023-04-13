@@ -2,7 +2,7 @@ import React from 'react';
 //styles
 import './singleInputForm.css'
 
-const SingleInputForm = ({handelSubmit, setInputValue, inputValue, type, title}) => {
+const SingleInputForm = ({handelSubmit, setInputValue, inputValue, type, title, btnText}) => {
   return ( 
     <form onSubmit={handelSubmit} className="single-search__form">
           <label htmlFor="item-input">{title}</label>
@@ -14,7 +14,7 @@ const SingleInputForm = ({handelSubmit, setInputValue, inputValue, type, title})
             }}
             id="item-input"
           />
-          <button type="submit">Search</button>
+          <button type="submit">{btnText}</button>
         </form>
    );
 }

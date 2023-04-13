@@ -43,6 +43,7 @@ const LocationSearch = () => {
         inputValue={inputValue}
         type="text"
         title="Enter Bin Name:"
+        btnText='Search'
       />
       <div className="filterd-locations-wrapper">
         {location && <LocationDetails location={location} key={location._id} />}

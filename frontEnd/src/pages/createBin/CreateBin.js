@@ -48,6 +48,7 @@ const CreateBin = () => {
         inputValue={title}
         type="text"
         title="Enter Bin Name:"
+        btnText='Create'
       />
     </div>
   );

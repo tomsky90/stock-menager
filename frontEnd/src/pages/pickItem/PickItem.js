@@ -130,6 +130,7 @@ const PickItem = () => {
           inputValue={itemInputValue}
           type="text"
           title="Enter Item Code:"
+          btnText='Search'
         />
       ) : null}
       {step === 2 ? (
@@ -139,6 +140,7 @@ const PickItem = () => {
           inputValue={binTitleInput}
           type="text"
           title="Enter Bin Code:"
+          btnText='Search'
         />
       ) : null}
       {step === 2 ? <ItemTableList data={items} itemTitle={itemTitle} /> : null}
@@ -149,6 +151,7 @@ const PickItem = () => {
           inputValue={qtyInputValue}
           type="number"
           title="Enter Quantity You Want To Pick:"
+          btnText='Select'
         />
       ) : null}
       {step === 3 ? (

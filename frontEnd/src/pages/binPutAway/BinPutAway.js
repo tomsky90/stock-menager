@@ -91,6 +91,7 @@ const BinPutAway = () => {
           error={error}
           type="text"
           title="Select Bin"
+          btnText='Search'
         />
       ) : null}
       {activeStep === 2 ? (
