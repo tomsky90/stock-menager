@@ -10,7 +10,7 @@ import { getData, putItemAway } from "../../fetchData/FetchData";
 //useAuthContext hook
 import { useAuthContext } from "../../hooks/useAuthContext";
 //styles
-import './binPutAway.css'
+import "./binPutAway.css";
 
 const BinPutAway = () => {
   const [data, setData] = useState();
@@ -69,11 +69,30 @@ const BinPutAway = () => {
       exp: itemExpiryInput,
     };
     const response = await putItemAway(data._id, item, user);
-    const json = await response.json()
+    const json = await response.json();
 
-    if(response.ok) {
-      setActiveStep(3)
-      setMessage(`Bin: ${json.title} updated succesfully`)
+    if (response.ok) {
+      setActiveStep(3);
+      setMessage(`Bin: ${json.title} updated succesfully`);
+      setTimeout(() => {
+        const resetData = async () => {
+          const data = await getData(inputValue, user);
+          if (data.error) {
+            setData(null);
+            setError(data.error);
+          } else {
+            setData(data);
+            setError(null);
+            setActiveStep(1);
+            setInputValue('');
+            setItemCodeInput('');
+            setItemExpiryInput('');
+            setItemQtyInput('');
+            setMessage('')
+          }
+        };
+        resetData()
+      }, 3000);
     }
   };
 
@@ -91,7 +110,7 @@ const BinPutAway = () => {
           error={error}
           type="text"
           title="Select Bin"
-          btnText='Search'
+          btnText="Search"
         />
       ) : null}
       {activeStep === 2 ? (

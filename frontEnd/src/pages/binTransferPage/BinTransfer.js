@@ -198,6 +198,7 @@ const BinTransfer = () => {
           inputValue={inputValue}
           type="text"
           title="Enter Bin Name:"
+          btnText='Search'
         />
       ) : null}
       {/* display item form */}
