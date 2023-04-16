@@ -2,6 +2,7 @@ import React, { useState } from "react";
 //components
 import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
 import Message from "../../components/message/Message";
+import Loader from '../../components/loader/Loader';
 //helpers
 import { addNewBin } from "../../fetchData/FetchData";
 //hooks
@@ -41,6 +42,10 @@ const CreateBin = () => {
       }
     }
   };
+
+  if(isLoading) {
+    return <Loader/>
+  }
 
   return (
     <div className="add-bin-page">
