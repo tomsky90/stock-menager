@@ -1,6 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { HashRouter, Routes, Route, Navigate} from 'react-router-dom';
 import { useAuthContext } from "./hooks/useAuthContext";
+import { useLocationsContext } from './hooks/useLocationsContext';
 
 //import styles
 import './style.css'
@@ -19,8 +20,9 @@ import Login from './pages/login/Login';
 // import CreateUser from './pages/createUser/CreateUser';
 import WelcomePage from './pages/welcomePage/WelcomePage';
 function App() {
+  const {locations, dispatch} = useLocationsContext()
 
-  const [locations, setLocations] = useState([]);
+  // const [locations, setLocations] = useState([]);
   const { user } = useAuthContext()
   
 
@@ -30,7 +32,10 @@ function App() {
         'Authorization': `Bearer ${user.token}`
       }})
       const data = await response.json()
-      setLocations(data)
+      if(response.ok) {
+        dispatch({type: 'SET_LOCATIONS', payload: data})
+      }
+     
     }
 
     if(user) {

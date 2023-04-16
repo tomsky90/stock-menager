@@ -10,7 +10,7 @@ const LocationsList = ({ locations }) => {
   ));
 
   return (
-    <div className="location-list-wrapper">
+    <div className="location-list-wrapper">{console.log(locations)}
       {renderLocations && renderLocations}
     </div>
   );

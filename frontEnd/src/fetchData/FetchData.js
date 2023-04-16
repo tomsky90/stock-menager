@@ -1,12 +1,13 @@
+import { json } from "react-router-dom";
 
 //get all data
-export const getData = async (uri, user) => {
-  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/" + uri, {
+export const getData = async ( user) => {
+  const response = await fetch("https://stock-menager-back-end.onrender.com/api/locations/", {
     headers: {
       'Authorization': `Bearer ${user.token}`
     }
   });
-  const json = await response.json();
+  const json = response;
   return json;
 };
 

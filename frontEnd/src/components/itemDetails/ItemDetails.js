@@ -3,11 +3,13 @@ import React, { useState } from "react";
 import Message from "../message/Message";
 import ItemForm from "../itemForm/ItemForm";
 //fetchers
-import { editItem, deleteItem } from "../../fetchData/FetchData";
+import { editItem, deleteItem, getData } from "../../fetchData/FetchData";
 //styles
 import './itemDetails.css'
-//auth context
+// context
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useLocationsContext } from "../../hooks/useLocationsContext";
+
 
 const ItemDetails = ({ item, setMessage, location }) => {
   const [itemFormActive, setItemFormActive] = useState(false);
@@ -15,7 +17,9 @@ const ItemDetails = ({ item, setMessage, location }) => {
   const [itemQtyInput, setItemQtyInput] = useState("");
   const [error, setError] = useState("");
   const [itemExpiry, setItemExpiry] = useState("");
-  const { user } = useAuthContext()
+  const [isLoading, setIsLoading] = useState('');
+  const { user } = useAuthContext();
+  const {dispatch} = useLocationsContext();
 
   const itemQtyOnChange = (e) => {
     if (e.target.value < 0) {
@@ -35,6 +39,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     if (itemCodeInput.length < 1 || itemQtyInput === "") {
       setError("Enter Valid Part Number And Qty!");
@@ -56,14 +61,49 @@ const ItemDetails = ({ item, setMessage, location }) => {
       setItemQtyInput("");
       setError(null);
       setItemExpiry("");
-      setMessage("Item Succesfully Added");
+      setMessage("Item Succesfully updated");
+      setTimeout(() => {
+        const updateLocationsList = async () => {
+          const response = await getData( user );
+          const json = await response.json();
+          if (!response.ok) {
+            setError(json.error);
+          }
+          if (response.ok) {
+            setIsLoading(false)
+            dispatch({type: 'SET_LOCATIONS', payload: json})
+            setMessage('')
+          }
+        }
+
+        updateLocationsList()
+          
+      },1000)
     }
   };
 
   const removeItem = async () => {
+    setIsLoading(true)
     const response = await deleteItem(item, location._id, user);
     if(response.ok) {
       setMessage(`Item: ${item.title} succesfuly deleted!`)
+      setTimeout(() => {
+        const updateLocationsList = async () => {
+          const response = await getData( user );
+          const json = await response.json();
+          if (!response.ok) {
+            setError(json.error);
+          }
+          if (response.ok) {
+            setIsLoading(false)
+            dispatch({type: 'SET_LOCATIONS', payload: json})
+            setMessage('')
+          }
+        }
+
+        updateLocationsList()
+          
+      },1000)
     }
   } 
 
@@ -80,10 +120,10 @@ const ItemDetails = ({ item, setMessage, location }) => {
           <p>Expiry date: {item.exp}</p>
         </div>
         <div className="item-wrapper__icon_wrapper">
-          <button className="add-item-btn" onClick={toggleItemForm}>
+          <button disabled={isLoading} className="add-item-btn" onClick={toggleItemForm}>
             Edit Item
           </button>
-          <button className="delete-item-btn" onClick={()=> {removeItem()}}>
+          <button disabled={isLoading} className="delete-item-btn" onClick={()=> {removeItem()}}>
             Delete Item
           </button>
         </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 //components
 import LocationDetails from "../../components/locationDetails/LocationDetails";
 import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
@@ -15,6 +15,15 @@ const LocationSearch = () => {
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
   const { user } = useAuthContext()
+
+  useEffect(() => {
+    const reSetLocation = () => {
+      setLocation(null)
+    }
+   reSetLocation()
+  },[])
+
+  
 
   const getBin = async (e) => {
     e.preventDefault();
