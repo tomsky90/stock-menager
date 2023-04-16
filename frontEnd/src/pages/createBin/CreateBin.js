@@ -13,13 +13,16 @@ const CreateBin = () => {
   const [title, setTitle] = useState("");
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(null);
   const { user } = useAuthContext()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
 
     if (title.length < 4) {
       setError("Please enter correct bin title.");
+      setIsLoading(false)
     } else {
       setMessage("");
       setError("");
@@ -29,10 +32,12 @@ const CreateBin = () => {
       const data = await addNewBin(location, user);
       if (data.error) {
         setError(data.error);
+        setIsLoading(false)
       } else {
         setTitle("");
         setError(null);
         setMessage("Location " + location.title + " added");
+        setIsLoading(false)
       }
     }
   };

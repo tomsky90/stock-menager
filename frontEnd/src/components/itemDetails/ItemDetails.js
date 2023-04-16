@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Message from "../message/Message";
 import ItemForm from "../itemForm/ItemForm";
 //fetchers
-import { editItem, deleteItem, getData, getSingleBin } from "../../fetchData/FetchData";
+import { editItem, deleteItem, getSingleBin } from "../../fetchData/FetchData";
 //styles
 import './itemDetails.css'
 // context

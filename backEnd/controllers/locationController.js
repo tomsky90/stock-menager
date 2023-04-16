@@ -41,8 +41,9 @@ const createNewLocation = async (req, res) => {
   const { title, items } = req.body;
 
   const exist = Location.findOne({ title: title })
+ 
 
-  if(exist) {
+  if(exist && exist !== undefined) {
     return res.status(404).json({ error: "Location alredy exists, please enter different name." });
   }
 
