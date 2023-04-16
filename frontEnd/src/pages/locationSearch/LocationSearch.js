@@ -1,35 +1,35 @@
 import React, { useState, useEffect } from "react";
 //components
-import LocationDetails from "../../components/locationDetails/LocationDetails";
+import LocationsList from "../../components/locationsList/LocationsList";
 import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
 import Message from "../../components/message/Message";
+import Loader from "../../components/loader/Loader";
 //fetchers
 import { getSingleBin } from "../../fetchData/FetchData";
 //hooks
 import { useAuthContext } from "../../hooks/useAuthContext";
+import { useLocationsContext } from "../../hooks/useLocationsContext";
 //styles
-import './locationSearch.css'
+import "./locationSearch.css";
 
 const LocationSearch = () => {
-  const [location, setLocation] = useState();
   const [inputValue, setInputValue] = useState("");
   const [error, setError] = useState("");
-  const { user } = useAuthContext()
+  const [isLoading, setIsLoading] = useState(null);
+  const { user } = useAuthContext();
+  const { locations, dispatch } = useLocationsContext();
 
   useEffect(() => {
-    const reSetLocation = () => {
-      setLocation(null)
-    }
-   reSetLocation()
-  },[])
-
-  
+    dispatch({ type: "SET_LOCATIONS", payload: [] });
+  }, []);
 
   const getBin = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setError("");
     if (inputValue.length < 4) {
       setError("Please enter correct Bin Title.");
+      setIsLoading(false);
       return;
     }
     const response = await getSingleBin(inputValue, user);
@@ -38,27 +38,35 @@ const LocationSearch = () => {
       setError(json.error);
     }
     if (response.ok) {
-      setLocation(json);
+      const arr = [];
+      arr.push(json);
+      dispatch({ type: "SET_LOCATIONS", payload: arr });
+      setIsLoading(false);
     }
   };
-
-  return (
-    <div className="location-search-page">
-      <h1>Search For Bin</h1>
-      {error && <Message status="error" message={error} />}
-      <SingleInputForm
-        handelSubmit={getBin}
-        setInputValue={setInputValue}
-        inputValue={inputValue}
-        type="text"
-        title="Enter Bin Name:"
-        btnText='Search'
-      />
-      <div className="filterd-locations-wrapper">
-        {location && <LocationDetails location={location} key={location._id} />}
+  if (isLoading) {
+    return <Loader />;
+  } 
+    return (
+      <div className="location-search-page">
+        <h1>Search For Bin</h1>
+        {error && <Message status="error" message={error} />}
+        <SingleInputForm
+          handelSubmit={getBin}
+          setInputValue={setInputValue}
+          inputValue={inputValue}
+          type="text"
+          title="Enter Bin Name:"
+          btnText="Search"
+        />
+        <div className="filterd-locations-wrapper">
+          {locations && (
+            <LocationsList isSingleBin={true} locations={locations} />
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  
 };
 
 export default LocationSearch;

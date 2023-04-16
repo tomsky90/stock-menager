@@ -1,4 +1,3 @@
-import { json } from "react-router-dom";
 
 //get all data
 export const getData = async ( user) => {

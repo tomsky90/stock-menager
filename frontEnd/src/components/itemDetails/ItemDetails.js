@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Message from "../message/Message";
 import ItemForm from "../itemForm/ItemForm";
 //fetchers
-import { editItem, deleteItem, getData } from "../../fetchData/FetchData";
+import { editItem, deleteItem, getData, getSingleBin } from "../../fetchData/FetchData";
 //styles
 import './itemDetails.css'
 // context
@@ -11,7 +11,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useLocationsContext } from "../../hooks/useLocationsContext";
 
 
-const ItemDetails = ({ item, setMessage, location }) => {
+const ItemDetails = ({ item, setMessage, location, isSingleBin }) => {
   const [itemFormActive, setItemFormActive] = useState(false);
   const [itemCodeInput, setItemCodeInput] = useState("");
   const [itemQtyInput, setItemQtyInput] = useState("");
@@ -43,6 +43,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
 
     if (itemCodeInput.length < 1 || itemQtyInput === "") {
       setError("Enter Valid Part Number And Qty!");
+      setIsLoading(false)
       return;
     }
 
@@ -55,6 +56,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
     const data = await editItem(item._id, updatedItem, user);
     if (!data.ok) {
       setError(data.error);
+      setIsLoading(false)
     }
     if (data.ok) {
       setItemCodeInput("");
@@ -63,21 +65,27 @@ const ItemDetails = ({ item, setMessage, location }) => {
       setItemExpiry("");
       setMessage("Item Succesfully updated");
       setTimeout(() => {
-        const updateLocationsList = async () => {
-          const response = await getData( user );
-          const json = await response.json();
-          if (!response.ok) {
-            setError(json.error);
+        const getAllData = async () => {
+          //if serching for bin, get single bin data
+          if(isSingleBin) {
+            const response = await getSingleBin(location.title, user) 
+            const json = await response.json()
+            if(!response.ok) {
+              setError(json.error)
+              setIsLoading(false)
+            }
+            if(response.ok) {
+              const arr = []
+              arr.push(json)
+              setMessage('')
+              setItemFormActive(false)
+              dispatch({type: 'SET_LOCATIONS', payload: arr})
+              setIsLoading(false)
+            }
           }
-          if (response.ok) {
-            setIsLoading(false)
-            dispatch({type: 'SET_LOCATIONS', payload: json})
-            setMessage('')
-          }
-        }
-
-        updateLocationsList()
           
+        }
+        getAllData()
       },1000)
     }
   };
@@ -88,21 +96,27 @@ const ItemDetails = ({ item, setMessage, location }) => {
     if(response.ok) {
       setMessage(`Item: ${item.title} succesfuly deleted!`)
       setTimeout(() => {
-        const updateLocationsList = async () => {
-          const response = await getData( user );
-          const json = await response.json();
-          if (!response.ok) {
-            setError(json.error);
+        const getAllData = async () => {
+          //if serching for bin, get single bin data
+          if(isSingleBin) {
+            const response = await getSingleBin(location.title, user) 
+            const json = await response.json()
+            if(!response.ok) {
+              setError(json.error)
+              setIsLoading(false)
+            }
+            if(response.ok) {
+              const arr = []
+              arr.push(json)
+              setMessage('')
+              setItemFormActive(false)
+              dispatch({type: 'SET_LOCATIONS', payload: arr})
+              setIsLoading(false)
+            }
           }
-          if (response.ok) {
-            setIsLoading(false)
-            dispatch({type: 'SET_LOCATIONS', payload: json})
-            setMessage('')
-          }
-        }
-
-        updateLocationsList()
           
+        }
+        getAllData()
       },1000)
     }
   } 
@@ -112,7 +126,7 @@ const ItemDetails = ({ item, setMessage, location }) => {
   };
 
   return (
-    <div className="item-wrapper">
+    <div className="item-wrapper location-list-wrapper">
       <div className="item-wrapper__header">
         <div className="item-wrapper__info-wrapper">
           <p>Item Code: {item.title}</p>
