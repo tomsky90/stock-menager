@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { HashRouter, Routes, Route, Navigate} from 'react-router-dom';
 import { useAuthContext } from "./hooks/useAuthContext";
 import { useLocationsContext } from './hooks/useLocationsContext';
@@ -9,7 +9,7 @@ import './style.css'
 //components
 import Header from './components/header/Header';
 import Home from './components/home/Home';
-import LocationsList from './components//locationsList/LocationsList';
+import AllBinsPage from './pages/allBinsPage/AllBinsPage';
 import BinPutAway from './pages/binPutAway/BinPutAway';
 import LocationSearch from './pages/locationSearch/LocationSearch';
 import SearchForItemPage from './pages/searchForItemPage/SearchForItemPage';
@@ -20,29 +20,9 @@ import Login from './pages/login/Login';
 // import CreateUser from './pages/createUser/CreateUser';
 import WelcomePage from './pages/welcomePage/WelcomePage';
 function App() {
-  const {locations, dispatch} = useLocationsContext()
-
-  // const [locations, setLocations] = useState([]);
+  const {locations} = useLocationsContext()
   const { user } = useAuthContext()
   
-
-  useEffect(() => {
-    const fetchLocations = async () => {
-      const response = await fetch('https://stock-menager-back-end.onrender.com/api/locations', {headers: {
-        'Authorization': `Bearer ${user.token}`
-      }})
-      const data = await response.json()
-      if(response.ok) {
-        dispatch({type: 'SET_LOCATIONS', payload: data})
-      }
-     
-    }
-
-    if(user) {
-       fetchLocations()
-    }
-
-  },[user])
   return (
     <HashRouter>
    <div className='app-wrapper'>
@@ -50,7 +30,7 @@ function App() {
     <Routes>
       <Route path='/' element={!user ? <WelcomePage/> : <Navigate to='/home'/>}/>
       <Route path='/home' element={user ? <Home/> : <Navigate to='/'/>}/>
-      <Route path='/locations' element={user ? <LocationsList locations={locations}/> : <Navigate to='/'/>}/>
+      <Route path='/locations' element={user ? <AllBinsPage locations={locations}/> : <Navigate to='/'/>}/>
       <Route path='/location-search' element={user ? <LocationSearch locations={locations}/> : <Navigate to='/'/>}/>
       <Route path='/location/item/search' element={user ? <SearchForItemPage/> : <Navigate to='/'/>}/>
       <Route path='/location/item/pick-item' element={user ? <PickItem/> : <Navigate to='/'/>}/>
