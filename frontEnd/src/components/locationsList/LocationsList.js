@@ -9,7 +9,6 @@ const LocationsList = ({ locations, isSingleBin }) => {
 
   return (
     <div className="location-list-wrapper">
-      {console.log(locations)}
       {locations && locations.map((location) => (
     <LocationDetails key={location._id} location={location}  isSingleBin={isSingleBin}/>
   ))}

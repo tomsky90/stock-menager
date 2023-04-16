@@ -40,6 +40,12 @@ const getLocation = async (req, res) => {
 const createNewLocation = async (req, res) => {
   const { title, items } = req.body;
 
+  const exist = Location.findOne({ title: title })
+
+  if(exist) {
+    return res.status(404).json({ error: "Location alredy exists, please enter different name." });
+  }
+
   try {
     const location = await Location.create({ title, items });
     res.status(200).json(location);

@@ -21,7 +21,7 @@ const LocationSearch = () => {
 
   useEffect(() => {
     dispatch({ type: "SET_LOCATIONS", payload: [] });
-  }, []);
+  }, [dispatch]);
 
   const getBin = async (e) => {
     e.preventDefault();
