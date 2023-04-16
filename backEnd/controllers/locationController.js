@@ -40,12 +40,14 @@ const getLocation = async (req, res) => {
 const createNewLocation = async (req, res) => {
   const { title, items } = req.body;
 
-  const exist = Location.findOne({ title: title })
-  console.log(exist)
+  console.log(title)
 
-  if(exist && exist !== undefined) {
-    return res.status(404).json({ error: "Location alredy exists, please enter different name." });
-  }
+  // const exist = Location.findOne({ title: title })
+  // console.log(exist)
+
+  // if(exist && exist !== undefined) {
+  //   return res.status(404).json({ error: "Location alredy exists, please enter different name." });
+  // }
 
   try {
     const location = await Location.create({ title, items });
