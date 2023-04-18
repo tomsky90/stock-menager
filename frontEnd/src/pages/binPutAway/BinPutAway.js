@@ -6,7 +6,7 @@ import StepCounter from "../../components/stepCounter/StepCounter";
 import ItemsList from "../../components/itemsList/ItemsList";
 import Message from "../../components/message/Message";
 //get data
-import { getData, putItemAway } from "../../fetchData/FetchData";
+import { getSingleBin, putItemAway } from "../../fetchData/FetchData";
 //useAuthContext hook
 import { useAuthContext } from "../../hooks/useAuthContext";
 //styles
@@ -43,7 +43,7 @@ const BinPutAway = () => {
       return;
     }
 
-    const data = await getData(inputValue, user);
+    const data = await getSingleBin(inputValue, user);
     if (data.error) {
       setData(null);
       setError(data.error);
