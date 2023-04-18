@@ -4,10 +4,13 @@ import { useNavigate } from "react-router-dom";
 import './login.css'
 //hooks
 import { useLogin } from "../../hooks/useLogin";
+//components
+import Loader from '../../components/loader/Loader'
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLogingIn, setIsLogingIn] = useState(null);
   const { login, error, isLoading } = useLogin();
   const navigate = useNavigate()
 
@@ -21,9 +24,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLogingIn(true)
     await login(email, password);
+    setIsLogingIn(false)
     navigate('/home')
   };
+  if(isLogingIn) {
+    return <Loader/>
+  }
   return (
     <div className="login__page-wrapper">
       <form className="login__form" onSubmit={handleSubmit}>

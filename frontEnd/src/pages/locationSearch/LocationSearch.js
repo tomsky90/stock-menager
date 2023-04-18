@@ -36,6 +36,7 @@ const LocationSearch = () => {
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
+      setIsLoading(false)
     }
     if (response.ok) {
       const arr = [];
