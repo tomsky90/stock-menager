@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Message from "../../components/message/Message";
 import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
 import StepCounter from "../../components/stepCounter/StepCounter";
-import ItemTableList from "../../components/itemsTableList/itemsTableList";
+import ItemsTableList from "../../components/itemsTableList/itemsTableList";
 //fetchers
 import { getSingleItem, getSingleBin, takeOffItem } from "../../fetchData/FetchData";
 //styles
@@ -14,7 +14,7 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 const PickItem = () => {
   const [itemInputValue, setItemInputValue] = useState("");
   const [binTitleInput, setBinTitleInput] = useState("");
-  const [itemTitle, steItemTitle] = useState("");
+  const [itemTitle, setItemTitle] = useState("");
   const [items, setItems] = useState(null);
   const [binPickFrom, setBinPickFrom] = useState(null);
   const [qtyInputValue, setQtyInputValue] = useState("");
@@ -60,7 +60,7 @@ const PickItem = () => {
       addQty(json);
       setItems(json);
       setStep(2);
-      steItemTitle(itemInputValue);
+      setItemTitle(itemInputValue);
       setItemInputValue("");
     }
   };
@@ -143,7 +143,7 @@ const PickItem = () => {
           btnText='Search'
         />
       ) : null}
-      {step === 2 ? <ItemTableList data={items} itemTitle={itemTitle} /> : null}
+      {step === 2 ? <ItemsTableList data={items} itemTitle={itemTitle} /> : null}
       {step === 3 ? (
         <SingleInputForm
           handelSubmit={setQtyToTransfer}
@@ -155,7 +155,7 @@ const PickItem = () => {
         />
       ) : null}
       {step === 3 ? (
-        <ItemTableList data={binPickFrom} itemTitle={itemTitle} />
+        <ItemsTableList data={binPickFrom} itemTitle={itemTitle} />
       ) : null}
       {step === 4 && <div className="pick-item__summary">
       
