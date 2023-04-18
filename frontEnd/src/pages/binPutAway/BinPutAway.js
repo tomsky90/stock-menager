@@ -76,7 +76,7 @@ const BinPutAway = () => {
       setMessage(`Bin: ${json.title} updated succesfully`);
       setTimeout(() => {
         const resetData = async () => {
-          const data = await getData(inputValue, user);
+          const data = await getSingleBin(inputValue, user);
           if (data.error) {
             setData(null);
             setError(data.error);
