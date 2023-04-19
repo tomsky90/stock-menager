@@ -50,7 +50,7 @@ const BinPutAway = () => {
     const json = await response.json();
 
     if (!response.ok) {
-      if(json.error === "Can't find item" {
+      if(json.error === "Can't find item") {
        setError(null);
       setActiveStep(2);
       setItemTitle(itemInputValue);
