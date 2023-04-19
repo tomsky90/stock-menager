@@ -52,7 +52,6 @@ const BinPutAway = () => {
     if (!response.ok) {
       if(json.error === "Can't find item" {
        setError(null);
-      setItems(json);
       setActiveStep(2);
       setItemTitle(itemInputValue);
       setItemInputValue("");
@@ -162,7 +161,7 @@ const BinPutAway = () => {
       {activeStep === 2 ? (
         <div className="bin-put-away-page__suggested-bins">
           <h3>Suggested Bins</h3>
-          <ItemsTableList data={items} itemTitle={itemTitle} />
+          {items && <ItemsTableList data={items} itemTitle={itemTitle} />} 
         </div>
       ) : null}
     </div>
