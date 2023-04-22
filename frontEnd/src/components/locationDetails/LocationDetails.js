@@ -91,7 +91,7 @@ const LocationDetails = ({ location, isSingleBin }) => {
   };
 
   return (
-    <div className="location-detail-wrapper">{console.log(isSingleBin)}
+    <div className="location-detail-wrapper">
       <div className="location-detail-title-wrapper">
         <h3>Bin: {location.title}</h3>
         <div className="icons-wrapper">
