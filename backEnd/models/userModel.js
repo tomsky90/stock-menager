@@ -4,19 +4,29 @@ const validator = require('validator')
 
 const Schema = mongoose.Schema
 const userSchema = new Schema({
+  admin: {
+    type: Boolean,
+    default: false,
+  },
+  office: {
+    type: Boolean,
+    default: false,
+  },
   email:{
     type: String,
     required: true,
     unique: true,
+    trim: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
   }
 })
 
 // static create user method
-userSchema.statics.createUser = async function(email, password) {
+userSchema.statics.createUser = async function(email, password, isAdmin = false, isOffice = false) {
 
   //validation
   if(!email || !password) {
@@ -39,7 +49,7 @@ userSchema.statics.createUser = async function(email, password) {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create(({email, password: hash}));
+  const user = await this.create(({email, password: hash, isAdmin, isOffice}));
 
   return user
 }
