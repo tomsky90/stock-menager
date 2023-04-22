@@ -26,7 +26,7 @@ const userSchema = new Schema({
 })
 
 // static create user method
-userSchema.statics.createUser = async function(email, password, isAdmin = false, isOffice = false) {
+userSchema.statics.createUser = async function(email, password, admin, office) {
 
   //validation
   if(!email || !password) {
@@ -49,7 +49,7 @@ userSchema.statics.createUser = async function(email, password, isAdmin = false,
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(password, salt);
 
-  const user = await this.create(({email, password: hash, isAdmin, isOffice}));
+  const user = await this.create(({email, password: hash, admin, office}));
 
   return user
 }
