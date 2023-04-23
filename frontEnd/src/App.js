@@ -17,6 +17,7 @@ import PickItem from './pages/pickItem/PickItem';
 import BinTransfer from './pages/binTransferPage/BinTransfer';
 import CreateBin from './pages/createBin/CreateBin';
 import Login from './pages/login/Login';
+import AdminPage from './pages/admin_Page/AdminPage';
 // import CreateUser from './pages/createUser/CreateUser';
 import WelcomePage from './pages/welcomePage/WelcomePage';
 function App() {
@@ -37,6 +38,7 @@ function App() {
       <Route path='/location/item/bin-putaway' element={user ? <BinPutAway/> : <Navigate to='/'/>}/>
       <Route path='/bin-transfer' element={user ? <BinTransfer/> : <Navigate to='/'/>}/>
       <Route path='/create-bin' element={user ? <CreateBin/> : <Navigate to='/'/>}/>
+      <Route path='/admin-page' element={user?.admin ? <AdminPage/> : <Navigate to='/'/>}/>
       {/* <Route path='/create-user' element={<CreateUser/>}/> */}
       <Route path='/login' element={ <Login/> }/>
 

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import './login.css'
 //hooks
 import { useLogin } from "../../hooks/useLogin";
+import { useAuthContext } from "../../hooks/useAuthContext";
 //components
 import Loader from '../../components/loader/Loader'
 
@@ -12,6 +13,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isLogingIn, setIsLogingIn] = useState(null);
   const { login, error, isLoading } = useLogin();
+  const { user } = useAuthContext()
   const navigate = useNavigate()
 
   const emailOnChange = (e) => {
@@ -27,7 +29,12 @@ const Login = () => {
     setIsLogingIn(true)
     await login(email, password);
     setIsLogingIn(false)
-    navigate('/home')
+    if(user?.admin) {
+      navigate('/admin-panel')
+    } else {
+      console.log(user)
+      navigate('/home')
+    }
   };
   if(isLogingIn) {
     return <Loader/>
