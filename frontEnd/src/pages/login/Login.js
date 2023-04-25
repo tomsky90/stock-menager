@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 //css
 import './login.css'
 //hooks
-import { useLogin } from "../../hooks/useLogin";
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from '../../hooks/useAuthContext'
 //components
 import Loader from '../../components/loader/Loader'
 
@@ -12,9 +11,45 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogingIn, setIsLogingIn] = useState(null);
-  const { login, error, isLoading } = useLogin();
-  const { user } = useAuthContext()
+  const [error, setError] = useState(null)
+  const { dispatch } = useAuthContext()
   const navigate = useNavigate()
+  // const { login, error, isLoading } = useLogin();
+  
+  const login = async () => {
+    setIsLogingIn(true)
+    setError(null)
+
+    const response = await fetch('https://stock-menager-back-end.onrender.com/api/user/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, password })
+    })
+    const json = await response.json()
+
+    if (!response.ok) {
+      setIsLogingIn(false)
+      setError(json.error)
+    }
+    if (response.ok) {
+      // save the user to local storage
+      localStorage.setItem('user', JSON.stringify(json))
+
+      // update the auth context
+      dispatch({type: 'LOGIN', payload: json})
+
+      // update loading state
+      setIsLogingIn(false)
+      const redirect = async () => {
+        
+        const user = await json 
+        if(user) {
+          navigate('/home')
+        }
+      }
+      redirect()
+    }
+  }
 
   const emailOnChange = (e) => {
     setEmail(e.target.value);
@@ -24,24 +59,19 @@ const Login = () => {
     setPassword(e.target.value)
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLogingIn(true)
-    await login(email, password);
-    setIsLogingIn(false)
-    if(user?.admin) {
-      navigate('/admin-panel')
-    } else {
-      console.log(user)
-      navigate('/home')
-    }
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsLogingIn(true)
+  //   await login(email, password);
+  //   setIsLogingIn(false)
+
+  // };
   if(isLogingIn) {
     return <Loader/>
   }
   return (
     <div className="login__page-wrapper">
-      <form className="login__form" onSubmit={handleSubmit}>
+      <form className="login__form" onSubmit={login}>
         <h3>Login</h3>
         <label>
           Email:
@@ -63,7 +93,7 @@ const Login = () => {
             value={password}
           />
         </label>
-        <button disabled={isLoading} type="submit">Submit</button>
+        <button disabled={isLogingIn}>Submit</button>
         {error && <div className="error"> {error}</div>}
       </form>
     </div>

@@ -30,7 +30,7 @@ function App() {
     <Header/>
     <Routes>
       <Route path='/' element={!user ? <WelcomePage/> : <Navigate to='/home'/>}/>
-      <Route path='/home' element={user ? <Home/> : <Navigate to='/'/>}/>
+      <Route path='/home' element={user?.admin ? <Navigate to='/admin-page'/> : user ? <Home/> : <Navigate to='/'/>}/>
       <Route path='/locations' element={user ? <AllBinsPage locations={locations}/> : <Navigate to='/'/>}/>
       <Route path='/location-search' element={user ? <LocationSearch locations={locations}/> : <Navigate to='/'/>}/>
       <Route path='/location/item/search' element={user ? <SearchForItemPage/> : <Navigate to='/'/>}/>

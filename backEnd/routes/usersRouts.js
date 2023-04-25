@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const requireAdminAuthorization = require('../middleware/requireAdminAuthorization')
 
 // controller functions
 const {loginUser, signupUser } = require('../controllers/userController')
@@ -8,6 +9,6 @@ const {loginUser, signupUser } = require('../controllers/userController')
 router.post('/login', loginUser);
 
 // sign up route
-router.post('/create-user', signupUser);
+router.post('/create-user',requireAdminAuthorization, signupUser);
 
 module.exports = router;
