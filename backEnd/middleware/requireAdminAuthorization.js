@@ -13,7 +13,8 @@ const requireAdminAuthorization = async (req, res, next) => {
   try{
     const {_id} = jwt.verify(token, process.env.SECRET)
     req.user = await User.findOne({_id}).select('_id')
-    if(!req.user.admin) {
+    const admin = await req.user.admin
+    if(admin === false) {
       return res.status(401).json({error: 'Only Admin'})
     }
   } catch(error) {
