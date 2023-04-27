@@ -4,6 +4,8 @@ import { useLocationsContext } from "../../hooks/useLocationsContext";
 import { useAuthContext } from "../../hooks/useAuthContext";
 //components
 import LocationsList from "../../components/locationsList/LocationsList";
+//fetchers
+import { getData } from "../../fetchData/FetchData";
 
 const AllBinsPage = () => {
   const {locations, dispatch} = useLocationsContext();
@@ -11,9 +13,7 @@ const AllBinsPage = () => {
 
   useEffect(() => {
     const fetchLocations = async () => {
-      const response = await fetch('https://stock-menager-back-end.onrender.com/api/locations', {headers: {
-        'Authorization': `Bearer ${user.token}`
-      }})
+      const response = await getData(user) 
       const data = await response.json()
       if(response.ok) {
         dispatch({type: 'SET_LOCATIONS', payload: data})

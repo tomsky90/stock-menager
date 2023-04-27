@@ -1,6 +1,9 @@
+import React from "react";
+//components
+import AdminHeader from './components/adminHeader/AdminHeader'
 const AdminPage = () => {
   return <div className='admin-page'>
-    Admin Page
+    <AdminHeader/>
   </div>;
 };
 

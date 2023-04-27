@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const requireAuth = require('../middleware/requireAuth');
-// const requireAdminAuthorization = require('../middleware/requireAdminAuthorization')
+const requireAdminAuth = require('../middleware/requireAdminAuthorization');
 
 // controller functions
 const {loginUser, signupUser } = require('../controllers/userController')
@@ -12,6 +11,6 @@ const {loginUser, signupUser } = require('../controllers/userController')
 router.post('/login', loginUser);
 
 // sign up route
-router.post('/create-user', requireAuth, signupUser);
+router.post('/create-user', requireAdminAuth, signupUser);
 
 module.exports = router;

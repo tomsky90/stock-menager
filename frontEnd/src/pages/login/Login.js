@@ -7,6 +7,8 @@ import { useAuthContext } from '../../hooks/useAuthContext'
 //components
 import Loader from '../../components/loader/Loader'
 
+import { BASEURL } from '../../config.js'
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +22,7 @@ const Login = () => {
     setIsLogingIn(true)
     setError(null)
 
-    const response = await fetch('https://stock-menager-back-end.onrender.com/api/user/login', {
+    const response = await fetch(BASEURL + '/api/user/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ email, password })
@@ -59,13 +61,6 @@ const Login = () => {
     setPassword(e.target.value)
   }
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsLogingIn(true)
-  //   await login(email, password);
-  //   setIsLogingIn(false)
-
-  // };
   if(isLogingIn) {
     return <Loader/>
   }

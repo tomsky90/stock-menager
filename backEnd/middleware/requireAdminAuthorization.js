@@ -1,8 +1,9 @@
 const jwt = require("jsonwebtoken");
 const User = require('../models/userModel');
 
-const requireAuth = async (req, res, next) => {
-  //verify authentication
+
+const requireAdminAuth = async (req, res, next) => {
+  //verify admin
   const { authorization } = req.headers;
 
   if (!authorization) {
@@ -10,15 +11,13 @@ const requireAuth = async (req, res, next) => {
   }
 
   const token = authorization.split(" ")[1];
-  try{
+  
     const {_id} = jwt.verify(token, process.env.SECRET)
-    req.user = await User.findOne({_id}).select('_id')
-    if(req.user.admin) {
-      next()
+    const user = await User.findOne({_id})
+    if(!user || !user.admin) {
+      return res.status(403).send({error: { status:403, message:'Access denied.'}});
     }
-  } catch(error) {
-    res.status(401).json({error: 'Request is not authorized'})
-  }
+   next()
 };
 
-module.exports =  requireAuth
+module.exports =  requireAdminAuth
