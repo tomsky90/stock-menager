@@ -8,17 +8,17 @@ const ItemsList = ({ data }) => {
           <div className="items-list__header">
             <p>Bin</p>
             <p>part</p>
-            <p>qty</p>
+            <p>qty</p>{console.log(data)}
           </div>
 
-          {data &&
+          {/* {data &&
             data.items.map((part) => {
               return (
                 <div key={part._id} className="items-list__item ">
                   <p>{data.title}</p> <p>{part.title}</p> <p>{part.qty}</p>
                 </div>
               );
-            })}
+            })} */}
         </div>
    );
 }

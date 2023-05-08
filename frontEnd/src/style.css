@@ -6,7 +6,11 @@
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
-
+/* varibles */
+:root {
+  --theme-color: cadetblue;
+  --theme-color-dark: #0e4142;
+}
 
 /* general */
 button:hover {

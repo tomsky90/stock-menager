@@ -15,6 +15,7 @@ const {
 } = require("../controllers/locationController");
 
 const requireAuth = require('../middleware/requireAuth');
+const requireAdminAuth = require('../middleware/requireAdminAuthorization');
 
 const router = express.Router();
 
@@ -31,7 +32,7 @@ router.get("/find-items/:title", findItems);
 router.get("/:title", getLocation);
 
 //create new location
-router.post("/", createNewLocation);
+router.post("/", requireAdminAuth, createNewLocation);
 
 //delete location
 router.delete("/:id", deleteLocation);

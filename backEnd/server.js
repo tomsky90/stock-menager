@@ -6,6 +6,7 @@ const cors = require('cors')
 //routes import
 const locationRoutes = require('./routes/locationRoutes');
 const userRoutes = require('./routes/usersRouts');
+const itemsListRoutes = require('./routes/itemsListRoutes');
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(
 //routes
 app.use('/api/locations', locationRoutes)
 app.use('/api/user', userRoutes)
+app.use('/api/items-list', itemsListRoutes)
 
 //connect to db
 mongoose.connect(process.env.MONGO_URI)

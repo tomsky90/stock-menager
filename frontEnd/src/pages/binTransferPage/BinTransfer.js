@@ -73,7 +73,7 @@ const BinTransfer = () => {
     if (response.ok) {
       setError("");
       const bin = json.find((i) => i.title === binTransferFrom.title);
-      const part = bin.items.find((i) => i.title === itemCodeInput);
+      const part = bin.items.find((i) => i.title === itemCodeInput.trim());
       setItemTransferred(part);
       setActiveStep(3);
     }

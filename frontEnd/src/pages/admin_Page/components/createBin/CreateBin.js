@@ -1,29 +1,30 @@
 import React, { useState } from "react";
 //components
-import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
-import Message from "../../components/message/Message";
-import Loader from '../../components/loader/Loader';
+import SingleInputForm from "../../../../components/singleInputForm/SingleInputForm";
+import Message from "../../../../components/message/Message";
+import Loader from "../../../../components/loader/Loader";
 //helpers
-import { addNewBin } from "../../fetchData/FetchData";
+import { addNewBin } from "../../../../fetchData/FetchData";
 //hooks
-import { useAuthContext } from "../../hooks/useAuthContext";
+import { useAuthContext } from "../../../../hooks/useAuthContext";
 //styles
-import './createBin.css'
+import "./createBin.css";
 
 const CreateBin = () => {
   const [title, setTitle] = useState("");
   const [error, setError] = useState(null);
   const [message, setMessage] = useState("");
   const [isLoading, setIsLoading] = useState(null);
-  const { user } = useAuthContext()
+  const { user } = useAuthContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true)
+    setIsLoading(true);
+    setError(false)
 
     if (title.length < 4) {
       setError("Please enter correct bin title.");
-      setIsLoading(false)
+      setIsLoading(false);
     } else {
       setMessage("");
       setError("");
@@ -33,33 +34,38 @@ const CreateBin = () => {
       const data = await addNewBin(location, user);
       if (data.error) {
         setError(data.error);
-        setIsLoading(false)
+        setIsLoading(false);
       } else {
         setTitle("");
         setError(null);
         setMessage("Location " + location.title + " added");
-        setIsLoading(false)
+        setIsLoading(false);
+        setTimeout(() => {
+          setMessage('')
+        }, 2000)
       }
     }
   };
 
-  if(isLoading) {
-    return <Loader/>
+  if (isLoading) {
+    return <Loader />;
   }
 
   return (
-    <div className="add-bin-page">
+    <div className="create-bin-page">
       <h1>Create New Bin</h1>
       {message && <Message status="succes" message={message} />}
       {error && <Message status="error" message={error} />}
-      <SingleInputForm
-        handelSubmit={handleSubmit}
-        setInputValue={setTitle}
-        inputValue={title}
-        type="text"
-        title="Enter Bin Name:"
-        btnText='Create'
-      />
+      <div className="create-bin-page__form-wrapper">
+        <SingleInputForm
+          handelSubmit={handleSubmit}
+          setInputValue={setTitle}
+          inputValue={title}
+          type="text"
+          title="Enter Bin Name:"
+          btnText="Create"
+        />
+      </div>
     </div>
   );
 };

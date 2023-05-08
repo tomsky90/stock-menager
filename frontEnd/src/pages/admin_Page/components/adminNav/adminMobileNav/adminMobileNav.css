@@ -1,0 +1,30 @@
+.admin-page__mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background-color: #dddddd;
+  transform: translateX(-100%);
+  transition: transform 0.7s ease-in-out;
+}
+
+.admin-page__mobile-nav.active {
+  transform: translateX(0);
+}
+
+.admin-page__mobile-nav a{
+  text-decoration: none;
+  background-color: var(--theme-color);
+  color:#fff;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  width: 60%;
+  text-align: center;
+}
+
+.admin-page__mobile-nav a:hover {
+  background-color: var(--theme-color-dark);
+}

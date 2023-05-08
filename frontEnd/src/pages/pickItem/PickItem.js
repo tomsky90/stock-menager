@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 //components
+import Loader from "../../components/loader/Loader";
 import Message from "../../components/message/Message";
 import SingleInputForm from "../../components/singleInputForm/SingleInputForm";
 import StepCounter from "../../components/stepCounter/StepCounter";
 import ItemsTableList from "../../components/itemsTableList/itemsTableList";
 //fetchers
-import { getSingleItem, getSingleBin, takeOffItem } from "../../fetchData/FetchData";
+import { getSingleItem, getSingleBin, takeOffItem, takeOffItemListItem } from "../../fetchData/FetchData";
 //styles
 import './pickItem.css'
 //hooks
@@ -22,7 +23,7 @@ const PickItem = () => {
   const [itemQty, setItemQty] = useState("");
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [itemTransferred, setItemTransferred] = useState(null);
+  const [itemToBePicked, setItemToBePicked] = useState(null);
   const [message, setMessage] = useState('')
   const { user } = useAuthContext()
 
@@ -31,7 +32,7 @@ const PickItem = () => {
     let count = 0;
     for (const location of locations) {
       for (const item of location.items) {
-        if (item.title === itemInputValue) {
+        if (item.title === itemInputValue.trim()) {
           count += item.qty;
         }
       }
@@ -43,9 +44,12 @@ const PickItem = () => {
   const handelSubmit = async (e) => {
     e.preventDefault();
     setItemQty("");
+    setError(null)
+    setIsLoading(true)
 
     if (itemInputValue.length < 1) {
       setError("Enter Valid Part Number!");
+      setIsLoading(false)
       return;
     }
 
@@ -54,67 +58,91 @@ const PickItem = () => {
 
     if (!response.ok) {
       setError(json.error);
+      setIsLoading(false)
     }
     if (response.ok) {
       setError(null);
       addQty(json);
       setItems(json);
       setStep(2);
-      setItemTitle(itemInputValue);
+      setItemTitle(itemInputValue.trim());
       setItemInputValue("");
+      setIsLoading(false)
     }
   };
 
   //find Bin
   const getBin = async (e) => {
     e.preventDefault();
+    setError(null)
+    setIsLoading(true)
     if (binTitleInput < 4) {
       setError("Please Enter Correct Bin Code.");
+      setIsLoading(false)
     }
 
     const response = await getSingleBin(binTitleInput, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
+      setIsLoading(false)
     }
     if (response.ok) {
       setError(null);
       setBinPickFrom([json]);
       const part = json.items.find((i) => i.title === itemTitle);
-      setItemTransferred(part);
+      setItemToBePicked(part);
       setStep(3);
+      setIsLoading(false)
     }
   };
 
   //select qty to be transfered
-  const setQtyToTransfer = () => {
-    setStep(4);
+  const setQtyToPick = () => {
+    if(itemToBePicked?.qty - qtyInputValue < 0) {
+      setError('Not enough items. Max avalible ' + itemToBePicked?.qty)
+      return
+    } else {
+      setError('')
+      setStep(4);
+    }
+    
   };
 
   //handle bin pick
   const handleBinPick = async () => {
     setIsLoading(true)
 
-    const item = {
-      title: itemTransferred.title,
-      qty: qtyInputValue,
-      exp: itemTransferred.exp,
-      itemId: itemTransferred._id,
-    };
-    const response = await takeOffItem(binPickFrom[0]._id, item, user);
-    const json = await response.json();
-    if (!response.ok) {
-      setError(json.error);
-      setIsLoading(false);
-    }
+    const qty = { qty: qtyInputValue };
+    const response = await takeOffItemListItem(itemTitle, qty, user);
     if(response.ok) {
-      setMessage('Item Picked Succesfully')
-      setStep(5)
+      const item = {
+        title: itemToBePicked.title,
+        qty: qtyInputValue,
+        exp: itemToBePicked.exp,
+        itemId: itemToBePicked._id,
+      };
+      const response = await takeOffItem(binPickFrom[0]._id, item, user);
+      const json = await response.json();
+      if (!response.ok) {
+        setError(json.error);
+        setIsLoading(false);
+      }
+      if(response.ok) {
+        setMessage('Item Picked Succesfully')
+        setStep(5)
+        setIsLoading(false)
+      }
     }
 
   }
-
+  if(isLoading) {
+    return(
+      <Loader/>
+    )
+  }
   return (
+    
     <div className="item-search-wrapper">
       <h1>Pick Item</h1>
       {error && <Message status="error" message={error} />}
@@ -144,9 +172,9 @@ const PickItem = () => {
         />
       ) : null}
       {step === 2 ? <ItemsTableList data={items} itemTitle={itemTitle} /> : null}
-      {step === 3 ? (
+      {step === 3 ? ( 
         <SingleInputForm
-          handelSubmit={setQtyToTransfer}
+          handelSubmit={setQtyToPick}
           setInputValue={setQtyInputValue}
           inputValue={qtyInputValue}
           type="number"

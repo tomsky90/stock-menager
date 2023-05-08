@@ -10,7 +10,7 @@ const {loginUser, signupUser } = require('../controllers/userController')
 //login route
 router.post('/login', loginUser);
 
-// sign up route
+// create user
 router.post('/create-user', requireAdminAuth, signupUser);
 
 module.exports = router;

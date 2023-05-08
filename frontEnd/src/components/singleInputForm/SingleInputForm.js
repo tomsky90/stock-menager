@@ -14,7 +14,7 @@ const SingleInputForm = ({handelSubmit, setInputValue, inputValue, type, title, 
             }}
             id="item-input"
           />
-          <button type="submit">{btnText}</button>
+          {btnText && <button type="submit">{btnText}</button>}
         </form>
    );
 }

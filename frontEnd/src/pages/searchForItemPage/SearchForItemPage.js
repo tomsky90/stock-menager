@@ -5,6 +5,8 @@ import SingleInputForm from '../../components/singleInputForm/SingleInputForm';
 import LocationsList from '../../components/locationsList/LocationsList';
 //hooks
 import { useAuthContext } from '../../hooks/useAuthContext';
+//fetchers
+import { getSingleItem } from '../../fetchData/FetchData';
 //styles
 import './searchForItemPage.css';
 
@@ -22,7 +24,7 @@ const SearchForItemPage = () => {
     let count = 0
     for(const location of locations) {
       for(const item of location.items) {
-        if(item.title === inputValue){
+        if(item.title === inputValue.trim()){
           count += item.qty
         }
       }
@@ -40,9 +42,7 @@ const SearchForItemPage = () => {
       return
     }
     
-    const response = await fetch('https://stock-menager-back-end.onrender.com/api/locations/find-items/' + inputValue, { headers:{
-      'Authorization': `Bearer ${user.token}`
-    }})
+    const response = await getSingleItem(inputValue, user)
 
     const json = await response.json()
 

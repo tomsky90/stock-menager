@@ -6,9 +6,6 @@ import './home.css'
 const Home = () => {
   return (
     <div className='home__page-wrapper'>
-      <Link to='/create-bin'>
-        <div>Create New Bin</div>
-      </Link>
       <Link to='/location-search'>
         <div>Serarch For Bin</div>
       </Link>

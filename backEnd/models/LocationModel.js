@@ -9,9 +9,21 @@ const locationSchema = new Schema({
     unique: true
   },
   items: [{
-    title: String,
-    qty: Number,
-    exp: String
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    qty: {
+      type: Number,
+      required: true,
+    },
+    exp: {
+      type: String
+    },
+    description: {
+      type: String,
+    }
   }]
 }, {timestamps: true})
 

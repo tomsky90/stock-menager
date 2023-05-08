@@ -9,10 +9,12 @@ const ItemForm = ({
   itemCodeInput,
   itemCodeInputOnChange,
   itemExpiry,
+  itemDescription,
   itemExpiryOnChange,
   itemQtyOnChange,
   itemQtyInput,
   handleSubmit,
+  itemDescriptionOnChange,
   error,
 }) => {
   return (
@@ -22,7 +24,9 @@ const ItemForm = ({
     >
       <div className="item-form__input-wrapper">
         <label htmlFor="item-code">Item Code:</label>
-        <input
+        {itemCodeInput ? (
+          <input
+          disabled
           type="text"
           value={itemCodeInput}
           id="item-code"
@@ -30,6 +34,39 @@ const ItemForm = ({
             itemCodeInputOnChange(e);
           }}
         />
+        ) : (
+          <input
+          type="text"
+          value={itemCodeInput}
+          id="item-code"
+          onChange={(e) => {
+            itemCodeInputOnChange(e);
+          }}
+        />
+        )}
+      </div>
+      <div className="item-form__input-wrapper">
+        <label htmlFor="item-dsc">Item Description:</label>
+        {itemDescription ? (
+           <input
+           disabled
+           type="text"
+           value={itemDescription}
+           id="item-dsc"
+           onChange={(e) => {
+             itemDescriptionOnChange(e)
+           }}
+         />
+        ) : (
+          <input
+          type="text"
+          value={itemDescription}
+          id="item-dsc"
+          onChange={(e) => {
+            itemDescriptionOnChange(e)
+          }}
+        />
+        )}
       </div>
       <div className="item-form__input-wrapper">
         <label htmlFor="item-exp">Expiry Date:</label>

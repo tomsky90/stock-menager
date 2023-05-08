@@ -254,7 +254,6 @@ const putItemAway = async (req, res) => {
         },
       }
     );
-    console.log(location);
     return res.status(200).json(location);
   } else {
     //if item don't exist push item into bin

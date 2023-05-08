@@ -1,0 +1,56 @@
+.put-away__items-list{
+  width: 90%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 50px;
+}
+
+.put-away__items-list__header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #d3d3d3;
+  margin-top: 30px;
+  padding: 10px 10px;
+}
+
+.put-away__items-list__header p {
+  width: 33%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.put-away__items-list__header p:last-of-type {
+  text-align: center;
+}
+
+.put-away__items-list__bin-item:nth-child(even) {
+  background-color: #f6f6f6;
+}
+
+.put-away__items-list__bin-item:nth-child(odd) {
+  background-color: #e0e0e0;
+}
+
+.put-away__items-list__bin-item {
+display: flex;
+justify-content: space-between;
+padding-top: 10px;
+padding-bottom: 10px;
+padding-left: 10px;
+padding-right: 10px;
+cursor: pointer;
+}
+
+.put-away__items-list__bin-item p {
+  width: 33%;
+  padding-left: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.put-away__items-list__bin-item p:last-of-type {
+  text-align: center;
+ }
+.put-away__items-list__item.hover:hover {
+  background-color: cadetblue;
+}
