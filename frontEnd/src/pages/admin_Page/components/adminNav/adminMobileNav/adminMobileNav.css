@@ -25,6 +25,10 @@
   text-align: center;
 }
 
+.admin-page__mobile-nav a.active {
+  color: var(--theme-color-dark);
+}
+
 .admin-page__mobile-nav a:hover {
-  background-color: var(--theme-color-dark);
+  background-color: #8dbbbd;
 }

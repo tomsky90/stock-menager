@@ -17,6 +17,10 @@
   text-decoration: none;
 }
 
+.admin-page__nav a.active {
+  color: var(--theme-color-dark);
+}
+
 .admin-page__nav a:hover {
   color: var(--theme-color-dark);
 }

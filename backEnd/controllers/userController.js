@@ -20,12 +20,12 @@ const loginUser = async (req, res) => {
     res.status(400).json({error: error.message})
   }
 }
-
+ 
 //signup user
-const signupUser = async (req, res) => {
-  const { email, password, admin, office } = req.body
+const createUser = async (req, res) => {
+  const { email, password, office } = req.body.newUser
   try{
-    const user = await User.createUser(email, password, admin, office)
+    const user = await User.createUser(email, password, office)
     res.status(200).json({email})
   } catch( error ) {
     res.status(400).json({error: error.message})
@@ -33,4 +33,4 @@ const signupUser = async (req, res) => {
  
 }
 
-module.exports = {loginUser, signupUser}
+module.exports = {loginUser, createUser}
