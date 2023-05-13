@@ -23,6 +23,13 @@ h1 {
   text-align: center;
 }
 
+/* app wrapper */
+.app-wrapper {
+  max-width: 1900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* search location page */
 .serch-location {
   display: flex;

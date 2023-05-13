@@ -4,6 +4,7 @@ import { useAuthContext } from "../../../../hooks/useAuthContext";
 //components
 import Loader from "../../../../components/loader/Loader";
 import Message from "../../../../components/message/Message";
+import UsersList from "./usersList/UsersList";
 //css
 import "./settings.css";
 //base url
@@ -93,6 +94,7 @@ const Settings = () => {
             />
           </label>
           <div className="settings-page__user-settings-create-user__role-select">
+            <h3>Select users role:</h3>
             <label>
               Office:
               <input
@@ -106,6 +108,7 @@ const Settings = () => {
             Create User
           </button>
         </div>
+        <UsersList user={user}/>
       </div>
     </div>
   );
