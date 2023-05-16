@@ -7,6 +7,7 @@ const cors = require('cors')
 const locationRoutes = require('./routes/locationRoutes');
 const userRoutes = require('./routes/usersRouts');
 const itemsListRoutes = require('./routes/itemsListRoutes');
+const settingsRoutes = require('./routes/settingsRoutes');
 
 const app = express()
 
@@ -22,6 +23,7 @@ app.use(
 app.use('/api/locations', locationRoutes)
 app.use('/api/user', userRoutes)
 app.use('/api/items-list', itemsListRoutes)
+app.use('/api/settings', settingsRoutes)
 
 //connect to db
 mongoose.connect(process.env.MONGO_URI)

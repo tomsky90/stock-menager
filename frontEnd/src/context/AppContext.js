@@ -1,27 +1,29 @@
-import { createContext, useReducer } from 'react';
+import { createContext, useReducer } from "react";
 
 export const AppContext = createContext();
 
 export const appReducer = (state, action) => {
   switch (action.type) {
-    case 'NOTACTIVE':
-      return {mobileNavActive: action.payload}
-    case 'ACTIVE':
-      return {mobileNavActive: action.payload}
+    case "NOTACTIVE":
+      return { mobileNavActive: action.payload };
+    case "ACTIVE":
+      return { mobileNavActive: action.payload };
+    case "SETSETTINGS":
+      return { settings: action.payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
-export const AppContextProvider = ({children}) => {
+export const AppContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, {
-    mobileNavActive: false
-  })
+    mobileNavActive: false,
+  });
 
 
   return (
-    <AppContext.Provider value={{...state, dispatch}}>
+    <AppContext.Provider value={{ ...state, dispatch }}>
       {children}
     </AppContext.Provider>
-  )
-}
+  );
+};

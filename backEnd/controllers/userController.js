@@ -55,6 +55,7 @@ const getUsers = async (req, res) => {
 
 //delete user
 const deleteUser = async (req, res) => {
+  const { id } = req.params
   console.log(id)
 
   if (!mongoose.Types.ObjectId.isValid(id)) {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 //context
 import { useAuthContext } from "../../../../hooks/useAuthContext";
+import { useSettingsContext } from "../../../../hooks/useSettingsContext";
 //components
 import Loader from "../../../../components/loader/Loader";
 import Message from "../../../../components/message/Message";
@@ -13,11 +14,13 @@ import { BASEURL } from "../../../../config";
 const Settings = () => {
   const [userNameInput, setUserNameInput] = useState("");
   const [userPasswordInput, setUserPasswordInput] = useState("");
+  const [lowStockInput, setLowStockInput] = useState("");
   const [isLoading, setIsLoading] = useState(null);
   const [isOffice, setIsOffice] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const { user } = useAuthContext();
+  const { settings } = useSettingsContext();
 
   const handleChange = (e) => {
     setIsOffice(!isOffice);
@@ -61,16 +64,61 @@ const Settings = () => {
     }
   };
 
+  const setLowStock = async () => {
+    const item = {
+      title: "lowStock",
+      qty: lowStockInput,
+    };
+    setIsLoading(true);
+    const response = await fetch(
+      BASEURL + "/api/settings/edit/" + settings?.lowStock?.id,
+      {
+        method: "PATCH",
+        body: JSON.stringify(item),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }
+    );
+    const json = response.json();
+    if (!response.ok) {
+      setIsLoading(false);
+      setError(json);
+    }
+    if (response.ok) {
+      setIsLoading(false);
+      setMessage("Settings updated successfully");
+      setTimeout(() => {
+        setMessage('')
+        setLowStockInput('')
+      }, 2000)
+    }
+  };
+
   if (isLoading) {
     return <Loader />;
   }
   return (
     <div className="settings-page">
+      <div className="settings-page__low-stock">
+        {message ? <Message status="succes" message={message} /> : null}
+        {error ? <Message status="error" message={error} /> : null}
+        <label>
+          Low Stock:
+          <input
+            type="number"
+            value={lowStockInput}
+            onChange={(e) => {
+              setLowStockInput(e.target.value);
+            }}
+          />
+        </label>
+        <button onClick={setLowStock}>Set</button>
+      </div>
       <div className="settings-page__user-settings">
         <div className="settings-page__user-settings-create-user">
           <h3>Add new user</h3>
-          {message ? <Message status="succes" message={message} /> : null}
-          {error ? <Message status="error" message={error} /> : null}
           <label>
             User name
             <input
@@ -108,7 +156,7 @@ const Settings = () => {
             Create User
           </button>
         </div>
-        <UsersList user={user}/>
+        <UsersList user={user} />
       </div>
     </div>
   );

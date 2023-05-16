@@ -5,6 +5,7 @@ import { AuthContextProvider } from "./context/AuthContext";
 import { LocationsContextProvider } from "./context/locationsContext";
 import { ItemsContextProvider } from './context/ItemsContext';
 import { AppContextProvider } from "./context/AppContext";
+import { SettingsContextProvider } from "./context/SettingsContext";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -12,7 +13,9 @@ ReactDOM.render(
       <LocationsContextProvider>
         <ItemsContextProvider>
           <AppContextProvider>
-            <App />
+            <SettingsContextProvider>
+              <App />
+            </SettingsContextProvider>
           </AppContextProvider>
         </ItemsContextProvider>
       </LocationsContextProvider>

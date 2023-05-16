@@ -64,12 +64,12 @@ const UsersList = ({ user }) => {
     }
     if (response.ok) {
       hideWarning();
-      setMessage(`user ${json.email} succesfuly deleted` );
+      setMessage(`user ${json} succesfuly deleted` );
       setIsLoading(false)
       setTimeout(() => {
         setMessage("");
         getUsers();
-      }, 2000);
+      }, 3000);
     }
   };
   if(isLoading) {

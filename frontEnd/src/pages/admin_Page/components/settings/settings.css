@@ -2,6 +2,32 @@
   padding: 30px 50px;
 }
 
+.settings-page__low-stock {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.settings-page__low-stock label {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-page__low-stock input {
+  padding: 5px 10px;
+  max-width: 100px;
+  margin-top: 10px;
+}
+
+.settings-page__low-stock button {
+  margin-top: 10px;
+  padding: 5px 10px;
+  background-color: var(--theme-color);
+  color: #fff;
+  border: none;
+  max-width: 100px;
+}
+
 .settings-page__user-settings-create-user {
   display: flex;
   column-gap: 20px;
@@ -48,6 +74,7 @@
 
 .settings-page__user-settings-create-user__role-select label {
   align-items: flex-start;
+  width: 20px;
 }
 
 .settings-page__user-settings-create-user__role-select input {

@@ -8,6 +8,7 @@ import { getAllItems } from "../../../../fetchData/FetchData";
 //context
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useItemsContext } from "../../../../hooks/useItemsContext";
+import { useSettingsContext } from "../../../../hooks/useSettingsContext";
 //css
 import "./adminHome.css";
 
@@ -17,6 +18,7 @@ const AdminHome = () => {
   const { user } = useAuthContext();
   const { items, dispatch } = useItemsContext();
   const [searchInputValue, setSearchInputValue] = useState("");
+  const { settings } =  useSettingsContext()
 
   useEffect(() => {
     setIsLoading(true);
@@ -36,6 +38,15 @@ const AdminHome = () => {
       getItems();
     }
   }, []);
+
+  const sortItemsLowFirst = () => {
+    const sortedItems = items.sort((a,b) => a.qty - b.qty)
+    dispatch({ type: "SET_ITEMS", payload:  sortedItems});
+  }
+  const sortItemsHighFirst = (a,b) => {
+    const sortedItems = items.sort((a,b) => b.qty - a.qty)
+    dispatch({ type: "SET_ITEMS", payload:  sortedItems});
+  }
 
   const filteredItems = items?.filter((item) => {
     return item.title.includes(searchInputValue);
@@ -58,6 +69,11 @@ const AdminHome = () => {
             />
             <button>Search</button>
           </label>
+          <label className="admin-header__search-form__sort-items">
+            <p>Sort items:</p>
+            <button onClick={() => {sortItemsLowFirst()}}>Low First</button>
+            <button onClick={() => {sortItemsHighFirst()}}>High First</button>
+          </label>
         </form>
       </div>
     </header>
@@ -65,7 +81,7 @@ const AdminHome = () => {
       {isLoading ? <Loader /> : (
         <div className="admin-home__items-list">
           <div className="admin-home__items-list__header">
-            <p>Code:</p>
+              <p>Code:</p>
               <p>Description:</p>
               <p>Total Qty:</p>
           </div>
@@ -73,7 +89,7 @@ const AdminHome = () => {
             <div key={item._id} className="admin-home__items-list__item">
               <p>{item.title}</p>
               <p>{item.description}</p>
-              <p>{item.qty}</p>
+              <p className={item.qty < settings?.lowStock?.qty ? 'low-stock' : null}>{item.qty}</p>
             </div>
           ))}
 
