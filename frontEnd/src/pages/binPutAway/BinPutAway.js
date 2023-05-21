@@ -79,7 +79,7 @@ const BinPutAway = () => {
       return;
     }
 
-    const response = await getSingleBin(inputValue, user);
+    const response = await getSingleBin(null, inputValue, user);
     const json = await response.json();
     if (json.error) {
       setError(json.error);
@@ -97,6 +97,7 @@ const BinPutAway = () => {
       return setError("Please fill in all fields.");
     }
     const qty = { qty: itemQtyInput };
+    // add to total qty in admin list
     const response = await addToItemListItem(itemTitle, qty, user);
     if (response.ok) {
       const item = {
@@ -105,6 +106,7 @@ const BinPutAway = () => {
         exp: itemExpiryInput,
         description: itemDescription,
       };
+      // if response ok add item to bin
       const response = await putItemAway(binToAddTo_id, item, user);
       const json = await response.json();
 

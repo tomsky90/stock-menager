@@ -79,9 +79,10 @@ const PickItem = () => {
     if (binTitleInput < 4) {
       setError("Please Enter Correct Bin Code.");
       setIsLoading(false)
+      return
     }
 
-    const response = await getSingleBin(binTitleInput, user);
+    const response = await getSingleBin(itemTitle, binTitleInput, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
@@ -99,6 +100,11 @@ const PickItem = () => {
 
   //select qty to be transfered
   const setQtyToPick = () => {
+    setError('')
+    if(qtyInputValue.length === 0) {
+      setError('Enter qty you want to pick')
+      return
+    }
     if(itemToBePicked?.qty - qtyInputValue < 0) {
       setError('Not enough items. Max avalible ' + itemToBePicked?.qty)
       return
@@ -129,9 +135,17 @@ const PickItem = () => {
         setIsLoading(false);
       }
       if(response.ok) {
+        setItemQty(itemQty - qtyInputValue)
         setMessage('Item Picked Succesfully')
         setStep(5)
         setIsLoading(false)
+        setTimeout(() => {
+          setMessage('')
+          setItemQty('')
+          setBinTitleInput('')
+          setQtyInputValue('')
+          setStep(1)
+        },3000)
       }
     }
 

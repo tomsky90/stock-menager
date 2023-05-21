@@ -26,14 +26,36 @@ const findItems = async (req, res) => {
 
 //get single location
 const getLocation = async (req, res) => {
-  const { title } = req.params;
+  const { title, id } = req.params;
+  
 
   const location = await Location.findOne({ title: title });
 
   if (!location) {
     return res.status(404).json({ error: "Location do not exist" });
   }
-  res.status(200).json(location);
+ 
+  console.log()
+  if(location && !id || location && id === 'null') {
+    return res.status(200).json(location);
+  } 
+  
+  if(location && id){
+    let doesItemExist = null
+     location.items.forEach((item) => {
+      if(item.title === id) {
+        doesItemExist = true
+      } 
+    })
+    
+    if(!doesItemExist) {
+      return res.status(404).json({ error: "Sorry, please try to select bin from the list" })
+    } else {
+      return res.status(200).json(location)
+    }
+  } 
+
+  
 };
 
 //post new location

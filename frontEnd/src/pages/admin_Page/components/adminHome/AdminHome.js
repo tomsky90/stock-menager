@@ -9,6 +9,8 @@ import { getAllItems } from "../../../../fetchData/FetchData";
 import { useAuthContext } from "../../../../hooks/useAuthContext";
 import { useItemsContext } from "../../../../hooks/useItemsContext";
 import { useSettingsContext } from "../../../../hooks/useSettingsContext";
+//react icons
+import { BsSearch } from 'react-icons/bs'
 //css
 import "./adminHome.css";
 
@@ -67,7 +69,7 @@ const AdminHome = () => {
               type="text"
               placeholder="Enter item code"
             />
-            <button>Search</button>
+            <BsSearch/>
           </label>
           <label className="admin-header__search-form__sort-items">
             <p>Sort items:</p>
@@ -89,7 +91,7 @@ const AdminHome = () => {
             <div key={item._id} className="admin-home__items-list__item">
               <p>{item.title}</p>
               <p>{item.description}</p>
-              <p className={item.qty < settings?.lowStock?.qty ? 'low-stock' : null}>{item.qty}</p>
+              <p className={item.qty < settings?.lowStock?.qty ? 'low-stock' : 'ok-stock'}>{item.qty}</p>
             </div>
           ))}
 

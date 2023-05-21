@@ -32,6 +32,20 @@ const BinTransfer = () => {
   const [loading, setLoading] = useState(false);
   const { user } = useAuthContext()
 
+  //const reset state
+  const resetState = () => {
+    setTimeout(() => {
+      setError(null);
+      setMessage("");
+      setLoading(false);
+      setBinTransferFrom(null);
+      setBinTransferTo(null);
+      setInputValue('')
+      setItemQtyInput('')
+      setActiveStep(1)
+    }, 3000)
+  }
+
   //get bin to transfer from
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -41,18 +55,23 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleBin(inputValue, user);
+    const response = await getSingleBin(null, inputValue, user);
     const json = await response.json();
 
     if (!response.ok) {
       setError(json.error);
     }
     if (response.ok) {
-      setError("");
+      if(!json.items.length) {
+        setError('Currently no items in this location.')
+        return
+      } else {
+        setError("");
       setData(json);
       setBinTransferFrom(json);
       setActiveStep(2);
       setInputValue("");
+      }
     }
   };
 
@@ -69,11 +88,12 @@ const BinTransfer = () => {
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);
+      return
     }
     if (response.ok) {
       setError("");
-      const bin = json.find((i) => i.title === binTransferFrom.title);
-      const part = bin.items.find((i) => i.title === itemCodeInput.trim());
+      const bin = json.find((i) => i.title === binTransferFrom?.title);
+      const part = bin?.items.find((i) => i.title === itemCodeInput.trim());
       setItemTransferred(part);
       setActiveStep(3);
     }
@@ -111,7 +131,7 @@ const BinTransfer = () => {
       return;
     }
 
-    const response = await getSingleBin(inputValue, user);
+    const response = await getSingleBin(null, inputValue, user);
     const json = await response.json();
     const part = json.items.find((i) => i.title === itemCodeInput);
 
@@ -160,6 +180,7 @@ const BinTransfer = () => {
           setError(null);
           setMessage("Item Succesfully Transfered!");
           setLoading(false);
+          resetState()
         }
       } else {
         const newItem = {
@@ -178,6 +199,7 @@ const BinTransfer = () => {
           setError(null);
           setMessage("Item Succesfully Transfered!");
           setLoading(false);
+          resetState()
         }
       }
     }
@@ -244,8 +266,8 @@ const BinTransfer = () => {
             <h3>You move: </h3>
             <p>Item qty: {qtyToBeTransferred}</p>
             <p>Item code:{itemTransferred.title}</p>
-            <p>Bin transfer from: {binTransferFrom.title}</p>
-            <p>Bin transfer to: {binTransferTo.title}</p>
+            <p>Bin transfer from: {binTransferFrom?.title}</p>
+            <p>Bin transfer to: {binTransferTo?.title}</p>
           </div>
           {!loading && (
             <button

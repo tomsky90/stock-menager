@@ -87,6 +87,9 @@
 .admin-home__items-list__item p.low-stock {
   color: red;
 }
+.admin-home__items-list__item p.ok-stock {
+  color: green;
+}
 
 .admin-home__items-list__item p:last-of-type {
   text-align: center;

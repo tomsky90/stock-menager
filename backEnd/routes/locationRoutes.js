@@ -29,7 +29,7 @@ router.get("/", getAllLocations);
 router.get("/find-items/:title", findItems);
 
 //get single location
-router.get("/:title", getLocation);
+router.get("/:title/:id", getLocation);
 
 //create new location
 router.post("/", requireAdminAuth, createNewLocation);

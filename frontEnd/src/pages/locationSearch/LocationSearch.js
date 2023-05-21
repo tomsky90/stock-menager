@@ -32,7 +32,7 @@ const LocationSearch = () => {
       setIsLoading(false);
       return;
     }
-    const response = await getSingleBin(inputValue, user);
+    const response = await getSingleBin(null, inputValue, user);
     const json = await response.json();
     if (!response.ok) {
       setError(json.error);

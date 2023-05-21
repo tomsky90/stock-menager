@@ -8,7 +8,7 @@ const itemTableList = ({ data, itemTitle }) => {
     <div className="items-list">
       <div className="items-list__header">
         <p>Bin</p>
-        <p>part</p>{console.log(data)}
+        <p>part</p>
         <p>qty</p>
       </div>
       {data.map((loc) => (
