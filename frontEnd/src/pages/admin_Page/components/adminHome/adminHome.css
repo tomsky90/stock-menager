@@ -20,6 +20,17 @@
   padding: 5px 10px
 }
 
+.admin-header__search-form__input-wrapper {
+  position: relative;
+}
+
+.admin-header__search-form__input-wrapper svg {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+
+
 .admin-header__search-form button {
   padding: 7px 10px;
   background-color: cadetblue;

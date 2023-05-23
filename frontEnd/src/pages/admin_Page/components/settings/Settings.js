@@ -105,7 +105,7 @@ const Settings = () => {
         {message ? <Message status="succes" message={message} /> : null}
         {error ? <Message status="error" message={error} /> : null}
         <label>
-          Set low stock level:
+          <h3>Set low stock level:</h3>
           <input
             type="number"
             value={lowStockInput}

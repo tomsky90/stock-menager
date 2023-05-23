@@ -42,17 +42,17 @@ const AdminMobileNav = () => {
           <VscNewFile /> <span>Add new Item</span>
         </div>
       </NavLink>
-      <NavLink to="/admin-page/put-stock-away">
+      <NavLink onClick={toggleNav} to="/admin-page/put-stock-away">
         <div className="admin-page__nav__icon-wrapper">
           <BsCloudUpload /> <span>Put item away</span>
         </div>
       </NavLink>
-      <NavLink to="/admin-page/pick-item">
+      <NavLink onClick={toggleNav} to="/admin-page/pick-item">
         <div className="admin-page__nav__icon-wrapper">
           <BsBasket /> <span>Pick item</span>
         </div>
       </NavLink>
-      <NavLink to="/admin-page/bin-transfer">
+      <NavLink onClick={toggleNav} to="/admin-page/bin-transfer">
         <div className="admin-page__nav__icon-wrapper">
           <BiTransfer /> <span>Transfer bin</span>
         </div>

@@ -61,15 +61,17 @@ const AdminHome = () => {
         <form className="admin-header__search-form">
           <label>
             Search for item:
-            <input
-              value={searchInputValue}
-              onChange={(e) => {
+            <div className="admin-header__search-form__input-wrapper">
+               <input
+               value={searchInputValue}
+               onChange={(e) => {
                 setSearchInputValue(e.target.value.toUpperCase());
-              }}
-              type="text"
-              placeholder="Enter item code"
-            />
-            <BsSearch/>
+               }}
+                type="text"
+                placeholder="Enter item code"
+              />
+               <BsSearch/>
+            </div>
           </label>
           <label className="admin-header__search-form__sort-items">
             <p>Sort items:</p>
