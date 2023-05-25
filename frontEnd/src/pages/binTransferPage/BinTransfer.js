@@ -11,7 +11,7 @@ import {
   getSingleItem,
   addToItem,
   takeOffItem,
-  pushItem,
+  putItemAway,
 } from "../../fetchData/FetchData";
 //styles
 import './binTransfer.css'
@@ -158,6 +158,7 @@ const BinTransfer = () => {
       qty: qtyToBeTransferred,
       exp: itemTransferred.exp,
       itemId: itemTransferred._id,
+      description: itemTransferred.description,
     };
     const response = await takeOffItem(binTransferFrom._id, item, user);
     const json = await response.json();
@@ -168,8 +169,8 @@ const BinTransfer = () => {
     //if response.ok update qty in bin transferTo
     if (response.ok) {
       //if item exist add to it
-      if (itemToBeAddedTo) {
-        const response = await addToItem(itemToBeAddedTo._id, item, user);
+      
+        const response = await putItemAway(binTransferTo._id, item, user);
         const json = await response.json();
 
         if (!response.ok) {
@@ -182,26 +183,6 @@ const BinTransfer = () => {
           setLoading(false);
           resetState()
         }
-      } else {
-        const newItem = {
-          title: itemTransferred.title,
-          qty: qtyToBeTransferred,
-          exp: itemTransferred.exp,
-        };
-        const response = await pushItem(binTransferTo._id, newItem, user);
-        const json = await response.json();
-
-        if (!response.ok) {
-          setError(json.error);
-          setLoading(false);
-        }
-        if (response.ok) {
-          setError(null);
-          setMessage("Item Succesfully Transfered!");
-          setLoading(false);
-          resetState()
-        }
-      }
     }
   };
 

@@ -260,7 +260,7 @@ const putItemAway = async (req, res) => {
   const exist = location.items.find((item) => item.title === title);
 
   if (!location) {
-    return res.status(400).json({ error: "No such location" });
+    return res.status(400).json({ error: "No such item" });
   }
   //if exists add qty and update
   if (exist) {

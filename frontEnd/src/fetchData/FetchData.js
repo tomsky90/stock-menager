@@ -12,7 +12,6 @@ export const getData = async (user) => {
 
 //get single bin
 export const getSingleBin = async (item, uri, user) => {
-  console.log(item,uri,user)
   const response = await fetch(BASEURL + "/api/locations/" + uri +'/' + item, {
     headers: {
       Authorization: `Bearer ${user.token}`,
