@@ -3,25 +3,24 @@
   margin-left: 5%;
   margin-right: 5%;
   margin-bottom: 50px;
-}
-
-.item-list__header {
-  width: 100%;
-  justify-content: space-between;
-  padding-left: 40px;
-  padding-right: 40px;
+  overflow: scroll;
 }
 
 .items-list__item {
   padding-left: 40px;
   padding-right: 40px;
 }
+
 .items-list__header {
   display: flex;
   justify-content: space-between;
   background-color: #d3d3d3;
   margin-top: 30px;
   padding: 10px 10px;
+}
+
+.items-list__header p{
+  min-width: 80px;
 }
 
 .items-list__bin-item:nth-child(even) {
@@ -33,13 +32,30 @@
 }
 
 .items-list__item {
-display: flex;
-justify-content: space-between;
-padding-top: 10px;
-padding-bottom: 10px;
-padding-left: 10px;
-padding-right: 10px;
-cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
+}
+
+.cell:first-of-type {
+  width: 80px;
+}
+
+
+
+.cell {
+  width: 100px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.cell:last-of-type {
+  margin-left: 10px;
 }
 
 .items-list__item.hover:hover {

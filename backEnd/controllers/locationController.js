@@ -249,7 +249,7 @@ const putItemAway = async (req, res) => {
   const { id } = req.params;
   const { title } = req.body;
   const { qty } = req.body;
-  const { exp } = req.body;
+  const { exp } = req.body; 
 
   if (!mongoose.Types.ObjectId.isValid(id)) {
     return res.status(400).json({ error: "No such Location" });
