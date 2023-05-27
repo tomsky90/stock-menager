@@ -4,18 +4,18 @@
   "icons": [
     {
       "src": "app-ico.ico",
-      "sizes": "123x102",
+      "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
       "src": "app-png.png",
       "type": "image/png",
-      "sizes": "123x102"
+      "sizes": "192x192"
     },
     {
       "src": "app-png.png",
       "type": "image/png",
-      "sizes": "123x102"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
