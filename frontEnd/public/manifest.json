@@ -10,12 +10,12 @@
     {
       "src": "app-192.png",
       "type": "image/png",
-      "sizes": "123x102"
+      "sizes": "192x192"
     },
     {
       "src": "app-512.png",
       "type": "image/png",
-      "sizes": "123x102"
+      "sizes": "512x512"
     }
   ],
   "start_url": ".",
