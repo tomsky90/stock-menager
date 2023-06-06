@@ -1,14 +1,12 @@
-# Stock-manager
+# Stock Manager
 
-### 
 
-## It is a MERN stack App wich allows:
+## Warehouse managment system is an app designed to help warehouse workers and managers to execute operations of a warehouse or distribution center.
+It lets warehouse workers to complete warehouse tasks, like puting stock away, and picking items from mobile device, and also lets managers to manage, control and track inventory from anywhere
 
-  ### -Create new Bin 
-  ### -Add items and items qty to each Bin
-  ### -Edit items qty, part code, and exp date
-  ### -Search for items by Item code
-  ### -Search for Bin by Bin code
+##It allows warehouse admin to create new bins, add new items to the record, admin can also create and delete users, and set a number when the system will display items as low stock.
+
+##Warehouse workers can easly complete warehouse tasks, like puting stock away, and picking items from mobile device, and also lets managers to manage, control and track inventory from anywhere.
   
 #All changes are beaing saved to mongoDb 
 
