@@ -29,13 +29,13 @@ I developed  Stock Manager as part of my learning journey, aiming to enhance my 
 To get  Stock Manager up and running, follow these simple steps:
 
 1. Clone the repository: `git clone https://github.com/tomsky90/stock-menager.git`
-2. Navigate to the project directory: `cd smart-warehouse`
+2. Navigate to the project directory: `cd stock-manager`
 3. Install dependencies: `npm install`
 4. Configure the application settings as needed.
 
 ## Usage
 
-Start SmartWarehouse with the following command:
+Start stock manager with the following command:
 
 ```bash
 npm start
