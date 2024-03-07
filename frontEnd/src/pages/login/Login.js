@@ -1,79 +1,98 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 //css
-import './login.css'
+import "./login.css";
 //hooks
-import { useAuthContext } from '../../hooks/useAuthContext'
+import { useAuthContext } from "../../hooks/useAuthContext";
 //components
-import Loader from '../../components/loader/Loader'
+import Loader from "../../components/loader/Loader";
 
-import { BASEURL } from '../../config.js'
+import { BASEURL } from "../../config.js";
 
 const Login = () => {
+  const [adminEmail, setAdminEmail] = useState("admintest@email.com");
+  const [userEmail, setUserEmail] = useState("test@email.com");
+  const [loginPassword, setLoginPassword] = useState("testPassword123*");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLogingIn, setIsLogingIn] = useState(null);
-  const [error, setError] = useState(null)
-  const { dispatch } = useAuthContext()
-  const navigate = useNavigate()
+  const [error, setError] = useState(null);
+  const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
   // const { login, error, isLoading } = useLogin();
-  
-  const login = async () => {
-    setIsLogingIn(true)
-    setError(null)
 
-    const response = await fetch(BASEURL + '/api/user/login', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email, password })
-    })
-    const json = await response.json()
+  const login = async () => {
+    setIsLogingIn(true);
+    setError(null);
+
+    const response = await fetch(BASEURL + "/api/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+    const json = await response.json();
 
     if (!response.ok) {
-      setIsLogingIn(false)
-      setError(json.error)
+      setIsLogingIn(false);
+      setError(json.error);
     }
     if (response.ok) {
       // save the user to local storage
-      localStorage.setItem('user', JSON.stringify(json))
+      localStorage.setItem("user", JSON.stringify(json));
 
       // update the auth context
-      dispatch({type: 'LOGIN', payload: json})
+      dispatch({ type: "LOGIN", payload: json });
 
       // update loading state
-      setIsLogingIn(false)
+      setIsLogingIn(false);
       const redirect = async () => {
-        
-        const user = await json 
-        if(user) {
-          navigate('/home')
+        const user = await json;
+        if (user) {
+          navigate("/home");
         }
-      }
-      redirect()
+      };
+      redirect();
     }
-  }
+  };
+
+  const adminLogin = (e) => {
+    e.preventDefault();
+    setEmail(adminEmail);
+    setPassword(loginPassword);
+  };
+
+  const userLogin = (e) => {
+    e.preventDefault();
+    setEmail(userEmail);
+    setPassword(loginPassword);
+  };
 
   const emailOnChange = (e) => {
     setEmail(e.target.value);
-  }
+  };
 
   const passwordOnChange = (e) => {
-    setPassword(e.target.value)
-  }
+    setPassword(e.target.value);
+  };
 
-  if(isLogingIn) {
-    return <Loader/>
+  if (isLogingIn) {
+    return <Loader />;
   }
   return (
     <div className="login__page-wrapper">
       <form className="login__form" onSubmit={login}>
         <h3>Login</h3>
+        <div className="login__btns-wrapper">
+          <button onClick={adminLogin}>Login as Admin</button>
+          <button onClick={userLogin}>Login as User</button>
+        </div>
+
         <label>
           Email:
           <input
             type="email"
             onChange={(e) => {
-              emailOnChange(e)
+              emailOnChange(e);
             }}
             value={email}
           />
@@ -83,7 +102,7 @@ const Login = () => {
           <input
             type="password"
             onChange={(e) => {
-              passwordOnChange(e)
+              passwordOnChange(e);
             }}
             value={password}
           />
